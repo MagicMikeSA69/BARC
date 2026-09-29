@@ -1,0 +1,58 @@
+{
+  "expo": {
+    "name": "BARC",
+    "slug": "barc",
+    "version": "0.1.0",
+    "scheme": "barc",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#0E7C5B"
+    },
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "org.barc.app",
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "BARC uses your location to find rides and drivers near you and to share your position with the person you are riding with.",
+        "ITSAppUsesNonExemptEncryption": false
+      }
+    },
+    "android": {
+      "package": "org.barc.app",
+      "adaptiveIcon": {
+        "backgroundColor": "#0E7C5B",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "permissions": ["ACCESS_COARSE_LOCATION", "ACCESS_FINE_LOCATION"],
+      "config": {
+        "googleMaps": {
+          "apiKey": "REPLACE_WITH_YOUR_ANDROID_MAPS_KEY"
+        }
+      },
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "favicon": "./assets/favicon.png",
+      "bundler": "metro",
+      "output": "single"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "BARC uses your location to find rides and drivers near you and to share your position with the person you are riding with."
+        }
+      ]
+    ],
+    "extra": {
+      "defaultNodeUrl": "http://localhost:8787"
+    }
+  }
+}
