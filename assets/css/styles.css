@@ -693,6 +693,19 @@ figcaption.cap {
 .lang { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--hair); border-radius: 999px; padding: 6px 12px; font-size: 13px; }
 .lang svg { width: 14px; height: 14px; }
 
+/* ---------- Liquid layer (WebGL, see assets/js/fluid.js) ----------
+   Fixed over the page, below the nav and menu, never intercepts the pointer.
+   Multiply in light mode keeps dark text legible under the dye; screen in dark. */
+.fluid-layer {
+  position: fixed; inset: 0; width: 100%; height: 100%;
+  z-index: 30; pointer-events: none;
+  mix-blend-mode: multiply;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .fluid-layer { mix-blend-mode: screen; } }
+:root[data-theme="dark"] .fluid-layer { mix-blend-mode: screen; }
+@media (prefers-reduced-motion: reduce) { .fluid-layer { display: none; } }
+@media print { .fluid-layer { display: none; } }
+
 /* ---------- Reveal on scroll ----------
    Everything is visible at rest. The script marks only elements that start
    below the viewport with .will-reveal; those fade in when scrolled to. */

@@ -22,6 +22,7 @@ There is no build step. The page works with GitHub Pages as‑is.
 index.html            page markup and inline SVG illustrations
 assets/css/styles.css tokens (light + dark), layout, components
 assets/js/main.js     nav state, mobile menu, theme toggle, tabs, reveal, chart tooltips, share
+assets/js/fluid.js    cursor‑reactive WebGL fluid layer (skipped under reduced motion or without WebGL)
 assets/img/favicon.svg
 ```
 
