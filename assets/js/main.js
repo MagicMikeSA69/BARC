@@ -103,7 +103,9 @@
     });
   });
 
-  /* ---------- Reveal on scroll + chart bar growth ---------- */
+  /* ---------- Reveal on scroll + chart bar growth ----------
+     Only elements that start below the fold are hidden, so the page is complete
+     at rest (thumbnails, print, and readers without scrolling all see content). */
   var revealTargets = doc.querySelectorAll(".reveal, .viz");
   if ("IntersectionObserver" in window && !reduceMotion) {
     var io = new IntersectionObserver(function (entries) {
@@ -113,10 +115,13 @@
           io.unobserve(entry.target);
         }
       });
-    }, { rootMargin: "0px 0px -10% 0px", threshold: 0.08 });
-    Array.prototype.forEach.call(revealTargets, function (el) { io.observe(el); });
-  } else {
-    Array.prototype.forEach.call(revealTargets, function (el) { el.classList.add("in-view"); });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.05 });
+    Array.prototype.forEach.call(revealTargets, function (el) {
+      if (el.getBoundingClientRect().top > window.innerHeight) {
+        el.classList.add("will-reveal");
+        io.observe(el);
+      }
+    });
   }
 
   /* ---------- Charts: view toggle + tooltips ---------- */
