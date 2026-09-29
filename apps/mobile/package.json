@@ -10,7 +10,8 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "typecheck": "tsc --noEmit -p tsconfig.json",
-    "lint": "expo lint"
+    "lint": "expo lint",
+    "build:web": "expo export --platform web --output-dir dist/web && node scripts/build-single-page.js dist/web dist/barc.html"
   },
   "dependencies": {
     "@barc/shared": "*",

@@ -67,3 +67,11 @@ test('protocol constants: zero take, capped contribution, sensible suggested rat
   assert.equal(suggestedRatesFor('ZAR').currency, 'ZAR');
   assert.equal(suggestedRatesFor('KES').currency, 'KES');
 });
+
+test('relative description names distance and compass direction', async () => {
+  const { describeRelative, bearingDeg } = await import('../src/geo.ts');
+  const c = { lat: -33.9249, lng: 18.4241 };
+  assert.equal(describeRelative(c, c), 'centre');
+  assert.match(describeRelative({ lat: -33.9249, lng: 18.4441 }, c), /^1\.\d km E of centre$/);
+  assert.ok(Math.abs(bearingDeg(c, { lat: -33.9, lng: 18.4241 }) - 0) < 1);
+});

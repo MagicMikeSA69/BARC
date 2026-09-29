@@ -152,6 +152,40 @@ export function StarPicker({ value, onChange }: { value: number; onChange: (v: n
   );
 }
 
+/**
+ * Two-step confirmation drawn in the page. Native alert dialogs are not
+ * available everywhere the app runs, so the question is asked inline.
+ */
+export function ConfirmButton({
+  title,
+  question,
+  confirmTitle,
+  onConfirm,
+  variant = 'ghost',
+  loading,
+  style,
+}: {
+  title: string;
+  question: string;
+  confirmTitle: string;
+  onConfirm: () => void;
+  variant?: Variant;
+  loading?: boolean;
+  style?: StyleProp<ViewStyle>;
+}) {
+  const [asking, setAsking] = React.useState(false);
+  if (!asking) return <Button title={title} variant={variant} onPress={() => setAsking(true)} style={style} />;
+  return (
+    <View style={[{ gap: space.sm }, style]}>
+      <Text style={styles.body}>{question}</Text>
+      <Row style={{ gap: space.sm }}>
+        <Button title={confirmTitle} variant="danger" onPress={onConfirm} loading={loading} style={{ flex: 1 }} />
+        <Button title="Keep" variant="secondary" onPress={() => setAsking(false)} style={{ flex: 1 }} />
+      </Row>
+    </View>
+  );
+}
+
 export function Loading({ label }: { label?: string }) {
   return (
     <View style={{ padding: space.xl, alignItems: 'center', gap: space.sm }}>

@@ -12,23 +12,46 @@ export default function MapCanvas({ centre, pins, onPress, style }: MapCanvasPro
   const all = [...pins, ...(centre ? [{ ...centre, id: 'c', kind: 'me' as const }] : [])];
   const lats = all.map((p) => p.lat);
   const lngs = all.map((p) => p.lng);
-  const minLat = Math.min(...lats, centre?.lat ?? 0) - 0.01;
-  const maxLat = Math.max(...lats, centre?.lat ?? 0) + 0.01;
-  const minLng = Math.min(...lngs, centre?.lng ?? 0) - 0.01;
-  const maxLng = Math.max(...lngs, centre?.lng ?? 0) + 0.01;
+  // Pad the bounds by roughly 3 km so a tap can reach a realistic trip length.
+  const PAD = 0.03;
+  const minLat = Math.min(...lats, centre?.lat ?? 0) - PAD;
+  const maxLat = Math.max(...lats, centre?.lat ?? 0) + PAD;
+  const minLng = Math.min(...lngs, centre?.lng ?? 0) - PAD;
+  const maxLng = Math.max(...lngs, centre?.lng ?? 0) + PAD;
   const pct = (v: number, min: number, max: number) => ((v - min) / (max - min || 1)) * 100;
 
   return (
     <Pressable
       style={[styles.wrap, style]}
       onPress={(e) => {
-        const { locationX, locationY } = e.nativeEvent;
-        const target = e.currentTarget as unknown as { offsetWidth?: number; offsetHeight?: number };
-        const w = target?.offsetWidth ?? 320;
-        const h = target?.offsetHeight ?? 260;
+        // On the web the press event is a DOM event; work out where in the box it landed.
+        const ne = e.nativeEvent as unknown as {
+          locationX?: number;
+          locationY?: number;
+          pageX?: number;
+          pageY?: number;
+          changedTouches?: Array<{ pageX: number; pageY: number }>;
+        };
+        const el = e.currentTarget as unknown as { getBoundingClientRect?: () => { left: number; top: number; width: number; height: number } };
+        const rect = el?.getBoundingClientRect?.();
+        const w = rect?.width ?? 0;
+        const h = rect?.height ?? 0;
+        let x = ne.locationX;
+        let y = ne.locationY;
+        if (!(x != null && x >= 0) && rect) {
+          const px = ne.pageX ?? ne.changedTouches?.[0]?.pageX;
+          const py = ne.pageY ?? ne.changedTouches?.[0]?.pageY;
+          const sx = typeof window !== 'undefined' ? window.scrollX : 0;
+          const sy = typeof window !== 'undefined' ? window.scrollY : 0;
+          if (px != null && py != null) {
+            x = px - rect.left - sx;
+            y = py - rect.top - sy;
+          }
+        }
+        if (x == null || y == null || !(w > 0) || !(h > 0) || !Number.isFinite(x) || !Number.isFinite(y)) return;
         onPress?.({
-          lat: maxLat - (locationY / h) * (maxLat - minLat),
-          lng: minLng + (locationX / w) * (maxLng - minLng),
+          lat: maxLat - (y / h) * (maxLat - minLat),
+          lng: minLng + (x / w) * (maxLng - minLng),
         });
       }}
     >

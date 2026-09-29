@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { Alert, Text } from 'react-native';
+import { Text } from 'react-native';
 import { router } from 'expo-router';
 import * as Clipboard from 'expo-clipboard';
 import { formatMoney, suggestedRatesFor, validateRates, type DriverRates, type Role, type Vehicle } from '@barc/shared';
-import { Banner, Button, Card, Chip, Field, H2, Muted, Row, Screen, Stars, Title } from '@/components/ui.tsx';
+import { Banner, Button, Card, Chip, ConfirmButton, Field, H2, Muted, Row, Screen, Stars, Title } from '@/components/ui.tsx';
 import { useApp, useUser } from '@/lib/store.ts';
 import { colors, space } from '@/lib/theme.ts';
 
@@ -54,28 +54,25 @@ export default function Profile() {
     }
   };
 
+  const [exported, setExported] = useState<string | null>(null);
   const exportData = async () => {
     try {
-      const data = await api.exportMe();
-      await Clipboard.setStringAsync(JSON.stringify(data, null, 2));
-      Alert.alert('Exported', 'Your profile, ratings and ride history are on the clipboard as JSON. Paste it anywhere you like.');
+      const json = JSON.stringify(await api.exportMe(), null, 2);
+      setExported(json);
+      try {
+        await Clipboard.setStringAsync(json);
+        setMsg({ tone: 'success', text: 'Your profile, ratings and ride history are on the clipboard as JSON.' });
+      } catch {
+        setMsg({ tone: 'success', text: 'Your data is shown below. Select it to copy.' });
+      }
     } catch (e) {
       setMsg({ tone: 'error', text: (e as Error).message });
     }
   };
 
-  const leave = () => {
-    Alert.alert('Sign out?', 'Your membership stays on the node. Export your data first if you want a copy.', [
-      { text: 'Cancel', style: 'cancel' },
-      {
-        text: 'Sign out',
-        style: 'destructive',
-        onPress: async () => {
-          await signOut();
-          router.replace('/onboarding');
-        },
-      },
-    ]);
+  const leave = async () => {
+    await signOut();
+    router.replace('/onboarding');
   };
 
   const preview = driving && validateRates({ base: num(base), perKm: num(perKm), perMin: num(perMin), minimum: num(minimum), currency })
@@ -148,8 +145,18 @@ export default function Profile() {
           Ratings and history belong to you, not the node. Export them any time and take them elsewhere.
         </Text>
         <Button title="Export my data (JSON)" variant="secondary" onPress={exportData} />
+        {exported ? (
+          <Text selectable style={{ fontFamily: 'monospace', fontSize: 11, color: colors.muted, marginTop: space.md }} numberOfLines={12}>
+            {exported}
+          </Text>
+        ) : null}
       </Card>
-      <Button title="Sign out" variant="ghost" onPress={leave} />
+      <ConfirmButton
+        title="Sign out"
+        question="Sign out? Your membership stays on the node. Export your data first if you want a copy."
+        confirmTitle="Sign out"
+        onConfirm={leave}
+      />
     </Screen>
   );
 }

@@ -69,14 +69,56 @@ export interface RideDetail {
   driver: PublicProfile | null;
 }
 
+export const DEMO_NODE_URL = 'demo://local';
+
 export function normaliseNodeUrl(input: string): string {
   let url = input.trim();
   if (!url) return url;
+  if (url.startsWith('demo://')) return DEMO_NODE_URL;
   if (!/^https?:\/\//i.test(url)) url = `http://${url}`;
   return url.replace(/\/+$/, '');
 }
 
-export class Api {
+export interface Channel {
+  send(e: ClientEvent): void;
+  close(): void;
+}
+
+/**
+ * Everything the app needs from a node. `Api` talks to a real node over
+ * HTTP; `DemoApi` (demo.ts) simulates one on the device.
+ */
+export interface NodeApi {
+  baseUrl: string;
+  token: string | null;
+  /** Where to centre maps when the device gives no position (demo only). */
+  defaultCentre: LatLng | null;
+  nodeInfo(): Promise<NodeInfo>;
+  register(body: { handle: string; displayName: string; role: User['role'] }): Promise<{ token: string; user: User }>;
+  me(): Promise<{ user: User }>;
+  updateMe(body: Partial<{ displayName: string; role: User['role']; paymentHandle: string; rates: DriverRates | null; vehicle: Vehicle | null }>): Promise<{ user: User }>;
+  exportMe(): Promise<unknown>;
+  setPresence(online: boolean, location: LatLng | null, heading?: number | null): Promise<{ ok: true }>;
+  quotes(pickup: Place, dropoff: Place): Promise<QuoteResponse>;
+  createRide(body: { pickup: Place; dropoff: Place; seats: number; note: string; maxFare: number | null; currency: string }): Promise<{ ride: RideRequest }>;
+  myRides(): Promise<{ rides: RideRequest[]; active: RideRequest | null }>;
+  openRides(here: LatLng | null): Promise<{ rides: OpenRide[] }>;
+  ride(id: string): Promise<RideDetail>;
+  makeOffer(rideId: string, body: { fare: number; etaMin: number; message: string }): Promise<{ offer: Offer }>;
+  withdrawOffer(rideId: string, offerId: string): Promise<{ offer: Offer }>;
+  acceptOffer(rideId: string, offerId: string): Promise<{ ride: RideRequest }>;
+  setStatus(rideId: string, status: RideStatus): Promise<{ ride: RideRequest }>;
+  rate(rideId: string, stars: number): Promise<{ ride: RideRequest }>;
+  shareLocation(rideId: string, location: LatLng, heading: number | null): Promise<{ ok: true }>;
+  proposals(): Promise<{ proposals: Proposal[]; members: number }>;
+  createProposal(body: { title: string; body: string; days: number }): Promise<{ proposal: Proposal }>;
+  vote(id: string, choice: VoteChoice): Promise<{ proposal: Proposal }>;
+  connect(onEvent: (e: ServerEvent) => void): Channel;
+}
+
+export class Api implements NodeApi {
+  readonly defaultCentre: LatLng | null = null;
+
   constructor(
     public baseUrl: string,
     public token: string | null = null,
@@ -180,7 +222,7 @@ export class Api {
   }
 
   /** Open the realtime channel. Reconnects with backoff until closed. */
-  connect(onEvent: (e: ServerEvent) => void): { send(e: ClientEvent): void; close(): void } {
+  connect(onEvent: (e: ServerEvent) => void): Channel {
     const wsUrl = `${this.baseUrl.replace(/^http/, 'ws')}/ws?token=${encodeURIComponent(this.token ?? '')}`;
     let ws: WebSocket | null = null;
     let closed = false;

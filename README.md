@@ -20,6 +20,8 @@ who gets work.
   <img src="docs/screenshots/home.png" width="180" alt="Home: 0% network take, drivers online" />
   <img src="docs/screenshots/community.png" width="180" alt="Community: proposals and votes" />
   <img src="docs/screenshots/profile.png" width="180" alt="Me: rate card and data export" />
+  <img src="docs/screenshots/offers.png" width="180" alt="Offers from three drivers, cheapest first" />
+  <img src="docs/screenshots/trip.png" width="180" alt="Trip underway with the driver's live position" />
 </p>
 
 ## What's in the box
@@ -47,7 +49,24 @@ and settle payment directly.
 **The node** is about 700 lines of TypeScript with a single SQLite file as
 its whole state. No cloud services, no API keys, no third-party accounts.
 
-## Run it
+## Try it in two minutes: the built-in demo
+
+The app ships with a **demo node**, a simulated town that runs entirely on
+the device. Tap *Try the demo* on the welcome screen. As a rider you post a
+request, three demo drivers send offers from their own rate cards, you
+choose one, and the trip plays out on the map through arrived, on the road
+and completed. As a driver, a demo rider posts a request near you and
+accepts your offer. Nothing leaves the device; it exists so you can feel
+the flow before hosting anything.
+
+To make a browser preview of the whole app as one HTML file:
+
+```bash
+npm install
+npm run build:web --workspace apps/mobile     # writes apps/mobile/dist/barc.html
+```
+
+## Run it for real
 
 Requirements: Node 22.13 or newer, and the Expo Go app on your phone (or a
 simulator).

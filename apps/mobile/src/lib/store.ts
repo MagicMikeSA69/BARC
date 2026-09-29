@@ -2,7 +2,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Constants from 'expo-constants';
 import { create } from 'zustand';
 import type { LatLng, NodeInfo, RideRequest, ServerEvent, User } from '@barc/shared';
-import { Api, normaliseNodeUrl } from './api.ts';
+import { normaliseNodeUrl, type NodeApi } from './api.ts';
+import { createApi } from './demo.ts';
 
 const SESSION_KEY = 'barc.session.v1';
 
@@ -15,7 +16,7 @@ interface Session {
 interface AppState {
   ready: boolean;
   session: Session | null;
-  api: Api;
+  api: NodeApi;
   node: NodeInfo | null;
   activeRide: RideRequest | null;
   /** Latest live position of the driver on the active ride, as seen by the rider. */
@@ -46,7 +47,7 @@ export const defaultNodeUrl: string =
 export const useApp = create<AppState>((set, get) => ({
   ready: false,
   session: null,
-  api: new Api(defaultNodeUrl),
+  api: createApi(defaultNodeUrl),
   node: null,
   activeRide: null,
   driverLocation: null,
@@ -59,7 +60,7 @@ export const useApp = create<AppState>((set, get) => ({
       const raw = await AsyncStorage.getItem(SESSION_KEY);
       if (raw) {
         const session = JSON.parse(raw) as Session;
-        const api = new Api(session.nodeUrl, session.token);
+        const api = createApi(session.nodeUrl, session.token, session.user);
         set({ session, api });
         // Refresh in the background; a stale profile is fine to start with.
         get().refreshMe().catch(() => undefined);
@@ -73,7 +74,7 @@ export const useApp = create<AppState>((set, get) => ({
 
   async join(nodeUrlInput, body) {
     const nodeUrl = normaliseNodeUrl(nodeUrlInput);
-    const api = new Api(nodeUrl);
+    const api = createApi(nodeUrl);
     const node = await api.nodeInfo();
     const { token, user } = await api.register(body);
     api.token = token;
@@ -84,7 +85,7 @@ export const useApp = create<AppState>((set, get) => ({
 
   async signOut() {
     await AsyncStorage.removeItem(SESSION_KEY);
-    set({ session: null, api: new Api(defaultNodeUrl), node: null, activeRide: null, online: false });
+    set({ session: null, api: createApi(defaultNodeUrl), node: null, activeRide: null, online: false, driverLocation: null });
   },
 
   setUser(user) {

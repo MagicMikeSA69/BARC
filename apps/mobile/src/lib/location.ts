@@ -6,13 +6,22 @@ export interface Position extends LatLng {
   heading: number | null;
 }
 
-/** Ask once for foreground location and return the current fix. */
+const POSITION_TIMEOUT_MS = 6000;
+
+/**
+ * Ask once for foreground location and return the current fix, or null if
+ * the platform refuses or stays silent (some embedded browsers never answer).
+ */
 export async function getCurrentPosition(): Promise<Position | null> {
-  const { status } = await Location.requestForegroundPermissionsAsync();
-  if (status !== 'granted') return null;
-  try {
+  const attempt = (async (): Promise<Position | null> => {
+    const { status } = await Location.requestForegroundPermissionsAsync();
+    if (status !== 'granted') return null;
     const pos = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.Balanced });
     return { lat: pos.coords.latitude, lng: pos.coords.longitude, heading: pos.coords.heading ?? null };
+  })();
+  const timeout = new Promise<null>((r) => setTimeout(() => r(null), POSITION_TIMEOUT_MS));
+  try {
+    return await Promise.race([attempt, timeout]);
   } catch {
     return null;
   }
@@ -38,16 +47,20 @@ export function useLivePosition(active: boolean, onUpdate?: (p: Position) => voi
         setPosition(first);
         cb.current?.(first);
       }
-      const { status } = await Location.getForegroundPermissionsAsync();
-      if (status !== 'granted' || cancelled) return;
-      sub = await Location.watchPositionAsync(
-        { accuracy: Location.Accuracy.Balanced, timeInterval: 5000, distanceInterval: 15 },
-        (pos) => {
-          const p = { lat: pos.coords.latitude, lng: pos.coords.longitude, heading: pos.coords.heading ?? null };
-          setPosition(p);
-          cb.current?.(p);
-        },
-      );
+      try {
+        const { status } = await Location.getForegroundPermissionsAsync();
+        if (status !== 'granted' || cancelled) return;
+        sub = await Location.watchPositionAsync(
+          { accuracy: Location.Accuracy.Balanced, timeInterval: 5000, distanceInterval: 15 },
+          (pos) => {
+            const p = { lat: pos.coords.latitude, lng: pos.coords.longitude, heading: pos.coords.heading ?? null };
+            setPosition(p);
+            cb.current?.(p);
+          },
+        );
+      } catch {
+        /* no geolocation on this platform */
+      }
     })();
     return () => {
       cancelled = true;

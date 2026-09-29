@@ -56,3 +56,23 @@ export function isValidLatLng(p: unknown): p is LatLng {
     lng <= 180
   );
 }
+
+const COMPASS = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'] as const;
+
+/** Compass bearing from `from` to `to`, in degrees clockwise from north. */
+export function bearingDeg(from: LatLng, to: LatLng): number {
+  const dLng = toRad(to.lng - from.lng);
+  const lat1 = toRad(from.lat);
+  const lat2 = toRad(to.lat);
+  const y = Math.sin(dLng) * Math.cos(lat2);
+  const x = Math.cos(lat1) * Math.sin(lat2) - Math.sin(lat1) * Math.cos(lat2) * Math.cos(dLng);
+  return ((Math.atan2(y, x) * 180) / Math.PI + 360) % 360;
+}
+
+/** A readable fallback label when no address is available: "1.8 km NE of centre". */
+export function describeRelative(point: LatLng, centre: LatLng, centreName = 'centre'): string {
+  const km = haversineKm(centre, point);
+  if (km < 0.05) return centreName;
+  const dir = COMPASS[Math.round(bearingDeg(centre, point) / 45) % 8];
+  return `${km < 10 ? km.toFixed(1) : Math.round(km)} km ${dir} of ${centreName}`;
+}

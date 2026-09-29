@@ -4,6 +4,7 @@ import { router } from 'expo-router';
 import { PRINCIPLES, type Role } from '@barc/shared';
 import { Banner, Body, Button, Card, Chip, Field, H2, Muted, Row, Screen, Title } from '@/components/ui.tsx';
 import { defaultNodeUrl, useApp } from '@/lib/store.ts';
+import { DEMO_NODE_URL } from '@/lib/api.ts';
 import { colors, space } from '@/lib/theme.ts';
 
 const ROLES: Array<{ key: Role; label: string; blurb: string }> = [
@@ -51,7 +52,15 @@ export default function Onboarding() {
             <Body>{p.body}</Body>
           </Card>
         ))}
-        <Button title="Join a node" onPress={() => setStep('join')} style={{ marginTop: space.md }} />
+        <Button
+          title="Try the demo"
+          onPress={() => {
+            setNodeUrl(DEMO_NODE_URL);
+            setStep('join');
+          }}
+          style={{ marginTop: space.md }}
+        />
+        <Button title="Join a real node" variant="secondary" onPress={() => setStep('join')} style={{ marginTop: space.sm }} />
       </Screen>
     );
   }
@@ -62,6 +71,11 @@ export default function Onboarding() {
         Join
       </Title>
       {error ? <Banner tone="error">{error}</Banner> : null}
+      {nodeUrl === DEMO_NODE_URL ? (
+        <Banner tone="success">
+          Demo node: a simulated town runs inside the app and nothing leaves your device. Pick "I ride" to request a trip and watch offers arrive, or "I drive" to receive a request.
+        </Banner>
+      ) : null}
       <Field
         label="Node address"
         value={nodeUrl}
@@ -70,6 +84,7 @@ export default function Onboarding() {
         autoCorrect={false}
         keyboardType="url"
         placeholder="https://rides.mytown.example"
+        hint={nodeUrl === DEMO_NODE_URL ? undefined : 'Or type demo://local to try the built-in demo.'}
       />
       <Field label="Handle" value={handle} onChangeText={setHandle} autoCapitalize="none" autoCorrect={false} placeholder="thandi_m" hint="3-24 letters, numbers or underscores. Unique on this node." />
       <Field label="Name people see" value={displayName} onChangeText={setDisplayName} placeholder="Thandi" />

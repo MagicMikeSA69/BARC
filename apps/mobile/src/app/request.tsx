@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Text, View } from 'react-native';
 import { router } from 'expo-router';
-import { formatMoney, type LatLng, type Place } from '@barc/shared';
+import { describeRelative, formatMoney, type LatLng, type Place } from '@barc/shared';
 import { Banner, Body, Button, Card, Chip, Field, H2, Loading, Muted, Row, Screen, Stars } from '@/components/ui.tsx';
 import MapCanvas, { type MapPin } from '@/components/MapCanvas';
 import { useApp } from '@/lib/store.ts';
@@ -30,12 +30,19 @@ export default function RequestRide() {
 
   useEffect(() => {
     getCurrentPosition().then(async (p) => {
-      if (!p) return;
+      if (!p) {
+        // No position from the device: fall back to the node's centre, if it has one.
+        if (api.defaultCentre) {
+          setHere(api.defaultCentre);
+          setPickup({ ...api.defaultCentre, label: 'Town centre' });
+        }
+        return;
+      }
       const loc = { lat: p.lat, lng: p.lng };
       setHere(loc);
       setPickup({ ...loc, label: (await labelFor(loc)) || 'Current location' });
     });
-  }, []);
+  }, [api]);
 
   useEffect(() => {
     if (!pickup || !dropoff) {
@@ -53,7 +60,7 @@ export default function RequestRide() {
   }, [api, pickup, dropoff]);
 
   const place = async (p: LatLng) => {
-    const label = (await labelFor(p)) || `${p.lat.toFixed(4)}, ${p.lng.toFixed(4)}`;
+    const label = (await labelFor(p)) || (here ? describeRelative(p, here, pickup?.label === 'Town centre' ? 'town centre' : 'you') : `${p.lat.toFixed(4)}, ${p.lng.toFixed(4)}`);
     if (which === 'pickup') {
       setPickup({ ...p, label });
       setWhich('dropoff');

@@ -17,11 +17,12 @@ export default function Home() {
   const refreshActiveRide = useApp((s) => s.refreshActiveRide);
   const refreshNode = useApp((s) => s.refreshNode);
   const eventTick = useApp((s) => s.eventTick);
+  const api = useApp((s) => s.api);
   const [here, setHere] = useState<LatLng | null>(null);
 
   useEffect(() => {
-    getCurrentPosition().then((p) => p && setHere({ lat: p.lat, lng: p.lng }));
-  }, []);
+    getCurrentPosition().then((p) => setHere(p ? { lat: p.lat, lng: p.lng } : api.defaultCentre));
+  }, [api]);
 
   useFocusEffect(
     useCallback(() => {

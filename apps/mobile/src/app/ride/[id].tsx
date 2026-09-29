@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { Alert, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import { router, useLocalSearchParams } from 'expo-router';
 import { computeFare, estimateEtaMinutes, formatMoney, type RideStatus } from '@barc/shared';
-import { Banner, Body, Button, Card, Field, H2, Loading, Muted, Row, Screen, StarPicker, Stars } from '@/components/ui.tsx';
+import { Banner, Body, Button, Card, ConfirmButton, Field, H2, Loading, Muted, Row, Screen, StarPicker, Stars } from '@/components/ui.tsx';
 import MapCanvas, { type MapPin } from '@/components/MapCanvas';
 import { OfferCard } from '@/components/OfferCard.tsx';
 import { STATUS_LABEL, StatusPill } from '@/components/RideCard.tsx';
@@ -78,11 +78,16 @@ export default function RideScreen() {
   const done = ride.status === 'completed' || ride.status === 'cancelled';
 
   const setStatus = (status: RideStatus) => run(status, () => api.setStatus(ride.id, status));
-  const confirmCancel = () =>
-    Alert.alert('Cancel this ride?', 'The other person will be told straight away.', [
-      { text: 'Keep it', style: 'cancel' },
-      { text: 'Cancel ride', style: 'destructive', onPress: () => setStatus('cancelled') },
-    ]);
+  const cancelButton = (title: string) => (
+    <ConfirmButton
+      title={title}
+      question="Cancel this ride? The other person will be told straight away."
+      confirmTitle="Yes, cancel"
+      onConfirm={() => setStatus('cancelled')}
+      loading={busy === 'cancelled'}
+      style={{ marginTop: space.sm }}
+    />
+  );
 
   return (
     <Screen>
@@ -110,7 +115,7 @@ export default function RideScreen() {
           detail={detail}
           busy={busy}
           onAccept={(offerId) => run(offerId, () => api.acceptOffer(ride.id, offerId))}
-          onCancel={confirmCancel}
+          cancelButton={cancelButton}
           onRate={(stars) => run('rate', () => api.rate(ride.id, stars))}
         />
       ) : null}
@@ -127,7 +132,7 @@ export default function RideScreen() {
           {ride.status === 'accepted' ? <Button title="I have arrived" onPress={() => setStatus('arrived')} loading={busy === 'arrived'} /> : null}
           {ride.status === 'arrived' ? <Button title="Start trip" onPress={() => setStatus('in_progress')} loading={busy === 'in_progress'} /> : null}
           {ride.status === 'in_progress' ? <Button title="Complete trip" onPress={() => setStatus('completed')} loading={busy === 'completed'} /> : null}
-          {ride.status !== 'in_progress' ? <Button title="Cancel" variant="ghost" onPress={confirmCancel} style={{ marginTop: space.sm }} /> : null}
+          {ride.status !== 'in_progress' ? cancelButton('Cancel') : null}
         </>
       ) : null}
 
@@ -157,13 +162,13 @@ function RiderSide({
   detail,
   busy,
   onAccept,
-  onCancel,
+  cancelButton,
   onRate,
 }: {
   detail: RideDetail;
   busy: string | null;
   onAccept: (offerId: string) => void;
-  onCancel: () => void;
+  cancelButton: (title: string) => React.ReactNode;
   onRate: (stars: number) => void;
 }) {
   const { ride, offers, driver } = detail;
@@ -179,7 +184,7 @@ function RiderSide({
         ) : (
           pending.map((o) => <OfferCard key={o.id} offer={o} onAccept={() => onAccept(o.id)} busy={busy === o.id} />)
         )}
-        <Button title="Cancel request" variant="ghost" onPress={onCancel} />
+        {cancelButton('Cancel request')}
       </>
     );
   }
@@ -201,7 +206,7 @@ function RiderSide({
       {ride.status === 'accepted' || ride.status === 'arrived' ? (
         <>
           <Muted style={{ marginBottom: space.sm }}>{STATUS_LABEL[ride.status]}. You can see the driver move on the map.</Muted>
-          <Button title="Cancel ride" variant="ghost" onPress={onCancel} />
+          {cancelButton('Cancel ride')}
         </>
       ) : null}
     </>
