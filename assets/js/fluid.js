@@ -1,7 +1,8 @@
-/* Broodline — cursor‑reactive liquid layer.
+/* Broodline — cursor‑reactive egg‑liquid layer.
    A compact GPU fluid simulation (stable fluids: advect → vorticity → project)
-   rendered to a fixed, pointer‑transparent canvas over the page. Dye follows
-   the cursor and dissipates within a couple of seconds. Falls back to nothing
+   drives a density field rendered as the inside of an egg: a translucent, glossy
+   albumen envelope around a golden yolk core. It follows the cursor, sags a
+   little under gravity, and clears within a few seconds. Falls back to nothing
    when WebGL is unavailable or the viewer prefers reduced motion. */
 (function () {
   "use strict";
@@ -12,22 +13,24 @@
   var config = {
     SIM_RES: coarse ? 96 : 144,
     DYE_RES: coarse ? 512 : 1024,
-    DENSITY_DISSIPATION: 1.6,
-    VELOCITY_DISSIPATION: 0.9,
+    DENSITY_DISSIPATION: 1.1,  /* the yolk clears about a second after the cursor leaves; the film a little later */
+    VELOCITY_DISSIPATION: 2.4, /* thick: motion dies quickly */
     PRESSURE: 0.8,
     PRESSURE_ITERATIONS: 14,
-    CURL: 22,
-    SPLAT_RADIUS: 0.18,
-    SPLAT_FORCE: 5200,
-    /* Per theme: how much dye each splat adds, and the most of the page it may ever cover. */
-    INTENSITY: 0.26,
-    MAX_ALPHA: 0.82,
-    IDLE_MS: 5000
+    CURL: 3,                   /* little swirl; albumen doesn't billow like smoke */
+    GRAVITY: 55,               /* dense yolk sags */
+    SPLAT_RADIUS: 0.3,
+    SPLAT_FORCE: 2400,
+    AMOUNT: 0.3,               /* density added per cursor splat */
+    DENSITY_CAP: 1.3,
+    IDLE_MS: 6000
   };
+  /* Look per theme: albumen is a clear film, yolk a golden core. */
   var THEME = {
-    light: { INTENSITY: 0.26, MAX_ALPHA: 0.82, DENSITY_DISSIPATION: 1.7 },
-    dark:  { INTENSITY: 0.15, MAX_ALPHA: 0.5,  DENSITY_DISSIPATION: 1.9 }
+    light: { albumen: [1.0, 0.985, 0.95], albAlpha: 0.7, yolk: [0.96, 0.66, 0.11], yolkAlpha: 0.92 },
+    dark:  { albumen: [1.0, 0.96, 0.9],   albAlpha: 0.5, yolk: [0.8, 0.5, 0.09],   yolkAlpha: 0.78 }
   };
+  var look = THEME.light;
 
   var canvas = document.createElement("canvas");
   canvas.className = "fluid-layer";
@@ -140,32 +143,47 @@
     "varying highp vec2 vUv; uniform sampler2D uTexture; uniform float value;",
     "void main () { gl_FragColor = value * texture2D(uTexture, vUv); }"].join("\n"));
 
+  /* Density → egg liquid. Albumen is a translucent film that darkens where its
+     surface tilts away (a meniscus) and catches a highlight; the yolk is a dense
+     golden core with a soft membrane ring. Output is premultiplied. */
   var displayShader = compile(gl.FRAGMENT_SHADER, [
     "precision highp float; precision highp sampler2D;",
     "varying vec2 vUv, vL, vR, vT, vB;",
-    "uniform sampler2D uTexture; uniform vec2 texelSize; uniform float uMaxAlpha;",
+    "uniform sampler2D uTexture; uniform float uBump;",
+    "uniform vec3 uYolk; uniform vec3 uAlbumen; uniform float uYolkAlpha; uniform float uAlbAlpha;",
     "void main () {",
-    "  vec3 c = texture2D(uTexture, vUv).rgb;",
-    "  vec3 lc = texture2D(uTexture, vL).rgb; vec3 rc = texture2D(uTexture, vR).rgb;",
-    "  vec3 tc = texture2D(uTexture, vT).rgb; vec3 bc = texture2D(uTexture, vB).rgb;",
-    "  float dx = length(rc) - length(lc); float dy = length(tc) - length(bc);",
-    "  vec3 n = normalize(vec3(dx, dy, length(texelSize)));",
-    "  float diffuse = clamp(dot(n, vec3(0.0, 0.0, 1.0)) + 0.7, 0.7, 1.0);",
-    "  c = max(c * diffuse, 0.0);",
-    "  float m = max(c.r, max(c.g, c.b));",
-    "  float a = min(m, uMaxAlpha);",
-    "  if (m > 0.0) c *= a / m;",
-    "  gl_FragColor = vec4(c, a);",
+    "  float C = texture2D(uTexture, vUv).r;",
+    "  float L = texture2D(uTexture, vL).r; float R = texture2D(uTexture, vR).r;",
+    "  float T = texture2D(uTexture, vT).r; float B = texture2D(uTexture, vB).r;",
+    "  float d = (4.0 * C + L + R + T + B) / 8.0;",
+    "  vec3 n = normalize(vec3(-(R - L) * uBump, -(T - B) * uBump, 1.0));",
+    "  vec3 Ld = normalize(vec3(-0.45, 0.6, 0.66));",
+    "  float lambert = max(dot(n, Ld), 0.0);",
+    "  float spec = pow(max(dot(reflect(-Ld, n), vec3(0.0, 0.0, 1.0)), 0.0), 64.0);",
+    "  float fres = pow(1.0 - n.z, 0.75);",
+    "  float alb = smoothstep(0.05, 0.22, d);",
+    "  float yolk = smoothstep(0.42, 0.74, d);",
+    "  float ring = smoothstep(0.36, 0.5, d) * (1.0 - smoothstep(0.5, 0.72, d));",
+    "  float aA = alb * uAlbAlpha * (0.14 + 0.86 * fres);",
+    "  vec3 cA = uAlbumen * (0.68 + 0.32 * lambert) * aA;",
+    "  float aY = yolk * uYolkAlpha;",
+    "  vec3 cY = uYolk * (0.8 + 0.2 * lambert) * (1.0 - 0.22 * ring) * aY;",
+    "  vec3 col = cY + cA * (1.0 - aY);",
+    "  float a = aY + aA * (1.0 - aY);",
+    "  float hi = spec * 0.9 * max(alb, yolk);",
+    "  col += hi; a = min(a + hi, 1.0);",
+    "  col = min(col, vec3(a));",
+    "  gl_FragColor = vec4(col, a);",
     "}"].join("\n"));
 
   var splatShader = compile(gl.FRAGMENT_SHADER, [
     "precision highp float; precision highp sampler2D;",
-    "varying vec2 vUv; uniform sampler2D uTarget; uniform float aspectRatio; uniform vec3 color; uniform vec2 point; uniform float radius;",
+    "varying vec2 vUv; uniform sampler2D uTarget; uniform float aspectRatio; uniform vec3 color; uniform vec2 point; uniform float radius; uniform float cap;",
     "void main () {",
     "  vec2 p = vUv - point.xy; p.x *= aspectRatio;",
     "  vec3 splat = exp(-dot(p, p) / radius) * color;",
     "  vec3 base = texture2D(uTarget, vUv).xyz;",
-    "  gl_FragColor = vec4(base + splat, 1.0);",
+    "  gl_FragColor = vec4(min(base + splat, vec3(cap)), 1.0);",
     "}"].join("\n"));
 
   var advectionSource = [
@@ -228,6 +246,17 @@
     "  gl_FragColor = vec4(velocity, 0.0, 1.0);",
     "}"].join("\n"));
 
+  /* Dense liquid sags: downward force proportional to density. */
+  var gravityShader = compile(gl.FRAGMENT_SHADER, [
+    "precision mediump float; precision mediump sampler2D;",
+    "varying highp vec2 vUv; uniform sampler2D uVelocity; uniform sampler2D uDensity; uniform float gravity; uniform float dt;",
+    "void main () {",
+    "  vec2 v = texture2D(uVelocity, vUv).xy;",
+    "  float d = texture2D(uDensity, vUv).r;",
+    "  v.y -= gravity * d * dt;",
+    "  gl_FragColor = vec4(v, 0.0, 1.0);",
+    "}"].join("\n"));
+
   var pressureShader = compile(gl.FRAGMENT_SHADER, [
     "precision mediump float; precision mediump sampler2D;",
     "varying highp vec2 vUv, vL, vR, vT, vB; uniform sampler2D uPressure; uniform sampler2D uDivergence;",
@@ -257,6 +286,7 @@
   var divergenceProgram = new Program(baseVertex, divergenceShader);
   var curlProgram = new Program(baseVertex, curlShader);
   var vorticityProgram = new Program(baseVertex, vorticityShader);
+  var gravityProgram = new Program(baseVertex, gravityShader);
   var pressureProgram = new Program(baseVertex, pressureShader);
   var gradientProgram = new Program(baseVertex, gradientSubtractShader);
 
@@ -342,57 +372,42 @@
     return false;
   }
 
-  /* ---------- palette from the page tokens ---------- */
-  var palette = [];
-  function hexToRgb(hex) {
-    hex = hex.trim().replace("#", "");
-    if (hex.length === 3) hex = hex.split("").map(function (c) { return c + c; }).join("");
-    var n = parseInt(hex, 16);
-    if (isNaN(n)) return null;
-    return { r: ((n >> 16) & 255) / 255, g: ((n >> 8) & 255) / 255, b: (n & 255) / 255 };
-  }
+  /* ---------- theme ---------- */
   function isDark() {
     var t = document.documentElement.getAttribute("data-theme");
     if (t === "dark") return true;
     if (t === "light") return false;
     return matchMedia("(prefers-color-scheme: dark)").matches;
   }
-  function readPalette() {
-    var theme = isDark() ? THEME.dark : THEME.light;
-    config.INTENSITY = theme.INTENSITY;
-    config.MAX_ALPHA = theme.MAX_ALPHA;
-    config.DENSITY_DISSIPATION = theme.DENSITY_DISSIPATION;
-    var cs = getComputedStyle(document.documentElement);
-    var names = ["--accent", "--hero-b", "--hero-c", "--hero-e"];
-    var out = [];
-    names.forEach(function (n) { var c = hexToRgb(cs.getPropertyValue(n) || ""); if (c) out.push(c); });
-    if (!out.length) out.push({ r: 0.95, g: 0.65, b: 0.1 });
-    palette = out;
-  }
-  readPalette();
-  new MutationObserver(readPalette).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+  function readTheme() { look = isDark() ? THEME.dark : THEME.light; }
+  readTheme();
+  new MutationObserver(readTheme).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
   var mq = matchMedia("(prefers-color-scheme: dark)");
-  if (mq.addEventListener) mq.addEventListener("change", readPalette);
+  if (mq.addEventListener) mq.addEventListener("change", readTheme);
 
   /* ---------- simulation ---------- */
-  function splat(x, y, dx, dy, color) {
-    splatProgram.bind();
-    gl.uniform1i(splatProgram.uniforms.uTarget, velocity.read.attach(0));
-    gl.uniform1f(splatProgram.uniforms.aspectRatio, canvas.width / canvas.height);
-    gl.uniform2f(splatProgram.uniforms.point, x, y);
-    gl.uniform3f(splatProgram.uniforms.color, dx, dy, 0);
-    gl.uniform1f(splatProgram.uniforms.radius, correctRadius(config.SPLAT_RADIUS / 100));
-    blit(velocity.write);
-    velocity.swap();
-    gl.uniform1i(splatProgram.uniforms.uTarget, dye.read.attach(0));
-    gl.uniform3f(splatProgram.uniforms.color, color.r, color.g, color.b);
-    blit(dye.write);
-    dye.swap();
-  }
   function correctRadius(radius) {
     var aspectRatio = canvas.width / canvas.height;
     if (aspectRatio > 1) radius *= aspectRatio;
     return radius;
+  }
+  /* Add motion (dx, dy) and liquid (amount) at (x, y); radiusScale widens the deposit. */
+  function splat(x, y, dx, dy, amount, radiusScale) {
+    var radius = correctRadius(config.SPLAT_RADIUS / 100) * (radiusScale || 1);
+    splatProgram.bind();
+    gl.uniform1f(splatProgram.uniforms.aspectRatio, canvas.width / canvas.height);
+    gl.uniform2f(splatProgram.uniforms.point, x, y);
+    gl.uniform1f(splatProgram.uniforms.radius, radius);
+    gl.uniform1i(splatProgram.uniforms.uTarget, velocity.read.attach(0));
+    gl.uniform3f(splatProgram.uniforms.color, dx, dy, 0);
+    gl.uniform1f(splatProgram.uniforms.cap, 1e6);
+    blit(velocity.write);
+    velocity.swap();
+    gl.uniform1i(splatProgram.uniforms.uTarget, dye.read.attach(0));
+    gl.uniform3f(splatProgram.uniforms.color, amount, 0, 0);
+    gl.uniform1f(splatProgram.uniforms.cap, config.DENSITY_CAP);
+    blit(dye.write);
+    dye.swap();
   }
 
   function step(dt) {
@@ -409,6 +424,14 @@
     gl.uniform1i(vorticityProgram.uniforms.uCurl, curl.attach(1));
     gl.uniform1f(vorticityProgram.uniforms.curl, config.CURL);
     gl.uniform1f(vorticityProgram.uniforms.dt, dt);
+    blit(velocity.write);
+    velocity.swap();
+
+    gravityProgram.bind();
+    gl.uniform1i(gravityProgram.uniforms.uVelocity, velocity.read.attach(0));
+    gl.uniform1i(gravityProgram.uniforms.uDensity, dye.read.attach(1));
+    gl.uniform1f(gravityProgram.uniforms.gravity, config.GRAVITY);
+    gl.uniform1f(gravityProgram.uniforms.dt, dt);
     blit(velocity.write);
     velocity.swap();
 
@@ -461,26 +484,22 @@
   function render() {
     gl.disable(gl.BLEND);
     displayProgram.bind();
-    gl.uniform2f(displayProgram.uniforms.texelSize, 1 / gl.drawingBufferWidth, 1 / gl.drawingBufferHeight);
-    gl.uniform1f(displayProgram.uniforms.uMaxAlpha, config.MAX_ALPHA);
+    /* Sample neighbours 1.5 dye texels apart so surface normals are smooth at screen resolution. */
+    gl.uniform2f(displayProgram.uniforms.texelSize, 1.5 / dye.width, 1.5 / dye.height);
+    gl.uniform1f(displayProgram.uniforms.uBump, 9.0);
+    gl.uniform3f(displayProgram.uniforms.uYolk, look.yolk[0], look.yolk[1], look.yolk[2]);
+    gl.uniform3f(displayProgram.uniforms.uAlbumen, look.albumen[0], look.albumen[1], look.albumen[2]);
+    gl.uniform1f(displayProgram.uniforms.uYolkAlpha, look.yolkAlpha);
+    gl.uniform1f(displayProgram.uniforms.uAlbAlpha, look.albAlpha);
     gl.uniform1i(displayProgram.uniforms.uTexture, dye.read.attach(0));
     blit(null);
   }
 
   /* ---------- pointer ---------- */
-  var pointer = { x: 0, y: 0, px: 0, py: 0, down: false, moved: false, colorIndex: 0, hue: 0 };
+  var pointer = { x: 0, y: 0, px: 0, py: 0, dx: 0, dy: 0, moved: false, pending: false };
   var lastActivity = performance.now();
-  var running = false, lastTime = performance.now(), colorTimer = 0;
+  var running = false, lastTime = performance.now();
 
-  function pickColor() {
-    /* Drift slowly through the page palette so the trail shifts between amber, sage and cream. */
-    var i = Math.floor(pointer.hue) % palette.length;
-    var j = (i + 1) % palette.length;
-    var t = pointer.hue - Math.floor(pointer.hue);
-    var a = palette[i], b = palette[j];
-    var k = config.INTENSITY;
-    return { r: (a.r + (b.r - a.r) * t) * k, g: (a.g + (b.g - a.g) * t) * k, b: (a.b + (b.b - a.b) * t) * k };
-  }
   function onMove(clientX, clientY) {
     var x = clientX / window.innerWidth;
     var y = 1 - clientY / window.innerHeight;
@@ -491,7 +510,7 @@
     pointer.x = x; pointer.y = y;
     pointer.dx = dx * config.SPLAT_FORCE; pointer.dy = dy * config.SPLAT_FORCE;
     pointer.px = x; pointer.py = y;
-    if (Math.abs(dx) > 0 || Math.abs(dy) > 0) {
+    if (dx !== 0 || dy !== 0) {
       pointer.pending = true;
       lastActivity = performance.now();
       start();
@@ -499,10 +518,9 @@
   }
   window.addEventListener("pointermove", function (e) { onMove(e.clientX, e.clientY); }, { passive: true });
   window.addEventListener("touchmove", function (e) { if (e.touches && e.touches[0]) onMove(e.touches[0].clientX, e.touches[0].clientY); }, { passive: true });
-  window.addEventListener("pointerleave", function () { pointer.moved = false; });
   document.addEventListener("mouseleave", function () { pointer.moved = false; });
 
-  /* Gentle ambient motion in the hero so the artwork is alive before anyone touches it. */
+  /* The hero holds a resting yolk that wobbles gently while it is in view. */
   var hero = document.querySelector(".hero");
   var heroVisible = false;
   if (hero && "IntersectionObserver" in window) {
@@ -511,18 +529,31 @@
       if (heroVisible) start();
     }, { threshold: 0.2 }).observe(hero);
   }
-  var nextAmbient = 0;
-  function ambient(now) {
-    if (!hero || !heroVisible || now < nextAmbient) return;
-    nextAmbient = now + 1800 + Math.random() * 1800;
+  function heroPoint(fx, fy) {
     var r = hero.getBoundingClientRect();
-    if (r.bottom < 0 || r.top > window.innerHeight) return;
-    var cx = (r.left + r.width * (0.25 + Math.random() * 0.5)) / window.innerWidth;
-    var cy = 1 - (r.top + r.height * (0.25 + Math.random() * 0.5)) / window.innerHeight;
-    var ang = Math.random() * Math.PI * 2, f = 260 + Math.random() * 260;
-    var c = pickColor();
-    splat(cx, cy, Math.cos(ang) * f, Math.sin(ang) * f, { r: c.r * 0.7, g: c.g * 0.7, b: c.b * 0.7 });
-    pointer.hue += 0.37;
+    return { x: (r.left + r.width * fx) / window.innerWidth, y: 1 - (r.top + r.height * fy) / window.innerHeight, r: r };
+  }
+  var nextAmbient = 0, seeded = false;
+  function ambient(now) {
+    if (!hero || !heroVisible) return;
+    if (!seeded) {
+      var c = heroPoint(0.5, 0.5);
+      if (c.y > 0.1 && c.y < 0.9) { seedYolk(); seeded = true; nextAmbient = now + 2500; }
+    }
+    if (now < nextAmbient) return;
+    nextAmbient = now + 2200 + Math.random() * 2200;
+    var p = heroPoint(0.35 + Math.random() * 0.3, 0.3 + Math.random() * 0.4);
+    if (p.r.bottom < 0 || p.r.top > window.innerHeight) return;
+    var ang = Math.random() * Math.PI * 2, f = 90 + Math.random() * 120;
+    splat(p.x, p.y, Math.cos(ang) * f, Math.sin(ang) * f, 0.16, 2.2);
+  }
+  function seedYolk() {
+    if (!hero) return;
+    var p = heroPoint(0.5, 0.5);
+    /* albumen pool, then a dense yolk sitting in it */
+    splat(p.x, p.y, 0, 0, 0.22, 7.0);
+    splat(p.x, p.y, 0, 0, 0.55, 2.8);
+    splat(p.x, p.y, 0, 0, 0.9, 1.6);
   }
 
   /* ---------- loop ---------- */
@@ -530,12 +561,10 @@
     if (!running) return;
     var dt = Math.min((now - lastTime) / 1000, 0.0166);
     lastTime = now;
-    if (resizeCanvas()) initFramebuffers();
-    colorTimer += dt * 0.25;
-    if (colorTimer >= 1) { colorTimer = 0; pointer.hue += 0.5; }
+    if (resizeCanvas()) { initFramebuffers(); seeded = false; }
     if (pointer.pending) {
       pointer.pending = false;
-      splat(pointer.x, pointer.y, pointer.dx, pointer.dy, pickColor());
+      splat(pointer.x, pointer.y, pointer.dx, pointer.dy, config.AMOUNT, 1);
     }
     ambient(now);
     step(dt);
@@ -551,24 +580,12 @@
     requestAnimationFrame(frame);
   }
   document.addEventListener("visibilitychange", function () { if (!document.hidden) { lastActivity = performance.now(); start(); } });
-  window.addEventListener("resize", function () { if (resizeCanvas()) initFramebuffers(); if (!running) render(); });
+  window.addEventListener("resize", function () { if (resizeCanvas()) { initFramebuffers(); seeded = false; } if (!running) render(); });
   canvas.addEventListener("webglcontextlost", function (e) { e.preventDefault(); running = false; canvas.remove(); });
 
   /* ---------- boot ---------- */
   resizeCanvas();
   initFramebuffers();
-  if (hero) {
-    /* A few seed splats so the first frame already has liquid in it. */
-    var r = hero.getBoundingClientRect();
-    for (var i = 0; i < 5; i++) {
-      var cx = (r.left + r.width * (0.2 + Math.random() * 0.6)) / window.innerWidth;
-      var cy = 1 - (r.top + r.height * (0.2 + Math.random() * 0.6)) / window.innerHeight;
-      var ang = Math.random() * Math.PI * 2, f = 400 + Math.random() * 400;
-      var c = pickColor();
-      splat(cx, cy, Math.cos(ang) * f, Math.sin(ang) * f, c);
-      pointer.hue += 0.61;
-    }
-  }
   lastActivity = performance.now();
   start();
 })();

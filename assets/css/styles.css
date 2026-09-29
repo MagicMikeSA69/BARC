@@ -695,14 +695,11 @@ figcaption.cap {
 
 /* ---------- Liquid layer (WebGL, see assets/js/fluid.js) ----------
    Fixed over the page, below the nav and menu, never intercepts the pointer.
-   Multiply in light mode keeps dark text legible under the dye; screen in dark. */
+   Composited normally: the albumen is a translucent film, the yolk a golden core. */
 .fluid-layer {
   position: fixed; inset: 0; width: 100%; height: 100%;
   z-index: 30; pointer-events: none;
-  mix-blend-mode: multiply;
 }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .fluid-layer { mix-blend-mode: screen; } }
-:root[data-theme="dark"] .fluid-layer { mix-blend-mode: screen; }
 @media (prefers-reduced-motion: reduce) { .fluid-layer { display: none; } }
 @media print { .fluid-layer { display: none; } }
 
