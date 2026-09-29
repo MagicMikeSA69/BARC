@@ -13,7 +13,7 @@
   var config = {
     SIM_RES: coarse ? 96 : 144,
     DYE_RES: coarse ? 512 : 1024,
-    DENSITY_DISSIPATION: 1.1,  /* the yolk clears about a second after the cursor leaves; the film a little later */
+    DENSITY_DISSIPATION: 0.95, /* behind the content it can pool a little longer before it is absorbed */
     VELOCITY_DISSIPATION: 2.4, /* thick: motion dies quickly */
     PRESSURE: 0.8,
     PRESSURE_ITERATIONS: 14,
@@ -22,7 +22,7 @@
     SPLAT_RADIUS: 0.3,
     SPLAT_FORCE: 2400,
     AMOUNT: 0.3,               /* density added per cursor splat */
-    DENSITY_CAP: 1.3,
+    DENSITY_CAP: 1.4,
     IDLE_MS: 6000
   };
   /* Look per theme: albumen is a clear film, yolk a golden core. */
