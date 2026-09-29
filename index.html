@@ -1,0 +1,909 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HX‑6 Aurora: A new generation of hatching | Broodline</title>
+  <meta name="description" content="HX‑6 Aurora brings together a decade of incubation research and big bets across eggshell‑temperature climate control, robotic egg handling, and welfare‑first chick processing.">
+  <meta property="og:title" content="HX‑6 Aurora: A new generation of hatching">
+  <meta property="og:description" content="Our most capable hatchery system yet: state‑of‑the‑art hatchability, chick uniformity, energy use, and biosecurity.">
+  <meta property="og:type" content="article">
+  <meta name="theme-color" content="#fbf8f2" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#15120e" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <script>
+    /* Apply a saved theme before first paint to avoid a flash. */
+    (function () {
+      try {
+        var t = localStorage.getItem("bl-theme");
+        if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- Icon sprite -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-egg" viewBox="0 0 24 24"><path d="M12 2.5c3.6 0 7 5.6 7 11.2A7 7 0 0 1 5 13.7C5 8.1 8.4 2.5 12 2.5Z" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="14.2" r="2.3" fill="currentColor"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m20 20-3.5-3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-theme" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 4a8 8 0 0 1 0 16Z" fill="currentColor"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1.2 1.2M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.2-1.2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M4 4l16 16M20 4 4 20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-linkedin" viewBox="0 0 24 24"><path d="M6.5 9.5V18M6.5 6.2v.1M11 18v-5a2.5 2.5 0 0 1 5 0v5M11 9.5V18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><rect x="3" y="3" width="18" height="18" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m4 7 8 6 8-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m8 12.5 2.6 2.5L16 9.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 19V5m-6 6 6-6 6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 5v14m6-6-6 6-6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-temp" viewBox="0 0 24 24"><path d="M10 14.5V5a2 2 0 1 1 4 0v9.5a3.5 3.5 0 1 1-4 0Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 10v6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-wind" viewBox="0 0 24 24"><path d="M3 8h11a3 3 0 1 0-3-3M3 12h15a3 3 0 1 1-3 3M3 16h7a2 2 0 1 1-2 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-cloud" viewBox="0 0 24 24"><path d="M7 18a4 4 0 0 1-.6-7.95A5.5 5.5 0 0 1 17 8.5a3.75 3.75 0 0 1 .5 7.5H7Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+    <symbol id="i-hand" viewBox="0 0 24 24"><path d="M8 12V6.5a1.5 1.5 0 0 1 3 0V11m0-5.5a1.5 1.5 0 0 1 3 0V11m0-3.5a1.5 1.5 0 0 1 3 0V13a6 6 0 0 1-6 6h-.5a6 6 0 0 1-4.7-2.3l-2.6-3.4a1.5 1.5 0 0 1 2.3-1.9L8 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 5 6v5.5c0 4.3 3 7.6 7 9.5 4-1.9 7-5.2 7-9.5V6l-7-3Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M3 12h18M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 6.5v11l9-5.5-9-5.5Z" fill="currentColor"/></symbol>
+  </defs>
+</svg>
+
+<!-- ============ Navigation ============ -->
+<header class="nav" id="nav">
+  <div class="container">
+    <a class="brand" href="#" aria-label="Broodline home">
+      <svg aria-hidden="true"><use href="#i-egg"/></svg>
+      <span>Broodline</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#machines">Machines</a></li>
+      <li><a href="#systems">Systems</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#biosecurity">Biosecurity</a></li>
+      <li><a href="#producers">For Producers</a></li>
+      <li><a href="#stories">Stories</a></li>
+      <li><a href="#company">Company</a></li>
+      <li><a href="#news">News</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="icon-btn" type="button" aria-label="Search"><svg aria-hidden="true"><use href="#i-search"/></svg></button>
+      <button class="icon-btn" type="button" id="theme-toggle" aria-label="Toggle color theme" title="Theme: system"><svg aria-hidden="true"><use href="#i-theme"/></svg></button>
+      <a class="nav-login" href="#producers">Producer portal</a>
+      <a class="btn btn-primary btn-sm" href="#availability">Request a demo</a>
+      <button class="icon-btn menu-toggle" type="button" id="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+        <svg class="open" aria-hidden="true"><use href="#i-menu"/></svg>
+        <svg class="close" aria-hidden="true"><use href="#i-close"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<nav class="mobile-menu" id="mobile-menu" aria-label="Mobile">
+  <ul>
+    <li><a href="#machines">Machines</a></li>
+    <li><a href="#systems">Systems</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#biosecurity">Biosecurity</a></li>
+    <li><a href="#producers">For Producers</a></li>
+    <li><a href="#stories">Stories</a></li>
+    <li><a href="#company">Company</a></li>
+    <li><a href="#news">News</a></li>
+  </ul>
+  <div class="mobile-cta">
+    <a class="btn btn-primary" href="#availability">Request a demo</a>
+    <a class="btn btn-secondary" href="#producers">Producer portal</a>
+  </div>
+</nav>
+
+<main id="main">
+
+  <!-- ============ Article header ============ -->
+  <div class="container article-header">
+    <div class="col">
+      <div class="eyebrow">
+        <span class="tag">Release</span>
+        <time datetime="2026-09-29">September 29, 2026</time>
+        <span class="dot" aria-hidden="true"></span>
+        <span>Machines</span>
+      </div>
+      <h1 class="title">HX‑6 Aurora: A new generation of hatching</h1>
+      <p class="dek">HX‑6 Aurora brings together a decade of incubation research and big bets across eggshell‑temperature climate control, robotic egg handling, and welfare‑first chick processing. It sets new marks for hatchability, chick uniformity, energy use, and biosecurity.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#availability">Request a demo <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a class="btn btn-secondary" href="#specifications">Read the technical brief</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ Hero art ============ -->
+  <div class="container">
+    <div class="hero" role="img" aria-label="Abstract artwork: soft amber and sage forms around a glowing egg silhouette.">
+      <svg viewBox="0 0 1600 686" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <defs>
+          <radialGradient id="hg1" cx="50%" cy="50%" r="50%">
+            <stop offset="0" stop-color="var(--hero-b)" stop-opacity="0.95"/>
+            <stop offset="1" stop-color="var(--hero-b)" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="hg2" cx="50%" cy="50%" r="50%">
+            <stop offset="0" stop-color="var(--hero-c)" stop-opacity="0.9"/>
+            <stop offset="1" stop-color="var(--hero-c)" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="hg3" cx="50%" cy="50%" r="50%">
+            <stop offset="0" stop-color="var(--hero-a)" stop-opacity="1"/>
+            <stop offset="1" stop-color="var(--hero-a)" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="hg4" cx="50%" cy="50%" r="50%">
+            <stop offset="0" stop-color="var(--hero-e)" stop-opacity="0.9"/>
+            <stop offset="1" stop-color="var(--hero-e)" stop-opacity="0"/>
+          </radialGradient>
+          <linearGradient id="eggfill" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="var(--hero-d)" stop-opacity="0.9"/>
+            <stop offset="1" stop-color="var(--hero-a)" stop-opacity="0.9"/>
+          </linearGradient>
+          <filter id="blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="46"/></filter>
+          <filter id="grain">
+            <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/>
+            <feColorMatrix type="saturate" values="0"/>
+            <feComponentTransfer><feFuncA type="linear" slope="0.08"/></feComponentTransfer>
+          </filter>
+        </defs>
+        <rect width="1600" height="686" fill="var(--hero-d)"/>
+        <g filter="url(#blur)">
+          <g class="drift">
+            <ellipse cx="420" cy="380" rx="520" ry="300" fill="url(#hg1)"/>
+            <ellipse cx="1180" cy="200" rx="480" ry="260" fill="url(#hg3)"/>
+          </g>
+          <g class="drift drift-2">
+            <ellipse cx="1250" cy="560" rx="560" ry="280" fill="url(#hg2)"/>
+            <ellipse cx="800" cy="120" rx="420" ry="220" fill="url(#hg4)"/>
+          </g>
+          <g class="drift drift-3">
+            <ellipse cx="300" cy="80" rx="360" ry="220" fill="url(#hg2)"/>
+            <ellipse cx="900" cy="640" rx="500" ry="220" fill="url(#hg1)"/>
+          </g>
+        </g>
+        <!-- egg silhouette -->
+        <g transform="translate(800 352)">
+          <path d="M0,-176 C94,-176 138,-47 138,47 C138,141 73,200 0,200 C-73,200 -138,141 -138,47 C-138,-47 -94,-176 0,-176Z" fill="url(#eggfill)" opacity="0.9"/>
+          <path d="M0,-176 C94,-176 138,-47 138,47 C138,141 73,200 0,200 C-73,200 -138,141 -138,47 C-138,-47 -94,-176 0,-176Z" fill="none" stroke="var(--accent)" stroke-opacity="0.55" stroke-width="1.5"/>
+          <!-- warmth rings -->
+          <g fill="none" stroke="var(--accent)" stroke-opacity="0.35" stroke-width="1">
+            <path d="M-206,60 C-206,-80 -120,-236 0,-236 C120,-236 206,-80 206,60 C206,170 120,262 0,262 C-120,262 -206,170 -206,60Z"/>
+            <path d="M-274,72 C-274,-112 -160,-296 0,-296 C160,-296 274,-112 274,72 C274,200 160,322 0,322 C-160,322 -274,200 -274,72Z" stroke-opacity="0.22"/>
+            <path d="M-342,84 C-342,-144 -200,-356 0,-356 C200,-356 342,-144 342,84 C342,230 200,382 0,382 C-200,382 -342,230 -342,84Z" stroke-opacity="0.12"/>
+          </g>
+          <!-- sensor points -->
+          <g fill="var(--accent)">
+            <circle cx="-62" cy="-40" r="3"/><circle cx="58" cy="-12" r="3"/><circle cx="-18" cy="96" r="3"/><circle cx="84" cy="98" r="3"/><circle cx="-96" cy="70" r="3"/>
+          </g>
+        </g>
+        <rect width="1600" height="686" filter="url(#grain)" opacity="0.5"/>
+      </svg>
+      <span class="hero-caption">HX‑6 Aurora · Eggshell‑temperature field, rendered</span>
+    </div>
+  </div>
+
+  <!-- ============ Article ============ -->
+  <article class="container article">
+
+    <aside class="share-rail" aria-label="Share">
+      <div class="inner">
+        <button class="icon-btn" type="button" data-share="copy" aria-label="Copy link"><svg aria-hidden="true"><use href="#i-link"/></svg></button>
+        <button class="icon-btn" type="button" data-share="x" aria-label="Share on X"><svg aria-hidden="true"><use href="#i-x"/></svg></button>
+        <button class="icon-btn" type="button" data-share="linkedin" aria-label="Share on LinkedIn"><svg aria-hidden="true"><use href="#i-linkedin"/></svg></button>
+        <button class="icon-btn" type="button" data-share="mail" aria-label="Share by email"><svg aria-hidden="true"><use href="#i-mail"/></svg></button>
+      </div>
+    </aside>
+
+    <!-- Intro -->
+    <section class="block" id="introduction">
+      <div class="col prose reveal">
+        <p>Today we're introducing HX‑6 Aurora, the most capable hatchery system we've ever built. Aurora is a complete single‑stage setter and hatcher line, from egg receipt to chick dispatch, in which every machine shares one climate model and one record of every egg.</p>
+        <p>Across 14 months of split‑flock pilots at six commercial hatcheries, Aurora hatched 96.8% of fertile eggs, narrowed the hatch window to 18 hours, and used 28% less energy per chick than HX‑5 Meridian. It did this while recording zero cross‑zone contamination events.<sup><a href="#fn1" id="ref1" aria-label="Footnote 1">1</a></sup></p>
+        <p>Aurora is available today as a limited preview to existing HX‑5 sites, with general availability in early 2027.</p>
+      </div>
+
+      <div class="wide stats reveal" aria-label="Key results">
+        <div class="stat">
+          <span class="label">Hatch of fertile</span>
+          <span class="value">96.8<small>%</small></span>
+          <span class="delta good"><svg aria-hidden="true"><use href="#i-up"/></svg><b>+2.7 pts</b> vs HX‑5 Meridian</span>
+        </div>
+        <div class="stat">
+          <span class="label">Hatch window, 90% of chicks</span>
+          <span class="value">18<small>h</small></span>
+          <span class="delta good"><svg aria-hidden="true"><use href="#i-down"/></svg><b>−8 h</b> vs HX‑5 Meridian</span>
+        </div>
+        <div class="stat">
+          <span class="label">Energy per 1,000 chicks</span>
+          <span class="value">14.2<small>kWh</small></span>
+          <span class="delta good"><svg aria-hidden="true"><use href="#i-down"/></svg><b>−28%</b> vs HX‑5 Meridian</span>
+        </div>
+        <div class="stat">
+          <span class="label">Cross‑zone contamination events</span>
+          <span class="value">0</span>
+          <span class="delta"><b>14 months</b>, six sites</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Performance -->
+    <section class="block" id="performance">
+      <div class="col prose reveal section-intro">
+        <h2>Frontier hatch performance</h2>
+        <p>We measure a hatchery machine the way producers do: chicks per fertile egg, chick quality, how tightly the flock hatches, and what it costs to get there. Aurora leads on every one of them, and it does so on the same eggs, from the same breeder flocks, set on the same day as the machines it is compared against.</p>
+      </div>
+
+      <figure class="wide viz reveal" data-viz data-view="chart">
+        <figcaption class="viz-head">
+          <div>
+            <h3>Hatchery benchmarks</h3>
+            <p>Split‑flock pilots, September 2025 to August 2026, six commercial hatcheries. Bars show the mean across all sets; higher is better unless noted.<sup><a href="#fn1" aria-label="Footnote 1">1</a></sup></p>
+          </div>
+          <div class="viz-actions" role="group" aria-label="View">
+            <button type="button" data-view="chart" aria-pressed="true">Chart</button>
+            <button type="button" data-view="table" aria-pressed="false">Table</button>
+          </div>
+        </figcaption>
+
+        <ul class="legend" aria-label="Series">
+          <li class="s1"><i class="sw"></i>HX‑6 Aurora</li>
+          <li class="s2"><i class="sw"></i>HX‑5 Meridian</li>
+          <li class="s3"><i class="sw"></i>Industry multi‑stage</li>
+        </ul>
+
+        <div class="viz-grid cols-3">
+          <div class="mini" style="--max:100">
+            <h4>Hatch of fertile <span>%</span></h4>
+            <div class="bars">
+              <div class="bar-row s1" tabindex="0" data-series="HX‑6 Aurora" data-value="96.8%" style="--v:96.8"><span class="bar"></span><span class="val">96.8</span></div>
+              <div class="bar-row s2" tabindex="0" data-series="HX‑5 Meridian" data-value="94.1%" style="--v:94.1"><span class="bar"></span><span class="val">94.1</span></div>
+              <div class="bar-row s3" tabindex="0" data-series="Industry multi‑stage" data-value="91.5%" style="--v:91.5"><span class="bar"></span><span class="val">91.5</span></div>
+            </div>
+            <div class="axis"><span>0</span><span>100</span></div>
+          </div>
+
+          <div class="mini" style="--max:100">
+            <h4>Chick quality index <span>Tona score</span></h4>
+            <div class="bars">
+              <div class="bar-row s1" tabindex="0" data-series="HX‑6 Aurora" data-value="98.2" style="--v:98.2"><span class="bar"></span><span class="val">98.2</span></div>
+              <div class="bar-row s2" tabindex="0" data-series="HX‑5 Meridian" data-value="96.4" style="--v:96.4"><span class="bar"></span><span class="val">96.4</span></div>
+              <div class="bar-row s3" tabindex="0" data-series="Industry multi‑stage" data-value="93.0" style="--v:93"><span class="bar"></span><span class="val">93.0</span></div>
+            </div>
+            <div class="axis"><span>0</span><span>100</span></div>
+          </div>
+
+          <div class="mini" style="--max:40">
+            <h4>Hatch window <span>hours · lower is better</span></h4>
+            <div class="bars">
+              <div class="bar-row s1" tabindex="0" data-series="HX‑6 Aurora" data-value="18 h" style="--v:18"><span class="bar"></span><span class="val">18</span></div>
+              <div class="bar-row s2" tabindex="0" data-series="HX‑5 Meridian" data-value="26 h" style="--v:26"><span class="bar"></span><span class="val">26</span></div>
+              <div class="bar-row s3" tabindex="0" data-series="Industry multi‑stage" data-value="34 h" style="--v:34"><span class="bar"></span><span class="val">34</span></div>
+            </div>
+            <div class="axis"><span>0</span><span>40</span></div>
+          </div>
+
+          <div class="mini" style="--max:30">
+            <h4>Energy per 1,000 chicks <span>kWh · lower is better</span></h4>
+            <div class="bars">
+              <div class="bar-row s1" tabindex="0" data-series="HX‑6 Aurora" data-value="14.2 kWh" style="--v:14.2"><span class="bar"></span><span class="val">14.2</span></div>
+              <div class="bar-row s2" tabindex="0" data-series="HX‑5 Meridian" data-value="19.8 kWh" style="--v:19.8"><span class="bar"></span><span class="val">19.8</span></div>
+              <div class="bar-row s3" tabindex="0" data-series="Industry multi‑stage" data-value="27.5 kWh" style="--v:27.5"><span class="bar"></span><span class="val">27.5</span></div>
+            </div>
+            <div class="axis"><span>0</span><span>30</span></div>
+          </div>
+
+          <div class="mini" style="--max:1.5">
+            <h4>Seven‑day mortality <span>% · lower is better</span></h4>
+            <div class="bars">
+              <div class="bar-row s1" tabindex="0" data-series="HX‑6 Aurora" data-value="0.41%" style="--v:0.41"><span class="bar"></span><span class="val">0.41</span></div>
+              <div class="bar-row s2" tabindex="0" data-series="HX‑5 Meridian" data-value="0.78%" style="--v:0.78"><span class="bar"></span><span class="val">0.78</span></div>
+              <div class="bar-row s3" tabindex="0" data-series="Industry multi‑stage" data-value="1.20%" style="--v:1.2"><span class="bar"></span><span class="val">1.20</span></div>
+            </div>
+            <div class="axis"><span>0</span><span>1.5</span></div>
+          </div>
+
+          <div class="mini" style="--max:100">
+            <h4>Saleable chicks per 100 set <span>count</span></h4>
+            <div class="bars">
+              <div class="bar-row s1" tabindex="0" data-series="HX‑6 Aurora" data-value="88.9" style="--v:88.9"><span class="bar"></span><span class="val">88.9</span></div>
+              <div class="bar-row s2" tabindex="0" data-series="HX‑5 Meridian" data-value="85.6" style="--v:85.6"><span class="bar"></span><span class="val">85.6</span></div>
+              <div class="bar-row s3" tabindex="0" data-series="Industry multi‑stage" data-value="82.0" style="--v:82"><span class="bar"></span><span class="val">82.0</span></div>
+            </div>
+            <div class="axis"><span>0</span><span>100</span></div>
+          </div>
+        </div>
+
+        <table class="viz-table">
+          <caption class="sr-only">Hatchery benchmarks by machine</caption>
+          <thead>
+            <tr><th scope="col">Metric</th><th scope="col" class="num">HX‑6 Aurora</th><th scope="col" class="num">HX‑5 Meridian</th><th scope="col" class="num">Industry multi‑stage</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Hatch of fertile (%)</th><td class="num">96.8</td><td class="num">94.1</td><td class="num">91.5</td></tr>
+            <tr><th scope="row">Chick quality index (Tona)</th><td class="num">98.2</td><td class="num">96.4</td><td class="num">93.0</td></tr>
+            <tr><th scope="row">Hatch window, 90% of chicks (h)</th><td class="num">18</td><td class="num">26</td><td class="num">34</td></tr>
+            <tr><th scope="row">Energy per 1,000 chicks (kWh)</th><td class="num">14.2</td><td class="num">19.8</td><td class="num">27.5</td></tr>
+            <tr><th scope="row">Seven‑day mortality (%)</th><td class="num">0.41</td><td class="num">0.78</td><td class="num">1.20</td></tr>
+            <tr><th scope="row">Saleable chicks per 100 eggs set</th><td class="num">88.9</td><td class="num">85.6</td><td class="num">82.0</td></tr>
+          </tbody>
+        </table>
+        <p class="viz-foot">Hatch window is the span between the 5th and 95th percentile of hatch.<sup><a href="#fn2" aria-label="Footnote 2">2</a></sup> Energy is measured at the machine bus and excludes room HVAC.<sup><a href="#fn3" aria-label="Footnote 3">3</a></sup></p>
+        <div class="viz-tip" role="tooltip" aria-hidden="true"></div>
+      </figure>
+
+      <div class="col prose reveal" style="margin-top:48px">
+        <p>The hatch window is the number we care most about. A chick that hatches 30 hours before pull waits that long without feed or water, and it arrives at the farm behind its flockmates and stays behind. Aurora's 18‑hour window means the flock starts together, eats together, and reaches target weight with less spread. Producers in the pilot saw a 0.9‑point improvement in seven‑day uniformity on Aurora flocks.</p>
+      </div>
+    </section>
+
+    <!-- Single stage -->
+    <section class="block" id="machines">
+      <div class="col prose reveal section-intro">
+        <h2>Single‑stage incubation, re‑engineered</h2>
+        <p>Most setters control air temperature and infer what the embryo is experiencing. Aurora measures it. Every trolley carries a 96‑point infrared array that reads eggshell temperature across the tray stack, and every trolley bay has its own damper, heat‑exchange loop, and humidity injector. The climate model runs at the level of the trolley, not the room.</p>
+        <p>That matters because a developing embryo is a heat source. By day 12 a full setter is producing kilowatts of metabolic heat, and the eggs in the middle of the stack run warmer than the ones at the edge. Aurora sees the difference and corrects it in minutes, holding the whole load within ±0.05 °C of the program.</p>
+      </div>
+
+      <figure class="wide media reveal">
+        <div class="media-frame">
+          <svg viewBox="0 0 1120 560" role="img" aria-labelledby="setter-title" style="color: var(--ink)">
+            <title id="setter-title">Cross‑section of an HX‑6 Aurora setter cabinet showing eight trolleys, the airflow loop, and sensor positions.</title>
+            <defs>
+              <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M0,0 L10,5 L0,10 Z" fill="var(--accent)"/>
+              </marker>
+            </defs>
+            <!-- cabinet -->
+            <rect x="60" y="70" width="1000" height="430" rx="14" fill="none" stroke="currentColor" stroke-width="1.6"/>
+            <!-- top plenum -->
+            <rect x="60" y="70" width="1000" height="60" rx="14" fill="var(--bg-2)" stroke="currentColor" stroke-width="1.2"/>
+            <line x1="60" y1="130" x2="1060" y2="130" stroke="currentColor" stroke-width="1.2"/>
+            <!-- fans -->
+            <g fill="none" stroke="currentColor" stroke-width="1.4">
+              <circle cx="260" cy="100" r="16"/><circle cx="560" cy="100" r="16"/><circle cx="860" cy="100" r="16"/>
+              <path d="M260,84 v32 M244,100 h32 M560,84 v32 M544,100 h32 M860,84 v32 M844,100 h32"/>
+            </g>
+            <!-- heat/cool coil -->
+            <path d="M420,88 q8,-12 16,0 t16,0 t16,0 t16,0 t16,0 t16,0 t16,0 t16,0" fill="none" stroke="var(--accent)" stroke-width="1.6"/>
+            <!-- trolleys -->
+            <g fill="none" stroke="currentColor" stroke-width="1.1">
+              <g id="trolley">
+                <rect x="100" y="160" width="100" height="300" rx="4"/>
+                <path d="M104,184h92 M104,208h92 M104,232h92 M104,256h92 M104,280h92 M104,304h92 M104,328h92 M104,352h92 M104,376h92 M104,400h92 M104,424h92 M104,448h92"/>
+                <circle cx="118" cy="466" r="5"/><circle cx="182" cy="466" r="5"/>
+              </g>
+              <use href="#trolley" x="118"/><use href="#trolley" x="236"/><use href="#trolley" x="354"/>
+              <use href="#trolley" x="472"/><use href="#trolley" x="590"/><use href="#trolley" x="708"/><use href="#trolley" x="826"/>
+            </g>
+            <!-- egg dots on one tray to hint contents -->
+            <g fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="0.8">
+              <ellipse cx="118" cy="178" rx="5" ry="6"/><ellipse cx="134" cy="178" rx="5" ry="6"/><ellipse cx="150" cy="178" rx="5" ry="6"/><ellipse cx="166" cy="178" rx="5" ry="6"/><ellipse cx="182" cy="178" rx="5" ry="6"/>
+            </g>
+            <!-- per-bay dampers under plenum -->
+            <g stroke="var(--accent)" stroke-width="2" stroke-linecap="round">
+              <path d="M138,140 l24,-6 M256,140 l24,-6 M374,140 l24,-6 M492,140 l24,-6 M610,140 l24,-6 M728,140 l24,-6 M846,140 l24,-6 M964,140 l24,-6"/>
+            </g>
+            <!-- airflow loop -->
+            <g fill="none" stroke="var(--accent)" stroke-width="1.8" marker-end="url(#arrow)" stroke-dasharray="6 6">
+              <path d="M80,120 C80,100 80,90 100,90 L 1010,90"/>
+              <path d="M1042,150 L1042,470"/>
+              <path d="M1010,484 L 100,484"/>
+              <path d="M78,470 L78,150"/>
+            </g>
+            <!-- sensors -->
+            <g font-family="inherit" font-size="13" fill="currentColor">
+              <g>
+                <circle cx="404" cy="300" r="5" fill="var(--accent)"/>
+                <path d="M404,300 L470,300 L 500,246" stroke="currentColor" stroke-width="1" fill="none"/>
+                <text x="506" y="242">96‑point eggshell IR array (per trolley)</text>
+              </g>
+              <g>
+                <circle cx="640" cy="300" r="5" fill="var(--accent)"/>
+                <path d="M640,300 L700,300 L 730,528" stroke="currentColor" stroke-width="1" fill="none"/>
+                <text x="736" y="532">CO₂ and RH probes, redundant pair per bay</text>
+              </g>
+              <g>
+                <path d="M138,138 L 138,40 L 160,40" stroke="currentColor" stroke-width="1" fill="none"/>
+                <text x="166" y="44">Per‑bay damper</text>
+              </g>
+              <g>
+                <path d="M480,84 L 480,40 L 500,40" stroke="currentColor" stroke-width="1" fill="none"/>
+                <text x="506" y="44">Heat‑exchange loop</text>
+              </g>
+              <g>
+                <path d="M860,84 L 860,40 L 880,40" stroke="currentColor" stroke-width="1" fill="none"/>
+                <text x="886" y="44">Variable‑pitch axial fans</text>
+              </g>
+              <g>
+                <path d="M1042,300 L 1080,300" stroke="currentColor" stroke-width="1" fill="none"/>
+                <text x="1052" y="290" transform="rotate(-90 1052 290)" text-anchor="end">Return</text>
+              </g>
+              <g>
+                <path d="M78,300 L 40,300" stroke="currentColor" stroke-width="1" fill="none"/>
+                <text x="50" y="290" transform="rotate(-90 50 290)" text-anchor="end">Supply</text>
+              </g>
+              <text x="560" y="538" text-anchor="middle" fill="var(--ink-2)">Airflow loop · 0.3–1.5 m/s at the egg</text>
+            </g>
+          </svg>
+        </div>
+        <figcaption class="cap">The HX‑6 Aurora setter. Eight trolleys of 14,400 eggs each sit in individually controlled bays. Air moves in a single loop across the plenum, down the return wall, and back under the trolleys; each bay's damper trims the share it receives.</figcaption>
+      </figure>
+
+      <div class="wide features reveal">
+        <div class="feature">
+          <div class="ico"><svg aria-hidden="true"><use href="#i-temp"/></svg></div>
+          <h3>Eggshell‑temperature control</h3>
+          <p>Infrared arrays read the shell, not the air. The program is written in eggshell degrees, and the controller holds it to ±0.05 °C across the full load from set to transfer.</p>
+        </div>
+        <div class="feature">
+          <div class="ico"><svg aria-hidden="true"><use href="#i-cloud"/></svg></div>
+          <h3>CO₂ ramping</h3>
+          <p>Vents stay sealed through early development and open on a programmed ramp to 0.4%, which strengthens the cardiovascular system and shortens the hatch window.</p>
+        </div>
+        <div class="feature">
+          <div class="ico"><svg aria-hidden="true"><use href="#i-wind"/></svg></div>
+          <h3>Zone‑by‑zone airflow</h3>
+          <p>Variable‑pitch fans and per‑bay dampers deliver air where the model says heat is building, rather than pushing the same volume past every tray.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Robotic handling -->
+    <section class="block" id="systems">
+      <div class="col prose reveal section-intro">
+        <h2>Robotic egg handling</h2>
+        <p>Aurora handles every egg from receipt to hatcher without a hand touching it. Candling, in‑ovo sexing, transfer, and in‑ovo vaccination run on one gantry family with shared vision, so an egg that is flagged at candling is remembered at transfer, and nothing is moved twice. The whole day‑18 sequence takes a trolley out of climate for less than four minutes.</p>
+      </div>
+
+      <div class="wide demo reveal">
+        <div class="tabs" role="tablist" aria-label="Egg handling stations">
+          <button class="tab" role="tab" id="tab-candle" aria-selected="true" aria-controls="panel-candle" type="button">Candling</button>
+          <button class="tab" role="tab" id="tab-sex" aria-selected="false" aria-controls="panel-sex" tabindex="-1" type="button">In‑ovo sexing</button>
+          <button class="tab" role="tab" id="tab-transfer" aria-selected="false" aria-controls="panel-transfer" tabindex="-1" type="button">Transfer</button>
+          <button class="tab" role="tab" id="tab-vax" aria-selected="false" aria-controls="panel-vax" tabindex="-1" type="button">In‑ovo vaccination</button>
+        </div>
+
+        <!-- Candling -->
+        <div class="panel" role="tabpanel" id="panel-candle" aria-labelledby="tab-candle" data-active>
+          <div class="screen">
+            <svg viewBox="0 0 800 500" aria-hidden="true" style="color: var(--ink)">
+              <rect x="80" y="110" width="640" height="320" rx="10" fill="var(--bg-elev)" stroke="var(--hair-2)"/>
+              <g fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1">
+                <g id="eggrow">
+                  <ellipse cx="120" cy="150" rx="13" ry="16"/><ellipse cx="170" cy="150" rx="13" ry="16"/><ellipse cx="220" cy="150" rx="13" ry="16"/><ellipse cx="270" cy="150" rx="13" ry="16"/><ellipse cx="320" cy="150" rx="13" ry="16"/><ellipse cx="370" cy="150" rx="13" ry="16"/><ellipse cx="420" cy="150" rx="13" ry="16"/><ellipse cx="470" cy="150" rx="13" ry="16"/><ellipse cx="520" cy="150" rx="13" ry="16"/><ellipse cx="570" cy="150" rx="13" ry="16"/><ellipse cx="620" cy="150" rx="13" ry="16"/><ellipse cx="670" cy="150" rx="13" ry="16"/>
+                </g>
+                <use href="#eggrow" y="48"/><use href="#eggrow" y="96"/><use href="#eggrow" y="144"/><use href="#eggrow" y="192"/><use href="#eggrow" y="240"/>
+              </g>
+              <!-- clears -->
+              <g fill="var(--bg-elev)" stroke="var(--ink-3)" stroke-width="1.4" stroke-dasharray="3 3">
+                <ellipse cx="270" cy="198" rx="13" ry="16"/><ellipse cx="520" cy="294" rx="13" ry="16"/><ellipse cx="170" cy="342" rx="13" ry="16"/><ellipse cx="620" cy="390" rx="13" ry="16"/>
+              </g>
+              <!-- scanner -->
+              <g class="scan">
+                <rect x="80" y="110" width="48" height="320" fill="var(--accent)" opacity="0.14"/>
+                <rect x="126" y="110" width="2" height="320" fill="var(--accent)"/>
+              </g>
+              <rect x="60" y="70" width="680" height="24" rx="6" fill="var(--bg-3)" stroke="var(--hair-2)"/>
+              <text x="400" y="86" text-anchor="middle" font-size="12" fill="var(--ink-2)">Vision head · 60,000 eggs/h</text>
+              <text x="80" y="462" font-size="13" fill="var(--ink-2)">Tray 04 · clears flagged 4 / 72 · early dead 0</text>
+            </svg>
+          </div>
+          <div class="body">
+            <h3>Candling and clears removal</h3>
+            <p>Two imaging passes, one in near‑infrared and one in visible light, classify every egg as fertile, clear, or early‑dead. Clears are lifted out and the tray record is updated, so downstream stations only work on eggs that will hatch.</p>
+            <dl class="kv">
+              <div><dt>Throughput</dt><dd>60,000 eggs/h</dd></div>
+              <div><dt>Clear detection</dt><dd>99.7%</dd></div>
+              <div><dt>False removals</dt><dd>&lt; 0.1%</dd></div>
+            </dl>
+          </div>
+        </div>
+
+        <!-- Sexing -->
+        <div class="panel" role="tabpanel" id="panel-sex" aria-labelledby="tab-sex" hidden>
+          <div class="screen">
+            <svg viewBox="0 0 800 500" aria-hidden="true" style="color: var(--ink)">
+              <g transform="translate(300 260)">
+                <path d="M0,-150 C80,-150 118,-40 118,40 C118,120 62,170 0,170 C-62,170 -118,120 -118,40 C-118,-40 -80,-150 0,-150Z" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/>
+                <ellipse cx="-30" cy="-80" rx="34" ry="18" fill="var(--bg-elev)" opacity="0.7"/>
+                <path d="M-10,20 c12,-30 40,-20 30,10 c-8,22 -36,18 -30,-10Z" fill="var(--accent)" opacity="0.35"/>
+              </g>
+              <!-- probe -->
+              <g class="dip">
+                <rect x="286" y="20" width="28" height="70" rx="4" fill="var(--bg-3)" stroke="var(--hair-2)"/>
+                <line x1="300" y1="90" x2="300" y2="128" stroke="currentColor" stroke-width="1.5"/>
+              </g>
+              <!-- spectral read -->
+              <rect x="470" y="120" width="270" height="260" rx="10" fill="var(--bg-elev)" stroke="var(--hair-2)"/>
+              <text x="490" y="150" font-size="12" fill="var(--ink-2)">Spectral read · day 9</text>
+              <path class="pulse" d="M490,300 C510,300 515,250 530,250 S550,330 565,330 S580,210 600,210 S625,300 640,300 S660,260 680,260 S700,300 720,300" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"/>
+              <line x1="490" y1="350" x2="720" y2="350" stroke="var(--hair-2)"/>
+              <text x="490" y="372" font-size="12" fill="var(--ink)">Female · confidence 99.2%</text>
+              <text x="80" y="462" font-size="13" fill="var(--ink-2)">Egg 4,182 of 14,400 · re‑queued 0.9%</text>
+            </svg>
+          </div>
+          <div class="body">
+            <h3>In‑ovo sexing at day 9</h3>
+            <p>A non‑invasive spectral read through the shell determines sex on day 9, well before any capacity for sensation develops. Male layer eggs are diverted before transfer, ending post‑hatch culling on Aurora lines. Low‑confidence reads are re‑queued to day 12 rather than guessed.<sup><a href="#fn4" aria-label="Footnote 4">4</a></sup></p>
+            <dl class="kv">
+              <div><dt>Day of read</dt><dd>9</dd></div>
+              <div><dt>Accuracy</dt><dd>99.2%</dd></div>
+              <div><dt>Throughput</dt><dd>24,000 eggs/h</dd></div>
+              <div><dt>Re‑queued</dt><dd>2.1%</dd></div>
+            </dl>
+          </div>
+        </div>
+
+        <!-- Transfer -->
+        <div class="panel" role="tabpanel" id="panel-transfer" aria-labelledby="tab-transfer" hidden>
+          <div class="screen">
+            <svg viewBox="0 0 800 500" aria-hidden="true" style="color: var(--ink)">
+              <!-- setter tray -->
+              <rect x="60" y="250" width="300" height="180" rx="8" fill="var(--bg-elev)" stroke="var(--hair-2)"/>
+              <g fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1">
+                <g id="row2"><ellipse cx="90" cy="285" rx="11" ry="14"/><ellipse cx="130" cy="285" rx="11" ry="14"/><ellipse cx="170" cy="285" rx="11" ry="14"/><ellipse cx="210" cy="285" rx="11" ry="14"/><ellipse cx="250" cy="285" rx="11" ry="14"/><ellipse cx="290" cy="285" rx="11" ry="14"/><ellipse cx="330" cy="285" rx="11" ry="14"/></g>
+                <use href="#row2" y="42"/><use href="#row2" y="84"/><use href="#row2" y="126"/>
+              </g>
+              <!-- hatcher basket -->
+              <rect x="440" y="250" width="300" height="180" rx="8" fill="var(--bg-elev)" stroke="var(--hair-2)"/>
+              <g stroke="var(--hair-2)" stroke-width="1">
+                <path d="M440,295h300 M440,340h300 M440,385h300 M500,250v180 M560,250v180 M620,250v180 M680,250v180"/>
+              </g>
+              <!-- gantry -->
+              <rect x="40" y="90" width="720" height="14" rx="4" fill="var(--bg-3)" stroke="var(--hair-2)"/>
+              <g class="slide">
+                <rect x="100" y="104" width="220" height="40" rx="6" fill="var(--bg-3)" stroke="var(--hair-2)"/>
+                <g stroke="currentColor" stroke-width="1.4">
+                  <path d="M120,144v40 M160,144v40 M200,144v40 M240,144v40 M280,144v40"/>
+                </g>
+                <g fill="var(--accent)"><circle cx="120" cy="188" r="5"/><circle cx="160" cy="188" r="5"/><circle cx="200" cy="188" r="5"/><circle cx="240" cy="188" r="5"/><circle cx="280" cy="188" r="5"/></g>
+              </g>
+              <path d="M380,340 h40" stroke="var(--accent)" stroke-width="2" marker-end="url(#arrow)"/>
+              <text x="210" y="460" text-anchor="middle" font-size="12" fill="var(--ink-2)">Setter tray</text>
+              <text x="590" y="460" text-anchor="middle" font-size="12" fill="var(--ink-2)">Hatcher basket</text>
+              <text x="60" y="60" font-size="13" fill="var(--ink-2)">Trolley 6 · 9 s per tray · out of climate 3 min 40 s</text>
+            </svg>
+          </div>
+          <div class="body">
+            <h3>Transfer at day 18</h3>
+            <p>Soft‑bellows heads lift a full tray in one motion and lower it into hatcher baskets with the eggs still in setter orientation. Force sensing on every head stops the cycle if an egg resists, and shell‑crack rates are lower than a trained hand transfer.</p>
+            <dl class="kv">
+              <div><dt>Cycle time</dt><dd>9 s per tray</dd></div>
+              <div><dt>Cracks introduced</dt><dd>&lt; 0.02%</dd></div>
+              <div><dt>Time out of climate</dt><dd>&lt; 4 min per trolley</dd></div>
+            </dl>
+          </div>
+        </div>
+
+        <!-- Vaccination -->
+        <div class="panel" role="tabpanel" id="panel-vax" aria-labelledby="tab-vax" hidden>
+          <div class="screen">
+            <svg viewBox="0 0 800 500" aria-hidden="true" style="color: var(--ink)">
+              <rect x="60" y="300" width="680" height="120" rx="8" fill="var(--bg-elev)" stroke="var(--hair-2)"/>
+              <g fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.2">
+                <ellipse cx="120" cy="360" rx="22" ry="28"/><ellipse cx="200" cy="360" rx="22" ry="28"/><ellipse cx="280" cy="360" rx="22" ry="28"/><ellipse cx="360" cy="360" rx="22" ry="28"/><ellipse cx="440" cy="360" rx="22" ry="28"/><ellipse cx="520" cy="360" rx="22" ry="28"/><ellipse cx="600" cy="360" rx="22" ry="28"/><ellipse cx="680" cy="360" rx="22" ry="28"/>
+              </g>
+              <g class="dip">
+                <rect x="80" y="180" width="640" height="40" rx="6" fill="var(--bg-3)" stroke="var(--hair-2)"/>
+                <g stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+                  <path d="M120,220v90 M200,220v90 M280,220v90 M360,220v90 M440,220v90 M520,220v90 M600,220v90 M680,220v90"/>
+                </g>
+              </g>
+              <text x="400" y="130" text-anchor="middle" font-size="12" fill="var(--ink-2)">Injector bar · 0.05 mL · needle set replaced every tray</text>
+              <text x="60" y="462" font-size="13" fill="var(--ink-2)">Site accuracy 99.5% · pressure verified per egg</text>
+            </svg>
+          </div>
+          <div class="body">
+            <h3>In‑ovo vaccination</h3>
+            <p>Vaccine is delivered at day 18 into the amnion with per‑egg pressure verification. Depth is set from each egg's measured height, and the needle set is swapped automatically every tray so no egg is touched by a needle that touched another tray.</p>
+            <dl class="kv">
+              <div><dt>Dose</dt><dd>0.05 mL</dd></div>
+              <div><dt>Site accuracy</dt><dd>99.5%</dd></div>
+              <div><dt>Needle change</dt><dd>Every tray</dd></div>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Climate -->
+    <section class="block" id="research">
+      <div class="col prose reveal section-intro">
+        <h2>Climate that thinks ahead</h2>
+        <p>Aurora's climate program is not a fixed schedule. It is generated for each set from breeder flock age, egg weight, storage days, and the measured heat curve of the embryos in the cabinet, and it is revised every hour as the eggs report back. When a flock runs hot on day 14, the program cools before the shell does, rather than after.</p>
+        <p>We trained the embryo heat model on eleven years of setter records and validated it against direct measurement in more than two thousand sets. It predicts eggshell temperature six hours ahead with a mean error of 0.03 °C.</p>
+      </div>
+
+      <blockquote class="col pull reveal">
+        <p>“For twenty years we asked producers to write incubation programs by hand. Aurora reads the eggs and writes the program for them. That is the whole idea.”</p>
+        <footer>Head of Incubation Research, Broodline</footer>
+      </blockquote>
+
+      <div class="wide timeline reveal" aria-label="A 21‑day Aurora program">
+        <div class="track" aria-hidden="true">
+          <span class="seg a"></span><span class="seg a"></span><span class="seg a"></span>
+          <span class="seg b"></span><span class="seg b"></span><span class="seg b"></span><span class="seg b"></span><span class="seg b"></span><span class="seg b"></span><span class="seg b"></span>
+          <span class="seg c"></span><span class="seg c"></span><span class="seg c"></span><span class="seg c"></span><span class="seg c"></span><span class="seg c"></span><span class="seg c"></span>
+          <span class="seg t"></span>
+          <span class="seg h"></span><span class="seg h"></span><span class="seg h"></span>
+        </div>
+        <div class="days" aria-hidden="true">
+          <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span>19</span><span>20</span><span>21</span>
+        </div>
+        <div class="phases">
+          <div class="phase"><b>Set · days 1–3</b><span>Eggshell 37.9 °C · RH 58% · vents sealed · turning hourly</span></div>
+          <div class="phase"><b>Early growth · days 4–10</b><span>Eggshell 37.8 °C · RH 55% · CO₂ ramp begins · candling day 9</span></div>
+          <div class="phase"><b>Late growth · days 11–17</b><span>Eggshell held 37.8–38.2 °C · RH 50% · vents open · metabolic heat removed per bay</span></div>
+          <div class="phase t"><b>Transfer · day 18</b><span>Sexing check, vaccination, transfer to hatcher · &lt; 4 min out of climate</span></div>
+          <div class="phase h"><b>Hatch · days 19–21</b><span>Eggshell 37.4 °C · RH follows pipping · light cycle · pull at 90% dry</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Chick processing -->
+    <section class="block" id="stories">
+      <div class="col prose reveal section-intro">
+        <h2>Welfare‑first chick processing</h2>
+        <p>Everything after the hatcher is designed around one rule: a chick should be handled as little as possible, and never in a way that would be unacceptable if a person were watching. Aurora replaces the tilting separator with a slow belt and air curtain, counts by vision rather than by drop, and holds chicks in climate‑controlled trays with light, water gel, and airflow until dispatch.</p>
+        <p>Every chick that leaves an Aurora line is counted, weighed as a tray, and linked to the egg record it came from. Producers receive a per‑flock report with hatch window, uniformity, and any handling exceptions before the truck arrives.</p>
+      </div>
+
+      <div class="wide features reveal">
+        <div class="feature">
+          <div class="ico"><svg aria-hidden="true"><use href="#i-hand"/></svg></div>
+          <h3>Gentle separation</h3>
+          <p>A low‑speed belt with an air curtain lifts shell debris away from chicks. No tilting, no drops over 8 cm, and no counting by impact.</p>
+        </div>
+        <div class="feature">
+          <div class="ico"><svg aria-hidden="true"><use href="#i-eye"/></svg></div>
+          <h3>Vision counting and grading</h3>
+          <p>Overhead cameras count and grade every chick for navel condition, posture, and activity, and flag trays that need a person's attention.</p>
+        </div>
+        <div class="feature">
+          <div class="ico"><svg aria-hidden="true"><use href="#i-temp"/></svg></div>
+          <h3>Climate‑controlled holding</h3>
+          <p>Holding trays keep chicks at 33 °C with gentle airflow, dim light, and water gel, so waiting for dispatch costs nothing in early weight gain.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Biosecurity -->
+    <section class="block" id="biosecurity">
+      <div class="col prose reveal section-intro">
+        <h2>Biosecurity by design</h2>
+        <p>A hatchery is only as clean as its dirtiest hour. Aurora treats biosecurity as an engineering constraint rather than a procedure: eggs, air, people, and waste each move in one direction, through pressure zones that never mix, in machines that can be cleaned in place between every set. In 14 months of pilot operation, Aurora lines recorded zero cross‑zone contamination events and zero positive environmental swabs for <em>Salmonella</em>.</p>
+        <p>We also changed what the machines will refuse to do. An Aurora hatcher will not open to the chick room while the setter‑side door is unsealed. A transfer head will not enter a cabinet whose last sanitation cycle failed verification. These interlocks cannot be overridden from the operator panel.</p>
+      </div>
+
+      <div class="wide stats reveal" aria-label="Biosecurity results">
+        <div class="stat">
+          <span class="label">Cross‑zone contamination events</span>
+          <span class="value">0</span>
+          <span class="delta"><b>14 months</b>, six sites</span>
+        </div>
+        <div class="stat">
+          <span class="label"><em>Salmonella</em>‑positive environmental swabs</span>
+          <span class="value">0.0<small>%</small></span>
+          <span class="delta"><b>n = 2,140</b> swabs</span>
+        </div>
+        <div class="stat">
+          <span class="label">Clean‑in‑place cycle</span>
+          <span class="value">41<small>min</small></span>
+          <span class="delta good"><svg aria-hidden="true"><use href="#i-down"/></svg><b>−77%</b> vs manual wash‑down</span>
+        </div>
+        <div class="stat">
+          <span class="label">Interlock overrides possible from panel</span>
+          <span class="value">0</span>
+          <span class="delta"><b>By design</b></span>
+        </div>
+      </div>
+
+      <ul class="wide checks reveal">
+        <li><svg aria-hidden="true"><use href="#i-check"/></svg><div><b>One‑way flow with pressure cascade</b><span>Egg receipt, setter, hatcher, and chick rooms step down in pressure so air only ever moves toward the dirtier zone.</span></div></li>
+        <li><svg aria-hidden="true"><use href="#i-check"/></svg><div><b>HEPA H13 supply per cabinet</b><span>Every setter and hatcher filters its own supply air; a failed filter in one bay cannot seed another.</span></div></li>
+        <li><svg aria-hidden="true"><use href="#i-check"/></svg><div><b>Sealed stainless interiors, clean‑in‑place</b><span>No exposed fasteners or seams inside the cabinet. Spray nozzles and a UV‑C cycle run between every set without opening the doors.</span></div></li>
+        <li><svg aria-hidden="true"><use href="#i-check"/></svg><div><b>Continuous ATP and particle monitoring</b><span>Surface and air readings stream to the site record; a set cannot be started in a cabinet above threshold.</span></div></li>
+        <li><svg aria-hidden="true"><use href="#i-check"/></svg><div><b>Access logging and audit trail</b><span>Every door, panel action, and sanitation cycle is logged with who, when, and result, and exported to auditors on request.</span></div></li>
+        <li><svg aria-hidden="true"><use href="#i-check"/></svg><div><b>Third‑party verification</b><span>Pilot sites were audited by an independent veterinary laboratory each quarter; summary reports are available to producers under evaluation.</span></div></li>
+      </ul>
+    </section>
+
+    <!-- Availability -->
+    <section class="block" id="availability">
+      <div class="col prose reveal section-intro">
+        <h2>Availability</h2>
+        <p>HX‑6 Aurora is available today as a limited preview to existing HX‑5 Meridian sites in North America and Europe. General availability follows in the first quarter of 2027, with Asia‑Pacific and Latin America in the first half of the year. A retrofit kit brings Aurora's climate controller, sensor arrays, and interlocks to HX‑5 cabinets starting mid‑2027.</p>
+        <p>Preview sites receive the full setter and hatcher line, the handling gantry family, and Aurora Cloud, with an incubation specialist on site for the first three sets. Pricing is quoted per line and depends on capacity and configuration.</p>
+      </div>
+
+      <div class="wide avail reveal" id="producers">
+        <div class="card now">
+          <span class="when">Now</span>
+          <h3>Limited preview</h3>
+          <p>Existing HX‑5 Meridian sites in North America and Europe. Full line, on‑site specialist for three sets, priority parts.</p>
+        </div>
+        <div class="card">
+          <span class="when">Q1 2027</span>
+          <h3>General availability</h3>
+          <p>All regions where Broodline operates service, with Asia‑Pacific and Latin America installs beginning in the first half.</p>
+        </div>
+        <div class="card">
+          <span class="when">Mid‑2027</span>
+          <h3>Retrofit program</h3>
+          <p>Aurora controller, eggshell IR arrays, and interlocks for HX‑5 cabinets. Handling gantries follow as a separate phase.</p>
+        </div>
+      </div>
+
+      <div class="col reveal" style="margin-top:28px">
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#company">Join the preview waitlist <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <a class="btn btn-secondary" href="#specifications">Compare configurations</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Specifications -->
+    <section class="block" id="specifications">
+      <div class="col prose reveal section-intro">
+        <h2>Specifications</h2>
+        <p>Figures below are for the standard configuration. Cabinet lengths and trolley counts can be specified per site; contact your regional team for a layout.</p>
+      </div>
+      <div class="wide table-scroll reveal">
+        <table class="spec">
+          <caption class="sr-only">HX‑6 Aurora setter and hatcher specifications</caption>
+          <thead>
+            <tr><th scope="col">Specification</th><th scope="col">HX‑6 Aurora Setter</th><th scope="col">HX‑6 Aurora Hatcher</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Capacity per cabinet</th><td>115,200 eggs (single‑stage)</td><td>38,400 eggs</td></tr>
+            <tr><th scope="row">Trolleys</th><td>8 × 14,400 eggs</td><td>8 × 4,800‑egg basket stacks</td></tr>
+            <tr><th scope="row">Eggshell‑temperature control</th><td>±0.05 °C · 96‑point IR array per trolley</td><td>±0.08 °C · 48‑point IR array per trolley</td></tr>
+            <tr><th scope="row">Airflow at the egg</th><td>0.3–1.5 m/s, variable‑pitch axial fans</td><td>0.3–1.2 m/s, variable‑pitch axial fans</td></tr>
+            <tr><th scope="row">CO₂ program range</th><td>0.1–0.8%</td><td>0.1–1.0%</td></tr>
+            <tr><th scope="row">Power, steady state</th><td>3.9 kW average</td><td>2.7 kW average</td></tr>
+            <tr><th scope="row">Footprint (L × W × H)</th><td>6.9 × 3.2 × 3.0 m</td><td>3.6 × 3.2 × 3.0 m</td></tr>
+            <tr><th scope="row">Sanitation</th><td colspan="2">Sealed stainless interior · clean‑in‑place nozzles · UV‑C cycle between sets · HEPA H13 supply</td></tr>
+            <tr><th scope="row">Connectivity</th><td colspan="2">Aurora Cloud · OPC UA · Modbus TCP · per‑egg record export (CSV, API)</td></tr>
+            <tr><th scope="row">Compliance</th><td colspan="2">CE · UL 508A · IEC 61010‑1 · designed to EU welfare directive 2007/43/EC</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Footnotes -->
+    <div class="col footnotes reveal" id="footnotes">
+      <ol>
+        <li id="fn1">Results from 14 months of pilot operation at six commercial hatcheries (four broiler, two layer) running HX‑6 Aurora alongside HX‑5 Meridian on split flocks from the same breeder source and egg age. Industry multi‑stage figures are the pooled average of the same sites' multi‑stage rooms over the prior 24 months. Full methodology is in the technical brief. <a href="#ref1" aria-label="Back to reference 1">↩</a></li>
+        <li id="fn2">Hatch window is measured as the elapsed hours between the 5th and 95th percentile of hatch, from hourly hatcher camera counts.</li>
+        <li id="fn3">Energy is measured at the machine bus, including fans, heating, cooling, and humidification, and excludes room‑level HVAC.</li>
+        <li id="fn4">Sexing accuracy is measured on day 9 with rejection of low‑confidence reads; 2.1% of eggs were re‑queued to day 12, at which point accuracy on the re‑queued set was 98.6%.</li>
+      </ol>
+    </div>
+
+    <div class="col authors reveal">
+      <span><b>Author</b> Broodline</span>
+      <span><b>Contributors</b> Incubation Research, Machine Engineering, Hatchery Operations, Animal Welfare Science, Field Trials</span>
+    </div>
+
+    <!-- Related -->
+    <section class="wide related reveal" id="news">
+      <h2>Related</h2>
+      <div class="related-grid">
+        <a class="rel" href="#research">
+          <div class="thumb"><svg viewBox="0 0 320 200" aria-hidden="true"><rect width="320" height="200" fill="var(--hero-d)"/><circle cx="90" cy="110" r="70" fill="var(--hero-b)" opacity="0.5"/><circle cx="220" cy="80" r="60" fill="var(--hero-c)" opacity="0.7"/></svg></div>
+          <div class="meta"><span>Research</span><span class="dot"></span><span>Sep 22, 2026</span></div>
+          <h3>Path to Aurora: how we rebuilt single‑stage incubation around the embryo</h3>
+        </a>
+        <a class="rel" href="#specifications">
+          <div class="thumb"><svg viewBox="0 0 320 200" aria-hidden="true"><rect width="320" height="200" fill="var(--bg-3)"/><g fill="none" stroke="var(--accent)" stroke-width="1.5"><rect x="60" y="50" width="200" height="110" rx="8"/><path d="M80,80h160 M80,105h160 M80,130h160"/></g></svg></div>
+          <div class="meta"><span>Machines</span><span class="dot"></span><span>Sep 29, 2026</span></div>
+          <h3>HX‑6 Aurora technical brief and trial methodology</h3>
+        </a>
+        <a class="rel" href="#biosecurity">
+          <div class="thumb"><svg viewBox="0 0 320 200" aria-hidden="true"><rect width="320" height="200" fill="var(--sage-soft)"/><path d="M160 40 100 66v48c0 38 26 66 60 82 34-16 60-44 60-82V66l-60-26Z" fill="none" stroke="var(--sage)" stroke-width="2"/></svg></div>
+          <div class="meta"><span>Biosecurity</span><span class="dot"></span><span>Aug 14, 2026</span></div>
+          <h3>Broodline biosecurity report 2026: fourteen months of pilot data</h3>
+        </a>
+      </div>
+    </section>
+
+  </article>
+
+  <!-- CTA band -->
+  <section class="cta-band" id="company">
+    <div class="container">
+      <div class="inner">
+        <div>
+          <h2>See Aurora running.</h2>
+          <p>Book a visit to a pilot hatchery, or a live remote walkthrough with our incubation team. We will bring your own flock data and show you the program Aurora would write for it.</p>
+        </div>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#availability">Request a demo <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <a class="btn btn-secondary" href="#producers">Talk to sales</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ============ Footer ============ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h4>Machines</h4>
+        <ul>
+          <li><a href="#machines">HX‑6 Aurora Setter</a></li>
+          <li><a href="#machines">HX‑6 Aurora Hatcher</a></li>
+          <li><a href="#systems">Handling gantries</a></li>
+          <li><a href="#stories">Chick processing</a></li>
+          <li><a href="#availability">HX‑5 Meridian retrofit</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Systems</h4>
+        <ul>
+          <li><a href="#research">Aurora climate model</a></li>
+          <li><a href="#research">Aurora Cloud</a></li>
+          <li><a href="#biosecurity">Sanitation and interlocks</a></li>
+          <li><a href="#specifications">Integrations</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Research</h4>
+        <ul>
+          <li><a href="#research">Incubation science</a></li>
+          <li><a href="#performance">Field trials</a></li>
+          <li><a href="#biosecurity">Welfare and biosecurity</a></li>
+          <li><a href="#news">Publications</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>For producers</h4>
+        <ul>
+          <li><a href="#producers">Producer portal</a></li>
+          <li><a href="#producers">Support</a></li>
+          <li><a href="#producers">Training</a></li>
+          <li><a href="#producers">Parts and service</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#company">About</a></li>
+          <li><a href="#company">Careers</a></li>
+          <li><a href="#news">Newsroom</a></li>
+          <li><a href="#company">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <a class="brand" href="#" aria-label="Broodline home"><svg aria-hidden="true"><use href="#i-egg"/></svg><span>Broodline</span></a>
+      <span>© 2016–<span id="year">2026</span> Broodline Hatchery Systems</span>
+      <div class="legal">
+        <a href="#company">Terms</a>
+        <a href="#company">Privacy</a>
+        <a href="#company">Animal welfare policy</a>
+      </div>
+      <div class="social">
+        <button class="lang" type="button"><svg aria-hidden="true"><use href="#i-globe"/></svg>English (US)</button>
+        <a class="icon-btn" href="#" aria-label="Broodline on X"><svg aria-hidden="true"><use href="#i-x"/></svg></a>
+        <a class="icon-btn" href="#" aria-label="Broodline on LinkedIn"><svg aria-hidden="true"><use href="#i-linkedin"/></svg></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="assets/js/main.js" defer></script>
+</body>
+</html>
