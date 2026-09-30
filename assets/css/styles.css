@@ -588,21 +588,21 @@ figcaption.cap {
 /* ---------- Hatch sequence (scroll-driven, see assets/js/hatch.js) ---------- */
 .hatch {
   --shell-hi: #fbf4e6; --shell: #ecdcbf; --shell-lo: #c4a67c; --shell-edge: #e8d6b6; --shell-in: #d9c4a0; --shell-in-lo: #a8865c; --crack: #6b4e2a;
-  --chick-hi: #fde47e; --chick: #f4c542; --chick-lo: #cf8d1a; --beak: #ec8a2c; --beak-lo: #b3601a;
+  --chick-hi: #fbedb9; --chick: #efd47f; --chick-lo: #c4973c; --beak: #dcae7c; --beak-lo: #a97c4e; --skin: #ecd39a; --eye: #1c1610;
   --metal-1: #ece9e3; --metal-2: #d9d4cb; --metal-3: #c2bcb1; --metal-line: #a39c90;
   --basket: #bcc3c9; --basket-lo: #8b939b; --window: #f8f3eb; --window-lo: #e4dacb;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) .hatch {
     --shell-hi: #e9dbc0; --shell: #cdb891; --shell-lo: #866c48; --shell-edge: #c0a988; --shell-in: #a48c68; --shell-in-lo: #62492e; --crack: #33230f;
-    --chick-hi: #f2d56e; --chick: #ddb034; --chick-lo: #a06c12; --beak: #d67a26; --beak-lo: #7f4410;
+    --chick-hi: #ead898; --chick: #d6b962; --chick-lo: #9f7a30; --beak: #c39a6a; --beak-lo: #8a643c; --skin: #cbb47c; --eye: #0f0c08;
     --metal-1: #3d3a35; --metal-2: #2e2b27; --metal-3: #22201c; --metal-line: #4e4942;
     --basket: #4c545c; --basket-lo: #2c3238; --window: #2b2620; --window-lo: #1c1916;
   }
 }
 :root[data-theme="dark"] .hatch {
   --shell-hi: #e9dbc0; --shell: #cdb891; --shell-lo: #866c48; --shell-edge: #c0a988; --shell-in: #a48c68; --shell-in-lo: #62492e; --crack: #33230f;
-  --chick-hi: #f2d56e; --chick: #ddb034; --chick-lo: #a06c12; --beak: #d67a26; --beak-lo: #7f4410;
+  --chick-hi: #ead898; --chick: #d6b962; --chick-lo: #9f7a30; --beak: #c39a6a; --beak-lo: #8a643c; --skin: #cbb47c; --eye: #0f0c08;
   --metal-1: #3d3a35; --metal-2: #2e2b27; --metal-3: #22201c; --metal-line: #4e4942;
   --basket: #4c545c; --basket-lo: #2c3238; --window: #2b2620; --window-lo: #1c1916;
 }

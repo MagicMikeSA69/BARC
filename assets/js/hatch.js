@@ -88,8 +88,8 @@
 
     /* The chick emerges wet and slick, then fluffs up as it dries under the lamp. */
     var dry = smooth(0.84, 1, p);
-    el.fluff.setAttribute("scale", fmt(2.5 + 7.5 * dry, 2));
-    el.wet.setAttribute("opacity", fmt(0.6 * (1 - dry), 2));
+    el.fluff.setAttribute("scale", fmt(2 + 6 * dry, 2));
+    el.wet.setAttribute("opacity", fmt(0.75 * (1 - dry), 2));
 
     /* Humidity fogs the lower glass as the basket hatches. */
     el.fog.setAttribute("opacity", fmt(0.22 * smooth(0.3, 0.9, p), 3));
