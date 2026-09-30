@@ -13,8 +13,8 @@
     rock: q("egg-rock"), cap: q("shell-cap"), whole: q("shell-whole"), chick: q("chick"),
     crackL: q("crack-l"), crackR: q("crack-r"), crackLHi: q("crack-l-hi"), crackRHi: q("crack-r-hi"), cracks: q("cracks"), pip: q("pip"),
     reticle: q("reticle"), eyeOpen: q("chick-eye-open"), eyeClosed: q("chick-eye-closed"),
-    light: q("hatch-light"), bgPips: q("bg-pips"), probeDot: q("probe-dot"),
-    fluff: q("fluff-map"), wet: q("chick-wet"), fog: q("hatch-fog"), shards: q("shards"),
+    light: q("hatch-light"), lamp: q("hatch-lamp"), rings: q("hx-rings"), embryo: q("embryo"), beakBump: q("beak-bump"),
+    fluff: q("fluff-map"), wet: q("chick-wet"), shards: q("shards"),
     shard0: q("shard-0"), shard1: q("shard-1"), shard2: q("shard-2"),
     status: q("hatch-status"), day: q("hatch-day"), temp: q("m-temp"), rh: q("m-rh"),
     co2: q("m-co2"), pull: q("m-pull"), phases: q("hatch-phases")
@@ -88,17 +88,23 @@
 
     /* The chick emerges wet and slick, then fluffs up as it dries under the lamp. */
     var dry = smooth(0.84, 1, p);
-    el.fluff.setAttribute("scale", fmt(2 + 6 * dry, 2));
+    el.fluff.setAttribute("scale", fmt(1.5 + 6.5 * dry, 2));
     el.wet.setAttribute("opacity", fmt(0.75 * (1 - dry), 2));
 
-    /* Humidity fogs the lower glass as the basket hatches. */
-    el.fog.setAttribute("opacity", fmt(0.22 * smooth(0.3, 0.9, p), 3));
+    /* Candling: the embryo's shadow shifts up into the air cell, and the beak shows there at internal pip. */
+    var shift = smooth(0.04, P.external, p);
+    el.embryo.setAttribute("transform", "translate(" + fmt(-4 * shift, 1) + " " + fmt(-24 * shift, 1) + ")");
+    el.beakBump.setAttribute("opacity", fmt(0.9 * smooth(P.internal, P.internal + 0.08, p), 2));
 
-    /* Vision system locks on and counts; hatcher light cycle comes up; neighbours begin to pip. */
+    /* Metabolic heat: the warmth rings breathe and brighten toward hatch; the lamp comes up after. */
+    var heat = 0.7 + 0.3 * smooth(0, P.open, p) + 0.06 * Math.sin(p * 40);
+    el.rings.setAttribute("opacity", fmt(heat, 3));
+    el.rings.setAttribute("transform", "translate(600 360) scale(" + fmt(1 + 0.03 * smooth(0, P.open, p) + 0.008 * Math.sin(p * 40), 3) + ")");
+    el.lamp.setAttribute("opacity", fmt(0.5 + 0.5 * smooth(0.8, 1, p), 2));
+
+    /* Vision system locks on and counts; hatcher light cycle comes up. */
     el.reticle.setAttribute("opacity", smooth(0.9, 0.97, p).toFixed(3));
-    el.light.setAttribute("opacity", (0.14 * smooth(0.8, 1, p)).toFixed(3));
-    el.bgPips.setAttribute("opacity", smooth(0.7, 0.9, p).toFixed(3));
-    el.probeDot.setAttribute("opacity", (0.35 + 0.65 * Math.abs(Math.sin(p * 40))).toFixed(3));
+    el.light.setAttribute("opacity", (0.1 * smooth(0.8, 1, p)).toFixed(3));
 
     /* Readouts */
     var day = 19 + 2 * p;
