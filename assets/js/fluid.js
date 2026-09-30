@@ -11,12 +11,12 @@
 
   var coarse = matchMedia("(pointer: coarse)").matches;
   var config = {
-    SIM_RES: coarse ? 96 : 144,
-    DYE_RES: coarse ? 512 : 1024,
+    SIM_RES: coarse ? 80 : 144,
+    DYE_RES: coarse ? 448 : 1024,
     DENSITY_DISSIPATION: 0.95, /* behind the content it can pool a little longer before it is absorbed */
     VELOCITY_DISSIPATION: 2.4, /* thick: motion dies quickly */
     PRESSURE: 0.8,
-    PRESSURE_ITERATIONS: 14,
+    PRESSURE_ITERATIONS: coarse ? 10 : 14,
     CURL: 3,                   /* little swirl; albumen doesn't billow like smoke */
     GRAVITY: 55,               /* dense yolk sags */
     SPLAT_RADIUS: 0.3,
@@ -363,7 +363,7 @@
   }
 
   function resizeCanvas() {
-    var dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+    var dpr = Math.min(window.devicePixelRatio || 1, coarse ? 1.25 : 1.5);
     var w = Math.floor(window.innerWidth * dpr), h = Math.floor(window.innerHeight * dpr);
     if (canvas.width !== w || canvas.height !== h) {
       canvas.width = w; canvas.height = h;

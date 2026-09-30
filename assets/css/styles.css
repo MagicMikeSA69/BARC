@@ -42,6 +42,9 @@
   --hero-d: #fff6e6;
   --hero-e: #e8b978;
 
+  /* translucent surface for the nav, captions and overlays */
+  --glass: rgba(251, 248, 242, 0.74);
+
   /* buttons */
   --btn-bg: #1a1512;
   --btn-fg: #fbf8f2;
@@ -89,6 +92,7 @@
     --hero-e: #7a4a14;
     --btn-bg: #f4eee4;
     --btn-fg: #15120e;
+    --glass: rgba(21, 18, 14, 0.74);
     --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 12px 40px -20px rgba(0, 0, 0, 0.8);
   }
 }
@@ -118,6 +122,7 @@
   --hero-e: #7a4a14;
   --btn-bg: #f4eee4;
   --btn-fg: #15120e;
+  --glass: rgba(21, 18, 14, 0.74);
   --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 12px 40px -20px rgba(0, 0, 0, 0.8);
 }
 
@@ -204,11 +209,11 @@ table { border-collapse: collapse; width: 100%; }
   height: calc(var(--nav-h) + env(safe-area-inset-top, 0px));
   padding-top: env(safe-area-inset-top, 0px);
   display: flex; align-items: center;
-  background: color-mix(in srgb, var(--bg) 0%, transparent);
+  background: transparent;
   transition: background-color 0.3s var(--ease), box-shadow 0.3s var(--ease), backdrop-filter 0.3s;
 }
 .nav.is-scrolled {
-  background: color-mix(in srgb, var(--bg) 82%, transparent);
+  background: var(--glass);
   backdrop-filter: saturate(160%) blur(14px);
   -webkit-backdrop-filter: saturate(160%) blur(14px);
   box-shadow: 0 1px 0 var(--hair);
@@ -316,8 +321,8 @@ body.menu-open .nav { background: var(--bg); box-shadow: 0 1px 0 var(--hair); }
 .hero-caption {
   position: absolute; left: 20px; bottom: 16px; z-index: 2;
   font-size: 12.5px; color: var(--ink-2);
-  background: color-mix(in srgb, var(--bg) 70%, transparent);
-  backdrop-filter: blur(8px);
+  background: var(--glass);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
   padding: 6px 10px; border-radius: 999px;
 }
 
@@ -616,11 +621,14 @@ figcaption.cap {
   display: grid; gap: 8px;
   padding: 12px 14px;
   border-radius: 16px;
-  background: color-mix(in srgb, var(--bg) 72%, transparent);
+  background: var(--glass);
   backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
 }
+@media (hover: none), (max-width: 639px) {
+  .hero .drift { animation: none; } /* keeps the static background layer from re-rasterising while scrolling */
+}
 @media (max-width: 639px) {
-  .hero-stage { aspect-ratio: 1 / 1; }
+  .hero-stage { aspect-ratio: 1 / 1; top: calc(var(--nav-h) + 12px + env(safe-area-inset-top, 0px)); }
   .hero-stage .hero-caption { display: none; }
   .hero-readout { right: 10px; bottom: 10px; left: 10px; min-width: 0; padding: 10px 12px; gap: 6px; }
   .hero-readout .hatch-metrics { display: none; }
