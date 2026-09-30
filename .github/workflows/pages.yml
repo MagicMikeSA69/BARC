@@ -1,0 +1,40 @@
+# Publishes this branch as a static GitHub Pages site at
+# https://magicmikesa69.github.io/BARC/
+#
+# First it makes sure Pages is switched on and pointed at this branch (root),
+# then it uploads the site and deploys it. Runs on every push to the branch.
+name: Publish preview to GitHub Pages
+
+on:
+  push:
+    branches: ["claude/elegant-hawking-dqxwnq"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Configure Pages (enables it if needed)
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+      - name: Upload site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
