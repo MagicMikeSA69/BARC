@@ -1,4 +1,4 @@
-/* Broodline — cursor‑reactive egg‑liquid layer.
+/* IME — cursor‑reactive egg‑liquid layer.
    A compact GPU fluid simulation (stable fluids: advect → vorticity → project)
    drives a density field rendered as the inside of an egg: a translucent, glossy
    albumen envelope around a golden yolk core. It follows the cursor, sags a

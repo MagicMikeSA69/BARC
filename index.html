@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>HX‑6 Aurora: A new generation of hatching | Broodline</title>
+  <title>HX‑6 Aurora: A new generation of hatching | IME</title>
   <meta name="description" content="HX‑6 Aurora brings together a decade of incubation research and big bets across eggshell‑temperature climate control, robotic egg handling, and welfare‑first chick processing.">
   <meta property="og:title" content="HX‑6 Aurora: A new generation of hatching">
   <meta property="og:description" content="Our most capable hatchery system yet: state‑of‑the‑art hatchability, chick uniformity, energy use, and biosecurity.">
@@ -58,9 +58,9 @@
 <!-- ============ Navigation ============ -->
 <header class="nav" id="nav">
   <div class="container">
-    <a class="brand" href="#" aria-label="Broodline home">
+    <a class="brand" href="#" aria-label="IME home">
       <svg aria-hidden="true"><use href="#i-egg"/></svg>
-      <span>Broodline</span>
+      <span>IME</span>
     </a>
     <ul class="nav-links">
       <li><a href="#machines">Machines</a></li>
@@ -624,7 +624,7 @@
 
       <blockquote class="col pull reveal">
         <p>“For twenty years we asked producers to write incubation programs by hand. Aurora reads the eggs and writes the program for them. That is the whole idea.”</p>
-        <footer>Head of Incubation Research, Broodline</footer>
+        <footer>Head of Incubation Research, IME</footer>
       </blockquote>
 
       <div class="wide timeline reveal" aria-label="A 21‑day Aurora program">
@@ -645,6 +645,167 @@
           <div class="phase t"><b>Transfer · day 18</b><span>Sexing check, vaccination, transfer to hatcher · &lt; 4 min out of climate</span></div>
           <div class="phase h"><b>Hatch · days 19–21</b><span>Eggshell 37.4 °C · RH follows pipping · light cycle · pull at 90% dry</span></div>
         </div>
+      </div>
+    </section>
+
+    <!-- Hatch day (scroll-driven) -->
+    <section class="block hatch" id="hatch">
+      <div class="col prose reveal section-intro">
+        <h2>Hatch day, inside the machine</h2>
+        <p>From day 19 the hatcher does less and watches more. Eggshell temperature comes down to 37.4 °C, humidity is allowed to climb with the first pips, and a camera above every basket watches for the moment a chick breaks through. Scroll to follow one egg in basket 3 from internal pip to counted chick.</p>
+      </div>
+
+      <div class="wide hatch-scroller" id="hatch-scroller">
+        <div class="hatch-stage" id="hatch-stage" style="--p:0">
+          <div class="hatch-scene">
+            <svg viewBox="0 0 1200 760" role="img" aria-labelledby="hatch-title hatch-desc" preserveAspectRatio="xMidYMid meet">
+              <title id="hatch-title">An egg hatching inside the HX‑6 Aurora hatcher</title>
+              <desc id="hatch-desc">A view through the hatcher window at one egg in a basket. As the page scrolls the egg rocks, pips, cracks around its top, the cap lifts and a chick emerges, and the camera counts it.</desc>
+              <defs>
+                <path id="egg-shape" d="M0,-190 C100,-190 150,-60 150,40 C150,150 80,200 0,200 C-80,200 -150,150 -150,40 C-150,-60 -100,-190 0,-190Z"/>
+                <clipPath id="clip-egg"><use href="#egg-shape"/></clipPath>
+                <clipPath id="clip-cap"><polygon points="-160,-58 -125,-60 -100,-76 -80,-54 -58,-80 -34,-60 -10,-86 15,-60 40,-84 66,-56 92,-78 112,-58 132,-74 160,-66 160,-400 -160,-400"/></clipPath>
+                <clipPath id="clip-bottom"><polygon points="-160,-58 -125,-60 -100,-76 -80,-54 -58,-80 -34,-60 -10,-86 15,-60 40,-84 66,-56 92,-78 112,-58 132,-74 160,-66 160,400 -160,400"/></clipPath>
+                <g id="spk" fill="var(--shell-line)" opacity="0.35">
+                  <circle cx="-62" cy="-118" r="2.4"/><circle cx="-24" cy="-140" r="1.8"/><circle cx="48" cy="-126" r="2.2"/><circle cx="84" cy="-40" r="2"/>
+                  <circle cx="-96" cy="10" r="2.4"/><circle cx="-40" cy="60" r="1.8"/><circle cx="30" cy="30" r="2.2"/><circle cx="96" cy="70" r="2"/>
+                  <circle cx="-70" cy="120" r="2"/><circle cx="20" cy="140" r="2.4"/><circle cx="70" cy="150" r="1.8"/><circle cx="-10" cy="-20" r="1.6"/>
+                </g>
+                <g id="star" fill="none" stroke="var(--crack)" stroke-width="2.4" stroke-linecap="round">
+                  <path d="M0,0 l-14,-9 M0,0 l12,-12 M0,0 l16,4 M0,0 l-6,14 M0,0 l7,12 M0,0 l-16,6"/>
+                </g>
+                <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#ffffff" stop-opacity="0.22"/>
+                  <stop offset="0.45" stop-color="#ffffff" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+
+              <!-- cabinet -->
+              <rect x="40" y="30" width="1120" height="700" rx="26" fill="var(--bg-2)" stroke="var(--hair-2)"/>
+              <path d="M40,120 H1160" stroke="var(--hair-2)"/>
+              <g fill="none" stroke="var(--ink-3)" stroke-width="1.4">
+                <circle cx="300" cy="75" r="20"/><path d="M300,55v40 M280,75h40"/>
+                <circle cx="600" cy="75" r="20"/><path d="M600,55v40 M580,75h40"/>
+                <circle cx="900" cy="75" r="20"/><path d="M900,55v40 M880,75h40"/>
+              </g>
+              <g stroke="var(--hair-2)" stroke-width="2" stroke-linecap="round">
+                <path d="M110,66h60 M110,84h60 M1030,66h60 M1030,84h60"/>
+              </g>
+              <text x="1130" y="704" text-anchor="end" font-size="14" fill="var(--ink-3)">HX‑6 Aurora Hatcher · Basket 3 · Camera 2</text>
+
+              <!-- window -->
+              <rect x="90" y="150" width="1020" height="520" rx="18" fill="var(--bg-elev)" stroke="var(--hair)"/>
+              <rect id="hatch-light" x="90" y="150" width="1020" height="520" rx="18" fill="var(--accent)" opacity="0"/>
+              <g fill="none" stroke="var(--accent)" stroke-opacity="0.35" stroke-width="1.5" stroke-dasharray="4 8">
+                <path d="M160,190 v380 M1040,190 v380"/>
+              </g>
+
+              <!-- basket -->
+              <rect x="150" y="560" width="900" height="70" rx="10" fill="var(--bg-3)" stroke="var(--hair-2)"/>
+              <g stroke="var(--hair-2)" stroke-width="1">
+                <path d="M150,595 H1050"/>
+                <path d="M200,560v70 M250,560v70 M300,560v70 M350,560v70 M400,560v70 M450,560v70 M500,560v70 M550,560v70 M600,560v70 M650,560v70 M700,560v70 M750,560v70 M800,560v70 M850,560v70 M900,560v70 M950,560v70 M1000,560v70"/>
+              </g>
+
+              <!-- neighbouring eggs -->
+              <g fill="var(--shell)" stroke="var(--shell-line)" stroke-width="1.6" opacity="0.9">
+                <use href="#egg-shape" transform="translate(240 436) scale(0.62)"/>
+                <use href="#egg-shape" transform="translate(345 436) scale(0.62)"/>
+                <use href="#egg-shape" transform="translate(855 436) scale(0.62)"/>
+                <use href="#egg-shape" transform="translate(960 436) scale(0.62)"/>
+              </g>
+              <g id="bg-pips" opacity="0">
+                <use href="#star" transform="translate(352 372) scale(0.7)"/>
+                <use href="#star" transform="translate(846 380) scale(0.6)"/>
+              </g>
+
+              <!-- IR probe -->
+              <rect x="1068" y="316" width="42" height="26" rx="6" fill="var(--bg-3)" stroke="var(--hair-2)"/>
+              <path d="M1068,329 H752" stroke="var(--accent)" stroke-opacity="0.5" stroke-width="1.4" stroke-dasharray="3 6"/>
+              <circle id="probe-dot" cx="748" cy="329" r="4.5" fill="var(--accent)"/>
+
+              <!-- camera -->
+              <rect x="108" y="158" width="40" height="22" rx="5" fill="var(--bg-3)" stroke="var(--hair-2)"/>
+              <circle cx="128" cy="169" r="5.5" fill="var(--ink-2)"/>
+
+              <!-- the egg -->
+              <g transform="translate(600 360)">
+                <g id="egg-rock">
+                  <!-- chick (behind the shell) -->
+                  <g id="chick" transform="translate(0 0)">
+                    <ellipse cx="0" cy="70" rx="100" ry="88" fill="var(--chick)" stroke="var(--chick-line)" stroke-width="1.5"/>
+                    <ellipse cx="-58" cy="86" rx="44" ry="24" transform="rotate(-24 -58 86)" fill="var(--chick-2)" stroke="var(--chick-line)" stroke-width="1.2"/>
+                    <circle cx="0" cy="-48" r="64" fill="var(--chick)" stroke="var(--chick-line)" stroke-width="1.5"/>
+                    <path d="M-20,-108 c6,-18 14,-22 20,-12 M2,-112 c4,-16 12,-20 18,-10 M-40,-98 c2,-14 10,-18 16,-10" fill="none" stroke="var(--chick-line)" stroke-width="2" stroke-linecap="round"/>
+                    <circle cx="40" cy="-34" r="10" fill="var(--beak)" opacity="0.22"/>
+                    <path d="M54,-52 l28,10 l-28,10 z" fill="var(--beak)" stroke="var(--chick-line)" stroke-width="1"/>
+                    <g id="chick-eye-open" opacity="0"><circle cx="26" cy="-60" r="6.5" fill="var(--ink)"/><circle cx="28.5" cy="-62.5" r="2" fill="#fff"/></g>
+                    <path id="chick-eye-closed" d="M18,-60 q8,7 16,0" fill="none" stroke="var(--ink)" stroke-width="2.4" stroke-linecap="round" opacity="1"/>
+                  </g>
+                  <!-- lower shell (front) -->
+                  <use href="#egg-shape" clip-path="url(#clip-bottom)" fill="var(--shell)" stroke="var(--shell-line)" stroke-width="1.8"/>
+                  <g clip-path="url(#clip-egg)"><use href="#spk" clip-path="url(#clip-bottom)"/></g>
+                  <g clip-path="url(#clip-egg)">
+                    <polyline id="rim-bottom" clip-path="url(#clip-bottom)" points="-160,-58 -125,-60 -100,-76 -80,-54 -58,-80 -34,-60 -10,-86 15,-60 40,-84 66,-56 92,-78 112,-58 132,-74 160,-66" fill="none" stroke="var(--shell-edge)" stroke-width="7" stroke-linejoin="round"/>
+                  </g>
+                  <!-- cap -->
+                  <g id="shell-cap" transform="translate(0 0) rotate(0 -125 -60)">
+                    <use href="#egg-shape" clip-path="url(#clip-cap)" fill="var(--shell)" stroke="var(--shell-line)" stroke-width="1.8"/>
+                    <g clip-path="url(#clip-egg)"><use href="#spk" clip-path="url(#clip-cap)"/></g>
+                    <g clip-path="url(#clip-egg)">
+                      <polyline id="rim-cap" clip-path="url(#clip-cap)" points="-160,-58 -125,-60 -100,-76 -80,-54 -58,-80 -34,-60 -10,-86 15,-60 40,-84 66,-56 92,-78 112,-58 132,-74 160,-66" fill="none" stroke="var(--shell-edge)" stroke-width="7" stroke-linejoin="round"/>
+                    </g>
+                  </g>
+                  <!-- intact shell, shown until the cap lifts -->
+                  <g id="shell-whole" opacity="1">
+                    <use href="#egg-shape" fill="var(--shell)" stroke="var(--shell-line)" stroke-width="1.8"/>
+                    <use href="#spk"/>
+                  </g>
+                  <!-- crack, drawn outward from the pip -->
+                  <g id="cracks" clip-path="url(#clip-egg)" opacity="1" fill="none" stroke="var(--crack)" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round">
+                    <polyline id="crack-l" points="15,-60 -10,-86 -34,-60 -58,-80 -80,-54 -100,-76 -125,-60 -160,-58"/>
+                    <polyline id="crack-r" points="15,-60 40,-84 66,-56 92,-78 112,-58 132,-74 160,-66"/>
+                  </g>
+                  <g id="pip" transform="translate(15 -60) scale(0)" opacity="1"><use href="#star"/></g>
+                </g>
+              </g>
+
+              <!-- vision reticle -->
+              <g id="reticle" opacity="0" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round">
+                <path d="M532,150 v-12 h12 M668,138 h12 v12 M532,246 v12 h12 M668,258 h12 v-12"/>
+                <text x="692" y="146" font-size="15" font-weight="600" fill="var(--ink)" stroke="none">Chick 1 · counted</text>
+                <text x="692" y="166" font-size="13" fill="var(--ink-2)" stroke="none">Navel closed · active · 41 g</text>
+              </g>
+
+              <!-- glass reflection -->
+              <path d="M90,168 Q90,150 108,150 H420 L200,670 H108 Q90,670 90,652 Z" fill="url(#glass)" pointer-events="none"/>
+            </svg>
+          </div>
+
+          <aside class="hatch-panel" aria-label="Hatcher readout">
+            <div class="hatch-status"><span class="dot" aria-hidden="true"></span><span id="hatch-status">Incubating</span></div>
+            <div class="hatch-day"><span class="lbl">Incubation</span><span class="val" id="hatch-day">Day 19.0</span></div>
+            <dl class="hatch-metrics">
+              <div><dt>Eggshell</dt><dd id="m-temp">37.6 °C</dd></div>
+              <div><dt>Humidity</dt><dd id="m-rh">58%</dd></div>
+              <div><dt>CO₂</dt><dd id="m-co2">0.45%</dd></div>
+              <div><dt>Pull in</dt><dd id="m-pull">36 h</dd></div>
+            </dl>
+            <ol class="hatch-phases" id="hatch-phases">
+              <li class="is-active" aria-current="step">Incubating</li>
+              <li>Internal pip</li>
+              <li>External pip</li>
+              <li>Zipping</li>
+              <li>Hatching</li>
+              <li>Hatched</li>
+            </ol>
+            <p class="hatch-hint">Scroll to advance</p>
+          </aside>
+        </div>
+      </div>
+
+      <div class="col prose reveal" style="margin-top:32px">
+        <p>Every hatch is logged with its time, so the pull happens when 90% of the basket is dry rather than at a fixed hour. Chicks that hatch early wait in warmth and dim light; chicks that hatch late are not rushed.</p>
       </div>
     </section>
 
@@ -720,7 +881,7 @@
     <section class="block" id="availability">
       <div class="col prose reveal section-intro">
         <h2>Availability</h2>
-        <p>HX‑6 Aurora is available today as a limited preview to existing HX‑5 Meridian sites in North America and Europe. General availability follows in the first quarter of 2027, with Asia‑Pacific and Latin America in the first half of the year. A retrofit kit brings Aurora's climate controller, sensor arrays, and interlocks to HX‑5 cabinets starting mid‑2027.</p>
+        <p>HX‑6 Aurora is available today as a limited preview to existing HX‑5 Meridian sites in Southern Africa. General availability follows in the first quarter of 2027, with Europe and the Middle East in the first half of the year. A retrofit kit brings Aurora's climate controller, sensor arrays, and interlocks to HX‑5 cabinets starting mid‑2027.</p>
         <p>Preview sites receive the full setter and hatcher line, the handling gantry family, and Aurora Cloud, with an incubation specialist on site for the first three sets. Pricing is quoted per line and depends on capacity and configuration.</p>
       </div>
 
@@ -728,12 +889,12 @@
         <div class="card now">
           <span class="when">Now</span>
           <h3>Limited preview</h3>
-          <p>Existing HX‑5 Meridian sites in North America and Europe. Full line, on‑site specialist for three sets, priority parts.</p>
+          <p>Existing HX‑5 Meridian sites in Southern Africa. Full line, on‑site specialist for three sets, priority parts.</p>
         </div>
         <div class="card">
           <span class="when">Q1 2027</span>
           <h3>General availability</h3>
-          <p>All regions where Broodline operates service, with Asia‑Pacific and Latin America installs beginning in the first half.</p>
+          <p>All regions where IME operates service, with installs beyond Southern Africa beginning in the first half.</p>
         </div>
         <div class="card">
           <span class="when">Mid‑2027</span>
@@ -789,7 +950,7 @@
     </div>
 
     <div class="col authors reveal">
-      <span><b>Author</b> Broodline</span>
+      <span><b>Author</b> IME</span>
       <span><b>Contributors</b> Incubation Research, Machine Engineering, Hatchery Operations, Animal Welfare Science, Field Trials</span>
     </div>
 
@@ -810,7 +971,7 @@
         <a class="rel" href="#biosecurity">
           <div class="thumb"><svg viewBox="0 0 320 200" aria-hidden="true"><rect width="320" height="200" fill="var(--sage-soft)"/><path d="M160 40 100 66v48c0 38 26 66 60 82 34-16 60-44 60-82V66l-60-26Z" fill="none" stroke="var(--sage)" stroke-width="2"/></svg></div>
           <div class="meta"><span>Biosecurity</span><span class="dot"></span><span>Aug 14, 2026</span></div>
-          <h3>Broodline biosecurity report 2026: fourteen months of pilot data</h3>
+          <h3>IME biosecurity report 2026: fourteen months of pilot data</h3>
         </a>
       </div>
     </section>
@@ -886,8 +1047,8 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <a class="brand" href="#" aria-label="Broodline home"><svg aria-hidden="true"><use href="#i-egg"/></svg><span>Broodline</span></a>
-      <span>© 2016–<span id="year">2026</span> Broodline Hatchery Systems</span>
+      <a class="brand" href="#" aria-label="IME home"><svg aria-hidden="true"><use href="#i-egg"/></svg><span>IME</span></a>
+      <span>© <span id="year">2026</span> IME</span>
       <div class="legal">
         <a href="#company">Terms</a>
         <a href="#company">Privacy</a>
@@ -895,8 +1056,8 @@
       </div>
       <div class="social">
         <button class="lang" type="button"><svg aria-hidden="true"><use href="#i-globe"/></svg>English (US)</button>
-        <a class="icon-btn" href="#" aria-label="Broodline on X"><svg aria-hidden="true"><use href="#i-x"/></svg></a>
-        <a class="icon-btn" href="#" aria-label="Broodline on LinkedIn"><svg aria-hidden="true"><use href="#i-linkedin"/></svg></a>
+        <a class="icon-btn" href="#" aria-label="IME on X"><svg aria-hidden="true"><use href="#i-x"/></svg></a>
+        <a class="icon-btn" href="#" aria-label="IME on LinkedIn"><svg aria-hidden="true"><use href="#i-linkedin"/></svg></a>
       </div>
     </div>
   </div>
@@ -905,6 +1066,7 @@
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script src="assets/js/main.js" defer></script>
+<script src="assets/js/hatch.js" defer></script>
 <script src="assets/js/fluid.js" defer></script>
 </body>
 </html>

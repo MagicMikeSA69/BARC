@@ -1,4 +1,4 @@
-# Broodline — HX‑6 Aurora launch page
+# IME — HX‑6 Aurora launch page
 
 A static, dependency‑free product announcement page for a fictional egg‑hatchery
 machine maker, laid out in the style of a long‑form flagship launch post
@@ -22,6 +22,7 @@ There is no build step. The page works with GitHub Pages as‑is.
 index.html            page markup and inline SVG illustrations
 assets/css/styles.css tokens (light + dark), layout, components
 assets/js/main.js     nav state, mobile menu, theme toggle, tabs, reveal, chart tooltips, share
+assets/js/hatch.js    scroll-driven hatch sequence (sticky hatcher window; egg pips, zips, cap lifts, chick counted)
 assets/js/fluid.js    cursor‑reactive WebGL egg‑liquid layer: albumen film + yolk core (skipped under reduced motion or without WebGL)
 assets/img/favicon.svg
 ```

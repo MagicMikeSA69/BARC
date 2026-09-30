@@ -1,4 +1,4 @@
-/* Broodline — HX‑6 Aurora launch page behaviours.
+/* IME — HX‑6 Aurora launch page behaviours.
    No dependencies. Everything degrades gracefully without JS. */
 (function () {
   "use strict";

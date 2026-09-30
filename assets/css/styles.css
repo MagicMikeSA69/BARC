@@ -1,5 +1,5 @@
 /* =========================================================
-   Broodline — HX‑6 Aurora launch page
+   IME — HX‑6 Aurora launch page
    Design tokens, layout, components.
    Structure mirrors a long-form product announcement:
    fixed nav → article header → hero art → narrow prose column
@@ -584,6 +584,72 @@ figcaption.cap {
 .phase span { display: block; font-size: 12.5px; color: var(--ink-2); margin-top: 4px; line-height: 1.45; }
 .phase.t { border-color: var(--s2); }
 .phase.h { border-color: var(--sage); }
+
+/* ---------- Hatch sequence (scroll-driven, see assets/js/hatch.js) ---------- */
+.hatch {
+  --shell: #f3e6d0; --shell-line: #c9b28d; --shell-edge: #e0cba6; --crack: #8a6a3a;
+  --chick: #f6c945; --chick-2: #e9b52e; --chick-line: #b98a1c; --beak: #e8862a;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .hatch {
+    --shell: #d9c7a8; --shell-line: #8d7a5a; --shell-edge: #b9a582; --crack: #5a4426;
+    --chick: #e0b63a; --chick-2: #c99a26; --chick-line: #8a6612; --beak: #d5762a;
+  }
+}
+:root[data-theme="dark"] .hatch {
+  --shell: #d9c7a8; --shell-line: #8d7a5a; --shell-edge: #b9a582; --crack: #5a4426;
+  --chick: #e0b63a; --chick-2: #c99a26; --chick-line: #8a6612; --beak: #d5762a;
+}
+.hatch-scroller { position: relative; height: 330vh; margin-top: 8px; }
+.hatch-stage {
+  position: sticky;
+  /* Pinned below the nav, or centred in the viewport when there is room (the script sets --stage-h). */
+  top: max(calc(var(--nav-h) + 16px + env(safe-area-inset-top, 0px)), calc((100vh - var(--stage-h, 520px)) / 2));
+  display: grid; gap: 12px;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto auto;
+}
+@media (min-width: 900px) {
+  .hatch-stage { grid-template-columns: minmax(0, 2.1fr) minmax(280px, 1fr); grid-template-rows: auto; }
+}
+.hatch-scroller.is-static { height: auto; }
+.hatch-stage.is-static { position: static; }
+.hatch-scene {
+  min-height: 0; min-width: 0;
+  aspect-ratio: 1200 / 760;
+  background: var(--bg-elev); border: 1px solid var(--hair); border-radius: var(--radius);
+  box-shadow: var(--shadow); overflow: hidden;
+  display: grid; place-items: center;
+}
+.hatch-scene svg { width: 100%; height: 100%; max-height: 100%; display: block; }
+.hatch-scene svg text { font-family: var(--font); }
+.hatch-panel {
+  min-width: 0;
+  background: var(--bg-elev); border: 1px solid var(--hair); border-radius: var(--radius);
+  padding: 18px 20px; display: grid; gap: 14px; align-content: start;
+}
+.hatch-status { display: inline-flex; align-items: center; gap: 9px; font-size: 12.5px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink-2); }
+.hatch-status .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); flex: 0 0 auto; }
+.hatch-day .lbl { display: block; font-size: 13px; color: var(--ink-2); }
+.hatch-day .val { display: block; font-size: clamp(1.75rem, 3vw, 2.5rem); font-weight: 600; letter-spacing: -0.03em; line-height: 1.05; font-variant-numeric: tabular-nums; }
+.hatch-metrics { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 16px; border-top: 1px solid var(--hair); padding-top: 14px; }
+.hatch-metrics div { display: grid; gap: 2px; }
+.hatch-metrics dt { font-size: 12.5px; color: var(--ink-2); }
+.hatch-metrics dd { margin: 0; font-weight: 600; font-variant-numeric: tabular-nums; }
+.hatch-phases { list-style: none; display: grid; gap: 7px; border-top: 1px solid var(--hair); padding-top: 14px; }
+.hatch-phases li { display: flex; align-items: center; gap: 10px; font-size: 13.5px; color: var(--ink-3); }
+.hatch-phases li::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--hair-2); flex: 0 0 auto; }
+.hatch-phases li.is-done { color: var(--ink-2); }
+.hatch-phases li.is-done::before { background: var(--sage); }
+.hatch-phases li.is-active { color: var(--ink); font-weight: 600; }
+.hatch-phases li.is-active::before { background: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+.hatch-hint { font-size: 12px; color: var(--ink-3); }
+@media (max-width: 899px) {
+  .hatch-panel { padding: 14px 16px; gap: 10px; }
+  .hatch-phases, .hatch-hint { display: none; }
+  .hatch-metrics { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .hatch-day .val { font-size: 1.5rem; }
+}
 
 /* ---------- Checklist ---------- */
 .checks { display: grid; gap: 12px; grid-template-columns: 1fr; margin-top: 40px; list-style: none; }
