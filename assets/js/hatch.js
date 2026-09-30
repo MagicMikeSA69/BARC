@@ -99,7 +99,7 @@
     /* Metabolic heat: the warmth rings breathe and brighten toward hatch; the lamp comes up after. */
     var heat = 0.7 + 0.3 * smooth(0, P.open, p) + 0.06 * Math.sin(p * 40);
     el.rings.setAttribute("opacity", fmt(heat, 3));
-    el.rings.setAttribute("transform", "translate(600 352) scale(" + fmt(1 + 0.03 * smooth(0, P.open, p) + 0.008 * Math.sin(p * 40), 3) + ")");
+    el.rings.setAttribute("transform", "translate(600 340) scale(" + fmt(0.8 * (1 + 0.03 * smooth(0, P.open, p) + 0.008 * Math.sin(p * 40)), 3) + ")");
 
     /* Vision system locks on and counts; the chamber warms a touch. */
     var lock = smooth(0.9, 0.97, p).toFixed(3);

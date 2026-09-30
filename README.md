@@ -22,7 +22,7 @@ There is no build step. The page works with GitHub Pages as‑is.
 index.html            page markup and inline SVG illustrations
 assets/css/styles.css tokens (light + dark), layout, components
 assets/js/main.js     nav state, mobile menu, theme toggle, tabs, reveal, chart tooltips, share
-assets/js/hatch.js    scroll-driven hatch sequence (sticky hatcher window; egg pips, zips, cap lifts, chick counted)
+assets/js/hatch.js    scroll-driven hero: the egg pips, zips, the cap lifts and the chick is counted as you scroll
 assets/js/fluid.js    cursor‑reactive WebGL egg‑liquid layer: albumen film + yolk core (skipped under reduced motion or without WebGL)
 assets/img/favicon.svg
 ```

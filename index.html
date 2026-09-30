@@ -122,71 +122,155 @@
     </div>
   </div>
 
-  <!-- ============ Hero art ============ -->
-  <div class="container">
-    <div class="hero" role="img" aria-label="Abstract artwork: soft amber and sage forms around a glowing egg silhouette.">
-      <svg viewBox="0 0 1600 686" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+  <!-- ============ Hero: the hatch, driven by scroll ============ -->
+  <div class="container hero-scroller hatch" id="hatch-scroller">
+    <div class="hero hero-stage" id="hatch-stage" style="--p:0">
+      <!-- static chamber: the hero's soft glows and fine grain, in its own layer -->
+      <svg class="hatch-bg" viewBox="0 0 1200 760" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
         <defs>
-          <radialGradient id="hg1" cx="50%" cy="50%" r="50%">
-            <stop offset="0" stop-color="var(--hero-b)" stop-opacity="0.95"/>
-            <stop offset="1" stop-color="var(--hero-b)" stop-opacity="0"/>
-          </radialGradient>
-          <radialGradient id="hg2" cx="50%" cy="50%" r="50%">
-            <stop offset="0" stop-color="var(--hero-c)" stop-opacity="0.9"/>
-            <stop offset="1" stop-color="var(--hero-c)" stop-opacity="0"/>
-          </radialGradient>
-          <radialGradient id="hg3" cx="50%" cy="50%" r="50%">
-            <stop offset="0" stop-color="var(--hero-a)" stop-opacity="1"/>
-            <stop offset="1" stop-color="var(--hero-a)" stop-opacity="0"/>
-          </radialGradient>
-          <radialGradient id="hg4" cx="50%" cy="50%" r="50%">
-            <stop offset="0" stop-color="var(--hero-e)" stop-opacity="0.9"/>
-            <stop offset="1" stop-color="var(--hero-e)" stop-opacity="0"/>
-          </radialGradient>
-          <linearGradient id="eggfill" x1="0" y1="0" x2="0" y2="1">
+          <radialGradient id="hxg1" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="var(--hero-b)" stop-opacity="0.95"/><stop offset="1" stop-color="var(--hero-b)" stop-opacity="0"/></radialGradient>
+          <radialGradient id="hxg2" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="var(--hero-c)" stop-opacity="0.9"/><stop offset="1" stop-color="var(--hero-c)" stop-opacity="0"/></radialGradient>
+          <radialGradient id="hxg3" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="var(--hero-a)" stop-opacity="1"/><stop offset="1" stop-color="var(--hero-a)" stop-opacity="0"/></radialGradient>
+          <radialGradient id="hxg4" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="var(--hero-e)" stop-opacity="0.9"/><stop offset="1" stop-color="var(--hero-e)" stop-opacity="0"/></radialGradient>
+          <filter id="hxblur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="46"/></filter>
+          <filter id="hxgrain"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope="0.08"/></feComponentTransfer></filter>
+        </defs>
+        <rect width="1200" height="760" fill="var(--hero-d)"/>
+        <g filter="url(#hxblur)">
+          <g class="drift">
+            <ellipse cx="315" cy="418" rx="390" ry="330" fill="url(#hxg1)"/>
+            <ellipse cx="885" cy="220" rx="360" ry="286" fill="url(#hxg3)"/>
+          </g>
+          <g class="drift drift-2">
+            <ellipse cx="938" cy="616" rx="420" ry="308" fill="url(#hxg2)"/>
+            <ellipse cx="600" cy="132" rx="315" ry="242" fill="url(#hxg4)"/>
+          </g>
+          <g class="drift drift-3">
+            <ellipse cx="225" cy="88" rx="270" ry="242" fill="url(#hxg2)"/>
+            <ellipse cx="675" cy="704" rx="375" ry="242" fill="url(#hxg1)"/>
+          </g>
+        </g>
+        <rect width="1200" height="760" filter="url(#hxgrain)" opacity="0.5"/>
+      </svg>
+
+      <!-- the egg, drawn the way the hero draws it -->
+      <svg class="hatch-fg" viewBox="0 0 1200 760" role="img" aria-labelledby="hatch-title hatch-desc" preserveAspectRatio="xMidYMid slice">
+        <title id="hatch-title">An egg hatching inside the HX‑6 Aurora hatcher</title>
+        <desc id="hatch-desc">A dark egg silhouette sits in a field of warm light. As the page scrolls it rocks, a point of light pips through, a bright crack zips around the top, the cap hinges away, and a chick rises out as a soft silhouette.</desc>
+        <defs>
+          <path id="egg-shape" d="M0,-190 C100,-190 150,-60 150,40 C150,150 80,200 0,200 C-80,200 -150,150 -150,40 C-150,-60 -100,-190 0,-190Z"/>
+          <clipPath id="clip-egg"><use href="#egg-shape"/></clipPath>
+          <clipPath id="clip-cap"><polygon points="-160,-58 -125,-60 -100,-76 -80,-54 -58,-80 -34,-60 -10,-86 15,-60 40,-84 66,-56 92,-78 112,-58 132,-74 160,-66 160,-400 -160,-400"/></clipPath>
+          <clipPath id="clip-bottom"><polygon points="-160,-58 -125,-60 -100,-76 -80,-54 -58,-80 -34,-60 -10,-86 15,-60 40,-84 66,-56 92,-78 112,-58 132,-74 160,-66 160,400 -160,400"/></clipPath>
+          <linearGradient id="hx-eggfill" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0" stop-color="var(--hero-d)" stop-opacity="0.9"/>
             <stop offset="1" stop-color="var(--hero-a)" stop-opacity="0.9"/>
           </linearGradient>
-          <filter id="blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="46"/></filter>
-          <filter id="grain">
-            <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/>
-            <feColorMatrix type="saturate" values="0"/>
-            <feComponentTransfer><feFuncA type="linear" slope="0.08"/></feComponentTransfer>
+          <linearGradient id="hx-chickGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="var(--hx-chick-1)"/><stop offset="1" stop-color="var(--hx-chick-2)"/></linearGradient>
+          <linearGradient id="hx-rimGrad" x1="0" y1="1" x2="1" y2="0"><stop offset="0.4" stop-color="var(--hx-rim)" stop-opacity="0"/><stop offset="1" stop-color="var(--hx-rim)" stop-opacity="0.7"/></linearGradient>
+          <filter id="hx-soft" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="14"/></filter>
+          <filter id="hx-glowline" x="-20%" y="-80%" width="140%" height="260%"><feGaussianBlur stdDeviation="3"/></filter>
+          <filter id="fluff" x="-25%" y="-25%" width="150%" height="150%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.07" numOctaves="3" seed="4" result="n"/>
+            <feDisplacementMap id="fluff-map" in="SourceGraphic" in2="n" scale="1.5" xChannelSelector="R" yChannelSelector="G"/>
           </filter>
+          <g id="star" fill="none" stroke="var(--hx-crack)" stroke-width="1.6" stroke-linecap="round">
+            <path d="M0,0 l-12,-8 M0,0 l10,-11 M0,0 l14,3 M0,0 l-5,12 M0,0 l6,10 M0,0 l-14,5"/>
+          </g>
+          <g id="hx-shell">
+            <use href="#egg-shape" fill="url(#hx-eggfill)"/>
+            <use href="#egg-shape" fill="none" stroke="var(--accent)" stroke-opacity="0.55" stroke-width="1.5"/>
+          </g>
         </defs>
-        <rect width="1600" height="686" fill="var(--hero-d)"/>
-        <g filter="url(#blur)">
-          <g class="drift">
-            <ellipse cx="420" cy="380" rx="520" ry="300" fill="url(#hg1)"/>
-            <ellipse cx="1180" cy="200" rx="480" ry="260" fill="url(#hg3)"/>
-          </g>
-          <g class="drift drift-2">
-            <ellipse cx="1250" cy="560" rx="560" ry="280" fill="url(#hg2)"/>
-            <ellipse cx="800" cy="120" rx="420" ry="220" fill="url(#hg4)"/>
-          </g>
-          <g class="drift drift-3">
-            <ellipse cx="300" cy="80" rx="360" ry="220" fill="url(#hg2)"/>
-            <ellipse cx="900" cy="640" rx="500" ry="220" fill="url(#hg1)"/>
-          </g>
-        </g>
-        <!-- egg silhouette -->
-        <g transform="translate(800 352)">
-          <path d="M0,-176 C94,-176 138,-47 138,47 C138,141 73,200 0,200 C-73,200 -138,141 -138,47 C-138,-47 -94,-176 0,-176Z" fill="url(#eggfill)" opacity="0.9"/>
-          <path d="M0,-176 C94,-176 138,-47 138,47 C138,141 73,200 0,200 C-73,200 -138,141 -138,47 C-138,-47 -94,-176 0,-176Z" fill="none" stroke="var(--accent)" stroke-opacity="0.55" stroke-width="1.5"/>
-          <!-- warmth rings -->
-          <g fill="none" stroke="var(--accent)" stroke-opacity="0.35" stroke-width="1">
-            <path d="M-206,60 C-206,-80 -120,-236 0,-236 C120,-236 206,-80 206,60 C206,170 120,262 0,262 C-120,262 -206,170 -206,60Z"/>
+
+        <rect id="hatch-light" width="1200" height="760" fill="var(--accent)" opacity="0"/>
+
+        <!-- warmth rings -->
+        <g id="hx-rings" transform="translate(600 340) scale(0.8)" fill="none" stroke="var(--accent)" stroke-width="1" opacity="1">
+          <g transform="scale(1.08)">
+            <path d="M-206,60 C-206,-80 -120,-236 0,-236 C120,-236 206,-80 206,60 C206,170 120,262 0,262 C-120,262 -206,170 -206,60Z" stroke-opacity="0.35"/>
             <path d="M-274,72 C-274,-112 -160,-296 0,-296 C160,-296 274,-112 274,72 C274,200 160,322 0,322 C-160,322 -274,200 -274,72Z" stroke-opacity="0.22"/>
             <path d="M-342,84 C-342,-144 -200,-356 0,-356 C200,-356 342,-144 342,84 C342,230 200,382 0,382 C-200,382 -342,230 -342,84Z" stroke-opacity="0.12"/>
           </g>
-          <!-- sensor points -->
-          <g fill="var(--accent)">
-            <circle cx="-62" cy="-40" r="3"/><circle cx="58" cy="-12" r="3"/><circle cx="-18" cy="96" r="3"/><circle cx="84" cy="98" r="3"/><circle cx="-96" cy="70" r="3"/>
+        </g>
+
+        <g transform="translate(600 340) scale(0.8)">
+          <g id="egg-rock">
+            <!-- shell interior behind the chick once open -->
+            <g clip-path="url(#clip-egg)">
+              <polygon points="-150,-40 -122,-84 -100,-98 -80,-82 -58,-104 -34,-86 -10,-110 15,-86 40,-108 66,-82 92,-102 112,-84 132,-96 150,-40 150,60 -150,60" fill="var(--hero-e)" opacity="0.55"/>
+            </g>
+            <!-- chick: a soft silhouette with a little rim light -->
+            <g id="chick" transform="translate(0 0)">
+              <g filter="url(#fluff)">
+                <path d="M0,-114 C36,-114 66,-92 66,-60 C66,-40 78,-20 96,-4 C112,20 110,70 100,100 C86,140 40,166 0,166 C-60,166 -108,130 -108,80 C-108,40 -92,10 -78,-10 C-66,-30 -70,-60 -66,-76 C-58,-100 -34,-114 0,-114Z" fill="url(#hx-chickGrad)"/>
+                <path d="M2,-109.2 L3.3,-122.2 M10.9,-110.8 L13.5,-121.6 M19.2,-109.6 L24.5,-117.4 M23.3,-106.8 L29.3,-114 M33.9,-103.1 L45.4,-109.6 M40.9,-99.4 L40.6,-108.4 M46.4,-96.5 L50.2,-106.1 M50.1,-91.4 L62.5,-95.5 M55,-85.1 L64.6,-89 M58.2,-78.9 L72.3,-75.8 M61.7,-72.1 L68.5,-76.9 M61.4,-63.3 L73.4,-65.8 M64.2,-57.8 L72.1,-54.8 M61.7,-51.4 L74.2,-53.7 M62.7,-49.6 L73.9,-50.1 M63.9,-42.5 L77.4,-49.6 M68.1,-38.4 L74.2,-43.2 M70.5,-30.2 L78.3,-39.1 M72.2,-29.4 L83.8,-32.2 M75.2,-23.8 L82.7,-29.7 M79.4,-17.7 L92.9,-21.9 M81.1,-12.8 L90.6,-23.1 M85.2,-11.6 L94.5,-13.1 M92.1,-3.7 L96.5,-10.9 M93.8,-2.4 L104.4,-7.9 M96,6.3 L107.8,0.4 M100.9,12.3 L109.4,13.7 M103,22.3 L111.9,24.2 M104.5,30 L117.5,35.8 M104.4,41 L113.3,41.7 M105.4,44.6 L116.3,51.1 M104.1,55.3 L113.9,59.9 M104.8,65.3 L113,68.4 M102.2,75.4 L111.2,81.4 M101.2,88.6 L110.1,87.5 M99.3,94.9 L109.1,92.4 M95.6,103.6 L109.9,102.7 M89.8,112.4 L99.6,121.2 M88,119.4 L101.4,120 M80.6,128.5 L83.6,139.6 M73.2,134.3 L79.7,147.8 M65.8,138.7 L74.5,151.5 M54.5,146.2 L58.8,161.4 M47.3,149.8 L50.9,165.1 M38,154.2 L38.2,167.8 M25.3,158.9 L30.3,170.9 M19.7,159 L20.2,175.1 M4.9,161.7 L7.4,174.7 M-3,163.9 L-8.2,175.3 M-14.2,161.9 L-16.5,171.7 M-33.6,158.1 L-37.3,172.9 M-44.9,156.1 L-41.7,168.4 M-55.9,149.4 L-56.5,163.8 M-66.4,145.6 L-77.3,151.9 M-75.2,137.2 L-84.1,150.3 M-87.4,126.1 L-94.7,134.3 M-90.2,121.1 L-102.8,130.1 M-98.9,110.4 L-107.9,109.2 M-102.9,99.3 L-111.8,104.8 M-104.7,87.4 L-118.4,88.9 M-105.7,74.1 L-113.1,74.3 M-103.5,63.5 L-115.4,69.2 M-104.7,60.1 L-111.8,56.3 M-100.6,47.9 L-111,51.8 M-99.4,41.5 L-110.9,44.9 M-96.1,34.4 L-110.1,26.4 M-93.6,24.5 L-103.3,24.3 M-91.4,21.7 L-101,17.8 M-87.5,13.4 L-99.7,9.8 M-85.2,6.9 L-94.4,-3.2 M-78.4,-1.9 L-93.2,-3 M-77.9,-3.3 L-91.1,-10.9 M-73.5,-8.5 L-86.1,-17.1 M-70.3,-17.1 L-80.2,-20.3 M-69.4,-20.8 L-80.4,-29.3 M-67.7,-24.1 L-80.5,-34.9 M-67.5,-33 L-80.1,-39.8 M-67,-41.8 L-77.3,-40.9 M-65.7,-45.1 L-73.6,-48.5 M-64.5,-55.2 L-74,-50.5 M-65.9,-56.4 L-73.7,-59.7 M-63.5,-61.9 L-77,-66.7 M-62.3,-69.1 L-72.7,-70.4 M-63.9,-71.8 L-76.7,-74.3 M-61,-76.5 L-73.4,-81.7 M-58.9,-81.4 L-73.9,-86.4 M-57.7,-83.6 L-64.9,-95.1 M-52.4,-92.3 L-63.6,-96.8 M-46.5,-96.6 L-59.5,-100.5 M-46,-97.8 L-48.9,-109.6 M-37.3,-103.4 L-47,-109.6 M-33.6,-105.7 L-32,-116.7 M-28.2,-105.5 L-34.3,-120.1 M-20.4,-109.6 L-25.3,-120.4 M-9.6,-109.7 L-14.5,-117.8 M-5.8,-110 L-10.1,-120.5" fill="none" stroke="var(--hx-chick-2)" stroke-width="1.3" stroke-linecap="round" opacity="0.5"/>
+                <path d="M0,-114 C36,-114 66,-92 66,-60 C66,-40 78,-20 96,-4 C112,20 110,70 100,100 C86,140 40,166 0,166 C-60,166 -108,130 -108,80 C-108,40 -92,10 -78,-10 C-66,-30 -70,-60 -66,-76 C-58,-100 -34,-114 0,-114Z" fill="none" stroke="url(#hx-rimGrad)" stroke-width="2.5"/>
+                <g id="chick-wet" opacity="0.6"><path d="M0,-114 C36,-114 66,-92 66,-60 C66,-40 78,-20 96,-4 C112,20 110,70 100,100 C86,140 40,166 0,166 C-60,166 -108,130 -108,80 C-108,40 -92,10 -78,-10 C-66,-30 -70,-60 -66,-76 C-58,-100 -34,-114 0,-114Z" fill="var(--hero-d)" opacity="0.35"/></g>
+              </g>
+              <path d="M62,-58 C74,-60 90,-54 97,-47 C90,-45 74,-45 62,-46 Z" fill="var(--hx-chick-1)"/>
+              <path d="M62,-46 C76,-45 90,-44 96,-46 C90,-41 76,-38 62,-39 Z" fill="var(--hx-chick-1)" opacity="0.85"/>
+              <g id="chick-eye-open" opacity="0"><circle cx="34" cy="-59" r="2.4" fill="var(--hx-rim)"/></g>
+              <g id="chick-eye-closed" opacity="1"></g>
+            </g>
+            <!-- lower shell (front) -->
+            <g>
+              <use href="#hx-shell" clip-path="url(#clip-bottom)"/>
+              <g clip-path="url(#clip-egg)"><polyline clip-path="url(#clip-bottom)" points="-160,-58 -125,-60 -100,-76 -80,-54 -58,-80 -34,-60 -10,-86 15,-60 40,-84 66,-56 92,-78 112,-58 132,-74 160,-66" fill="none" stroke="var(--accent)" stroke-opacity="0.7" stroke-width="1.5" stroke-linejoin="round" transform="translate(0 0.8)"/></g>
+              <g fill="var(--accent)"><circle cx="-62" cy="-40" r="3"/><circle cx="58" cy="-12" r="3"/><circle cx="-18" cy="96" r="3"/><circle cx="84" cy="98" r="3"/><circle cx="-96" cy="70" r="3"/></g>
+            </g>
+            <!-- cap -->
+            <g id="shell-cap" transform="translate(0 0) rotate(0 -125 -60)">
+              <use href="#hx-shell" clip-path="url(#clip-cap)"/>
+              <g clip-path="url(#clip-egg)"><polyline clip-path="url(#clip-cap)" points="-160,-58 -125,-60 -100,-76 -80,-54 -58,-80 -34,-60 -10,-86 15,-60 40,-84 66,-56 92,-78 112,-58 132,-74 160,-66" fill="none" stroke="var(--accent)" stroke-opacity="0.7" stroke-width="1.5" stroke-linejoin="round" transform="translate(0 -0.8)"/></g>
+            </g>
+            <!-- intact egg until the cap lifts, with a faint warmth inside -->
+            <g id="shell-whole" opacity="1">
+              <use href="#hx-shell"/>
+              <g clip-path="url(#clip-egg)">
+                <g id="embryo" transform="translate(0 0)">
+                  <ellipse cx="0" cy="-40" rx="70" ry="60" fill="var(--hero-e)" opacity="0.28" filter="url(#hx-soft)"/>
+                </g>
+                <circle id="beak-bump" cx="-8" cy="-126" r="7" fill="var(--hx-rim)" opacity="0" filter="url(#hx-glowline)"/>
+              </g>
+            </g>
+            <!-- light through the crack -->
+            <g id="cracks" clip-path="url(#clip-egg)" opacity="1" fill="none" stroke-linejoin="round" stroke-linecap="round">
+              <polyline id="crack-l-hi" points="15,-60 -10,-86 -34,-60 -58,-80 -80,-54 -100,-76 -125,-60 -160,-58" stroke="var(--hx-crack)" stroke-width="5" stroke-opacity="0.5" filter="url(#hx-glowline)"/>
+              <polyline id="crack-r-hi" points="15,-60 40,-84 66,-56 92,-78 112,-58 132,-74 160,-66" stroke="var(--hx-crack)" stroke-width="5" stroke-opacity="0.5" filter="url(#hx-glowline)"/>
+              <polyline id="crack-l" points="15,-60 -10,-86 -34,-60 -58,-80 -80,-54 -100,-76 -125,-60 -160,-58" stroke="var(--hx-crack)" stroke-width="1.6"/>
+              <polyline id="crack-r" points="15,-60 40,-84 66,-56 92,-78 112,-58 132,-74 160,-66" stroke="var(--hx-crack)" stroke-width="1.6"/>
+            </g>
+            <g id="pip" transform="translate(15 -60) scale(0)" opacity="1"><circle r="5" fill="var(--hx-crack)" opacity="0.7" filter="url(#hx-glowline)"/><use href="#star"/></g>
+            <g id="shards" opacity="0" fill="var(--hero-a)" stroke="var(--accent)" stroke-opacity="0.6" stroke-width="0.8">
+              <polygon id="shard-0" points="0,0 9,-3 7,6 -2,7" transform="translate(15 -60)"/>
+              <polygon id="shard-1" points="0,0 6,-5 10,2 3,5" transform="translate(15 -60)"/>
+              <polygon id="shard-2" points="0,0 5,-2 4,5 -3,4" transform="translate(15 -60)"/>
+            </g>
           </g>
         </g>
-        <rect width="1600" height="686" filter="url(#grain)" opacity="0.5"/>
+
+        <!-- vision reticle -->
+        <g id="reticle" opacity="0" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round">
+          <path d="M549,168 v-10 h10 M651,158 h10 v10 M549,250 v10 h10 M651,260 h10 v-10"/>
+        </g>
       </svg>
-      <span class="hero-caption">HX‑6 Aurora · Eggshell‑temperature field, rendered</span>
+      <div class="hatch-count" id="reticle-label" style="opacity:0"><b>Chick 1 · counted</b><span>Navel closed · active · 41 g</span></div>
+      <span class="hero-caption">HX‑6 Aurora Hatcher 03 · Basket 3 · Camera 2</span>
+      <div class="hero-readout" aria-label="Hatcher readout">
+        <div class="hatch-status"><span class="dot" aria-hidden="true"></span><span id="hatch-status">Incubating</span></div>
+        <div class="hatch-day"><span class="val" id="hatch-day">Day 19.0</span></div>
+        <dl class="hatch-metrics">
+          <div><dt>Eggshell</dt><dd id="m-temp">37.6 °C</dd></div>
+          <div><dt>Humidity</dt><dd id="m-rh">58%</dd></div>
+          <div><dt>CO₂</dt><dd id="m-co2">0.45%</dd></div>
+          <div><dt>Pull in</dt><dd id="m-pull">36 h</dd></div>
+        </dl>
+        <ol class="hatch-phases" id="hatch-phases" aria-label="Hatch phases">
+          <li class="is-active" aria-current="step">Incubating</li><li>Internal pip</li><li>External pip</li><li>Zipping</li><li>Hatching</li><li>Hatched</li>
+        </ol>
+        <p class="hatch-hint">Scroll to advance</p>
+      </div>
     </div>
   </div>
 
@@ -645,171 +729,6 @@
           <div class="phase t"><b>Transfer · day 18</b><span>Sexing check, vaccination, transfer to hatcher · &lt; 4 min out of climate</span></div>
           <div class="phase h"><b>Hatch · days 19–21</b><span>Eggshell 37.4 °C · RH follows pipping · light cycle · pull at 90% dry</span></div>
         </div>
-      </div>
-    </section>
-
-    <!-- Hatch day (scroll-driven) -->
-    <section class="block hatch" id="hatch">
-      <div class="col prose reveal section-intro">
-        <h2>Hatch day, inside the machine</h2>
-        <p>From day 19 the hatcher does less and watches more. Eggshell temperature comes down to 37.4 °C, humidity is allowed to climb with the first pips, and a camera above every basket watches for the moment a chick breaks through. Scroll to follow one egg in basket 3 from internal pip to counted chick.</p>
-      </div>
-
-      <div class="wide hatch-scroller" id="hatch-scroller">
-        <div class="hatch-stage" id="hatch-stage" style="--p:0">
-          <div class="hatch-scene">
-            <!-- static chamber: the hero's soft glows and fine grain, in its own layer -->
-            <svg class="hatch-bg" viewBox="0 0 1200 760" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-              <defs>
-                <radialGradient id="hxg1" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="var(--hero-b)" stop-opacity="0.95"/><stop offset="1" stop-color="var(--hero-b)" stop-opacity="0"/></radialGradient>
-                <radialGradient id="hxg2" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="var(--hero-c)" stop-opacity="0.9"/><stop offset="1" stop-color="var(--hero-c)" stop-opacity="0"/></radialGradient>
-                <radialGradient id="hxg3" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="var(--hero-a)" stop-opacity="1"/><stop offset="1" stop-color="var(--hero-a)" stop-opacity="0"/></radialGradient>
-                <radialGradient id="hxg4" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="var(--hero-e)" stop-opacity="0.9"/><stop offset="1" stop-color="var(--hero-e)" stop-opacity="0"/></radialGradient>
-                <filter id="hxblur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="46"/></filter>
-                <filter id="hxgrain"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope="0.08"/></feComponentTransfer></filter>
-              </defs>
-              <rect width="1200" height="760" fill="var(--hero-d)"/>
-              <g filter="url(#hxblur)">
-                <ellipse cx="315" cy="418" rx="390" ry="330" fill="url(#hxg1)"/>
-                <ellipse cx="885" cy="220" rx="360" ry="286" fill="url(#hxg3)"/>
-                <ellipse cx="938" cy="616" rx="420" ry="308" fill="url(#hxg2)"/>
-                <ellipse cx="600" cy="132" rx="315" ry="242" fill="url(#hxg4)"/>
-                <ellipse cx="225" cy="88" rx="270" ry="242" fill="url(#hxg2)"/>
-                <ellipse cx="675" cy="704" rx="375" ry="242" fill="url(#hxg1)"/>
-              </g>
-              <rect width="1200" height="760" filter="url(#hxgrain)" opacity="0.5"/>
-            </svg>
-
-            <!-- the egg, drawn the way the hero draws it -->
-            <svg class="hatch-fg" viewBox="0 0 1200 760" role="img" aria-labelledby="hatch-title hatch-desc" preserveAspectRatio="xMidYMid slice">
-              <title id="hatch-title">An egg hatching inside the HX‑6 Aurora hatcher</title>
-              <desc id="hatch-desc">A dark egg silhouette sits in a field of warm light. As the page scrolls it rocks, a point of light pips through, a bright crack zips around the top, the cap hinges away, and a chick rises out as a soft silhouette.</desc>
-              <defs>
-                <path id="egg-shape" d="M0,-190 C100,-190 150,-60 150,40 C150,150 80,200 0,200 C-80,200 -150,150 -150,40 C-150,-60 -100,-190 0,-190Z"/>
-                <clipPath id="clip-egg"><use href="#egg-shape"/></clipPath>
-                <clipPath id="clip-cap"><polygon points="-160,-58 -125,-60 -100,-76 -80,-54 -58,-80 -34,-60 -10,-86 15,-60 40,-84 66,-56 92,-78 112,-58 132,-74 160,-66 160,-400 -160,-400"/></clipPath>
-                <clipPath id="clip-bottom"><polygon points="-160,-58 -125,-60 -100,-76 -80,-54 -58,-80 -34,-60 -10,-86 15,-60 40,-84 66,-56 92,-78 112,-58 132,-74 160,-66 160,400 -160,400"/></clipPath>
-                <linearGradient id="hx-eggfill" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0" stop-color="var(--hero-d)" stop-opacity="0.9"/>
-                  <stop offset="1" stop-color="var(--hero-a)" stop-opacity="0.9"/>
-                </linearGradient>
-                <linearGradient id="hx-chickGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="var(--hx-chick-1)"/><stop offset="1" stop-color="var(--hx-chick-2)"/></linearGradient>
-                <linearGradient id="hx-rimGrad" x1="0" y1="1" x2="1" y2="0"><stop offset="0.4" stop-color="var(--hx-rim)" stop-opacity="0"/><stop offset="1" stop-color="var(--hx-rim)" stop-opacity="0.7"/></linearGradient>
-                <filter id="hx-soft" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="14"/></filter>
-                <filter id="hx-glowline" x="-20%" y="-80%" width="140%" height="260%"><feGaussianBlur stdDeviation="3"/></filter>
-                <filter id="fluff" x="-25%" y="-25%" width="150%" height="150%">
-                  <feTurbulence type="fractalNoise" baseFrequency="0.07" numOctaves="3" seed="4" result="n"/>
-                  <feDisplacementMap id="fluff-map" in="SourceGraphic" in2="n" scale="1.5" xChannelSelector="R" yChannelSelector="G"/>
-                </filter>
-                <g id="star" fill="none" stroke="var(--hx-crack)" stroke-width="1.6" stroke-linecap="round">
-                  <path d="M0,0 l-12,-8 M0,0 l10,-11 M0,0 l14,3 M0,0 l-5,12 M0,0 l6,10 M0,0 l-14,5"/>
-                </g>
-                <g id="hx-shell">
-                  <use href="#egg-shape" fill="url(#hx-eggfill)"/>
-                  <use href="#egg-shape" fill="none" stroke="var(--accent)" stroke-opacity="0.55" stroke-width="1.5"/>
-                </g>
-              </defs>
-
-              <rect id="hatch-light" width="1200" height="760" fill="var(--accent)" opacity="0"/>
-
-              <!-- warmth rings -->
-              <g id="hx-rings" transform="translate(600 352)" fill="none" stroke="var(--accent)" stroke-width="1" opacity="1">
-                <g transform="scale(1.08)">
-                  <path d="M-206,60 C-206,-80 -120,-236 0,-236 C120,-236 206,-80 206,60 C206,170 120,262 0,262 C-120,262 -206,170 -206,60Z" stroke-opacity="0.35"/>
-                  <path d="M-274,72 C-274,-112 -160,-296 0,-296 C160,-296 274,-112 274,72 C274,200 160,322 0,322 C-160,322 -274,200 -274,72Z" stroke-opacity="0.22"/>
-                  <path d="M-342,84 C-342,-144 -200,-356 0,-356 C200,-356 342,-144 342,84 C342,230 200,382 0,382 C-200,382 -342,230 -342,84Z" stroke-opacity="0.12"/>
-                </g>
-              </g>
-
-              <g transform="translate(600 352)">
-                <g id="egg-rock">
-                  <!-- shell interior behind the chick once open -->
-                  <g clip-path="url(#clip-egg)">
-                    <polygon points="-150,-40 -122,-84 -100,-98 -80,-82 -58,-104 -34,-86 -10,-110 15,-86 40,-108 66,-82 92,-102 112,-84 132,-96 150,-40 150,60 -150,60" fill="var(--hero-e)" opacity="0.55"/>
-                  </g>
-                  <!-- chick: a soft silhouette with a little rim light -->
-                  <g id="chick" transform="translate(0 0)">
-                    <g filter="url(#fluff)">
-                      <path d="M0,-114 C36,-114 66,-92 66,-60 C66,-40 78,-20 96,-4 C112,20 110,70 100,100 C86,140 40,166 0,166 C-60,166 -108,130 -108,80 C-108,40 -92,10 -78,-10 C-66,-30 -70,-60 -66,-76 C-58,-100 -34,-114 0,-114Z" fill="url(#hx-chickGrad)"/>
-                      <path d="M2,-109.2 L3.3,-122.2 M10.9,-110.8 L13.5,-121.6 M19.2,-109.6 L24.5,-117.4 M23.3,-106.8 L29.3,-114 M33.9,-103.1 L45.4,-109.6 M40.9,-99.4 L40.6,-108.4 M46.4,-96.5 L50.2,-106.1 M50.1,-91.4 L62.5,-95.5 M55,-85.1 L64.6,-89 M58.2,-78.9 L72.3,-75.8 M61.7,-72.1 L68.5,-76.9 M61.4,-63.3 L73.4,-65.8 M64.2,-57.8 L72.1,-54.8 M61.7,-51.4 L74.2,-53.7 M62.7,-49.6 L73.9,-50.1 M63.9,-42.5 L77.4,-49.6 M68.1,-38.4 L74.2,-43.2 M70.5,-30.2 L78.3,-39.1 M72.2,-29.4 L83.8,-32.2 M75.2,-23.8 L82.7,-29.7 M79.4,-17.7 L92.9,-21.9 M81.1,-12.8 L90.6,-23.1 M85.2,-11.6 L94.5,-13.1 M92.1,-3.7 L96.5,-10.9 M93.8,-2.4 L104.4,-7.9 M96,6.3 L107.8,0.4 M100.9,12.3 L109.4,13.7 M103,22.3 L111.9,24.2 M104.5,30 L117.5,35.8 M104.4,41 L113.3,41.7 M105.4,44.6 L116.3,51.1 M104.1,55.3 L113.9,59.9 M104.8,65.3 L113,68.4 M102.2,75.4 L111.2,81.4 M101.2,88.6 L110.1,87.5 M99.3,94.9 L109.1,92.4 M95.6,103.6 L109.9,102.7 M89.8,112.4 L99.6,121.2 M88,119.4 L101.4,120 M80.6,128.5 L83.6,139.6 M73.2,134.3 L79.7,147.8 M65.8,138.7 L74.5,151.5 M54.5,146.2 L58.8,161.4 M47.3,149.8 L50.9,165.1 M38,154.2 L38.2,167.8 M25.3,158.9 L30.3,170.9 M19.7,159 L20.2,175.1 M4.9,161.7 L7.4,174.7 M-3,163.9 L-8.2,175.3 M-14.2,161.9 L-16.5,171.7 M-33.6,158.1 L-37.3,172.9 M-44.9,156.1 L-41.7,168.4 M-55.9,149.4 L-56.5,163.8 M-66.4,145.6 L-77.3,151.9 M-75.2,137.2 L-84.1,150.3 M-87.4,126.1 L-94.7,134.3 M-90.2,121.1 L-102.8,130.1 M-98.9,110.4 L-107.9,109.2 M-102.9,99.3 L-111.8,104.8 M-104.7,87.4 L-118.4,88.9 M-105.7,74.1 L-113.1,74.3 M-103.5,63.5 L-115.4,69.2 M-104.7,60.1 L-111.8,56.3 M-100.6,47.9 L-111,51.8 M-99.4,41.5 L-110.9,44.9 M-96.1,34.4 L-110.1,26.4 M-93.6,24.5 L-103.3,24.3 M-91.4,21.7 L-101,17.8 M-87.5,13.4 L-99.7,9.8 M-85.2,6.9 L-94.4,-3.2 M-78.4,-1.9 L-93.2,-3 M-77.9,-3.3 L-91.1,-10.9 M-73.5,-8.5 L-86.1,-17.1 M-70.3,-17.1 L-80.2,-20.3 M-69.4,-20.8 L-80.4,-29.3 M-67.7,-24.1 L-80.5,-34.9 M-67.5,-33 L-80.1,-39.8 M-67,-41.8 L-77.3,-40.9 M-65.7,-45.1 L-73.6,-48.5 M-64.5,-55.2 L-74,-50.5 M-65.9,-56.4 L-73.7,-59.7 M-63.5,-61.9 L-77,-66.7 M-62.3,-69.1 L-72.7,-70.4 M-63.9,-71.8 L-76.7,-74.3 M-61,-76.5 L-73.4,-81.7 M-58.9,-81.4 L-73.9,-86.4 M-57.7,-83.6 L-64.9,-95.1 M-52.4,-92.3 L-63.6,-96.8 M-46.5,-96.6 L-59.5,-100.5 M-46,-97.8 L-48.9,-109.6 M-37.3,-103.4 L-47,-109.6 M-33.6,-105.7 L-32,-116.7 M-28.2,-105.5 L-34.3,-120.1 M-20.4,-109.6 L-25.3,-120.4 M-9.6,-109.7 L-14.5,-117.8 M-5.8,-110 L-10.1,-120.5" fill="none" stroke="var(--hx-chick-2)" stroke-width="1.3" stroke-linecap="round" opacity="0.5"/>
-                      <path d="M0,-114 C36,-114 66,-92 66,-60 C66,-40 78,-20 96,-4 C112,20 110,70 100,100 C86,140 40,166 0,166 C-60,166 -108,130 -108,80 C-108,40 -92,10 -78,-10 C-66,-30 -70,-60 -66,-76 C-58,-100 -34,-114 0,-114Z" fill="none" stroke="url(#hx-rimGrad)" stroke-width="2.5"/>
-                      <g id="chick-wet" opacity="0.6"><path d="M0,-114 C36,-114 66,-92 66,-60 C66,-40 78,-20 96,-4 C112,20 110,70 100,100 C86,140 40,166 0,166 C-60,166 -108,130 -108,80 C-108,40 -92,10 -78,-10 C-66,-30 -70,-60 -66,-76 C-58,-100 -34,-114 0,-114Z" fill="var(--hero-d)" opacity="0.35"/></g>
-                    </g>
-                    <path d="M62,-58 C74,-60 90,-54 97,-47 C90,-45 74,-45 62,-46 Z" fill="var(--hx-chick-1)"/>
-                    <path d="M62,-46 C76,-45 90,-44 96,-46 C90,-41 76,-38 62,-39 Z" fill="var(--hx-chick-1)" opacity="0.85"/>
-                    <g id="chick-eye-open" opacity="0"><circle cx="34" cy="-59" r="2.4" fill="var(--hx-rim)"/></g>
-                    <g id="chick-eye-closed" opacity="1"></g>
-                  </g>
-                  <!-- lower shell (front) -->
-                  <g>
-                    <use href="#hx-shell" clip-path="url(#clip-bottom)"/>
-                    <g clip-path="url(#clip-egg)"><polyline clip-path="url(#clip-bottom)" points="-160,-58 -125,-60 -100,-76 -80,-54 -58,-80 -34,-60 -10,-86 15,-60 40,-84 66,-56 92,-78 112,-58 132,-74 160,-66" fill="none" stroke="var(--accent)" stroke-opacity="0.7" stroke-width="1.5" stroke-linejoin="round" transform="translate(0 0.8)"/></g>
-                    <g fill="var(--accent)"><circle cx="-62" cy="-40" r="3"/><circle cx="58" cy="-12" r="3"/><circle cx="-18" cy="96" r="3"/><circle cx="84" cy="98" r="3"/><circle cx="-96" cy="70" r="3"/></g>
-                  </g>
-                  <!-- cap -->
-                  <g id="shell-cap" transform="translate(0 0) rotate(0 -125 -60)">
-                    <use href="#hx-shell" clip-path="url(#clip-cap)"/>
-                    <g clip-path="url(#clip-egg)"><polyline clip-path="url(#clip-cap)" points="-160,-58 -125,-60 -100,-76 -80,-54 -58,-80 -34,-60 -10,-86 15,-60 40,-84 66,-56 92,-78 112,-58 132,-74 160,-66" fill="none" stroke="var(--accent)" stroke-opacity="0.7" stroke-width="1.5" stroke-linejoin="round" transform="translate(0 -0.8)"/></g>
-                  </g>
-                  <!-- intact egg until the cap lifts, with a faint warmth inside -->
-                  <g id="shell-whole" opacity="1">
-                    <use href="#hx-shell"/>
-                    <g clip-path="url(#clip-egg)">
-                      <g id="embryo" transform="translate(0 0)">
-                        <ellipse cx="0" cy="-40" rx="70" ry="60" fill="var(--hero-e)" opacity="0.28" filter="url(#hx-soft)"/>
-                      </g>
-                      <circle id="beak-bump" cx="-8" cy="-126" r="7" fill="var(--hx-rim)" opacity="0" filter="url(#hx-glowline)"/>
-                    </g>
-                  </g>
-                  <!-- light through the crack -->
-                  <g id="cracks" clip-path="url(#clip-egg)" opacity="1" fill="none" stroke-linejoin="round" stroke-linecap="round">
-                    <polyline id="crack-l-hi" points="15,-60 -10,-86 -34,-60 -58,-80 -80,-54 -100,-76 -125,-60 -160,-58" stroke="var(--hx-crack)" stroke-width="5" stroke-opacity="0.5" filter="url(#hx-glowline)"/>
-                    <polyline id="crack-r-hi" points="15,-60 40,-84 66,-56 92,-78 112,-58 132,-74 160,-66" stroke="var(--hx-crack)" stroke-width="5" stroke-opacity="0.5" filter="url(#hx-glowline)"/>
-                    <polyline id="crack-l" points="15,-60 -10,-86 -34,-60 -58,-80 -80,-54 -100,-76 -125,-60 -160,-58" stroke="var(--hx-crack)" stroke-width="1.6"/>
-                    <polyline id="crack-r" points="15,-60 40,-84 66,-56 92,-78 112,-58 132,-74 160,-66" stroke="var(--hx-crack)" stroke-width="1.6"/>
-                  </g>
-                  <g id="pip" transform="translate(15 -60) scale(0)" opacity="1"><circle r="5" fill="var(--hx-crack)" opacity="0.7" filter="url(#hx-glowline)"/><use href="#star"/></g>
-                  <g id="shards" opacity="0" fill="var(--hero-a)" stroke="var(--accent)" stroke-opacity="0.6" stroke-width="0.8">
-                    <polygon id="shard-0" points="0,0 9,-3 7,6 -2,7" transform="translate(15 -60)"/>
-                    <polygon id="shard-1" points="0,0 6,-5 10,2 3,5" transform="translate(15 -60)"/>
-                    <polygon id="shard-2" points="0,0 5,-2 4,5 -3,4" transform="translate(15 -60)"/>
-                  </g>
-                </g>
-              </g>
-
-              <!-- vision reticle -->
-              <g id="reticle" opacity="0" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round">
-                <path d="M532,142 v-12 h12 M668,130 h12 v12 M532,238 v12 h12 M668,250 h12 v-12"/>
-              </g>
-            </svg>
-            <div class="hatch-count" id="reticle-label" style="opacity:0"><b>Chick 1 · counted</b><span>Navel closed · active · 41 g</span></div>
-            <span class="hero-caption">HX‑6 Aurora Hatcher 03 · Basket 3 · Camera 2</span>
-          </div>
-
-          <aside class="hatch-panel" aria-label="Hatcher readout">
-            <div class="hatch-status"><span class="dot" aria-hidden="true"></span><span id="hatch-status">Incubating</span></div>
-            <div class="hatch-day"><span class="lbl">Incubation</span><span class="val" id="hatch-day">Day 19.0</span></div>
-            <dl class="hatch-metrics">
-              <div><dt>Eggshell</dt><dd id="m-temp">37.6 °C</dd></div>
-              <div><dt>Humidity</dt><dd id="m-rh">58%</dd></div>
-              <div><dt>CO₂</dt><dd id="m-co2">0.45%</dd></div>
-              <div><dt>Pull in</dt><dd id="m-pull">36 h</dd></div>
-            </dl>
-            <ol class="hatch-phases" id="hatch-phases">
-              <li class="is-active" aria-current="step">Incubating</li>
-              <li>Internal pip</li>
-              <li>External pip</li>
-              <li>Zipping</li>
-              <li>Hatching</li>
-              <li>Hatched</li>
-            </ol>
-            <p class="hatch-hint">Scroll to advance</p>
-          </aside>
-        </div>
-      </div>
-
-      <div class="col prose reveal" style="margin-top:32px">
-        <p>Every hatch is logged with its time, so the pull happens when 90% of the basket is dry rather than at a fixed hour. Chicks that hatch early wait in warmth and dim light; chicks that hatch late are not rushed.</p>
       </div>
     </section>
 

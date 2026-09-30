@@ -593,64 +593,54 @@ figcaption.cap {
   :root:not([data-theme="light"]) .hatch { --hx-chick-1: #5a3810; --hx-chick-2: #8a5418; --hx-rim: #f6c77c; --hx-crack: #ffe2a8; }
 }
 :root[data-theme="dark"] .hatch { --hx-chick-1: #5a3810; --hx-chick-2: #8a5418; --hx-rim: #f6c77c; --hx-crack: #ffe2a8; }
-.hatch-scroller { position: relative; height: 330vh; margin-top: 8px; }
-.hatch-stage {
+/* Hero stage: pins under the nav (or centres when there is room) while its scroller passes. */
+.hero-scroller { position: relative; height: 280vh; }
+@media (min-width: 768px) { .hero-scroller { height: 320vh; } }
+.hero-stage {
   position: sticky;
-  /* Pinned below the nav, or centred in the viewport when there is room (the script sets --stage-h). */
-  top: max(calc(var(--nav-h) + 16px + env(safe-area-inset-top, 0px)), calc((100vh - var(--stage-h, 520px)) / 2));
-  display: grid; gap: 12px;
-  grid-template-columns: minmax(0, 1fr);
-  grid-template-rows: auto auto;
+  top: max(calc(var(--nav-h) + 12px + env(safe-area-inset-top, 0px)), calc((100vh - var(--stage-h, 520px)) / 2));
 }
-@media (min-width: 900px) {
-  .hatch-stage { grid-template-columns: minmax(0, 2.1fr) minmax(280px, 1fr); grid-template-rows: auto; }
-}
-.hatch-scroller.is-static { height: auto; }
-.hatch-stage.is-static { position: static; }
-.hatch-scene {
-  min-height: 0; min-width: 0;
-  aspect-ratio: 1200 / 760;
-  position: relative; overflow: hidden;
-  border-radius: 24px;
-  background: var(--hero-d);
-}
-.hatch-scene svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
-.hatch-scene .hatch-bg { will-change: transform; } /* static layer: scroll updates never repaint it */
-.hatch-scene .hero-caption { z-index: 2; }
+.hero-stage .hatch-bg { will-change: transform; } /* static layer: scroll updates never repaint it */
+.hero-stage .hero-caption { z-index: 2; }
+.hero-scroller.is-static { height: auto; }
+.hero-stage.is-static { position: relative; }
 .hatch-count {
-  position: absolute; left: 57%; top: 14%; z-index: 2;
+  position: absolute; left: calc(50% + 56px); top: 10%; z-index: 2;
   display: grid; gap: 2px; font-size: 13px; line-height: 1.3; color: var(--ink-2);
   transition: opacity 0.2s;
 }
 .hatch-count b { font-weight: 600; color: var(--ink); }
-@media (max-width: 899px) { .hatch-count { font-size: 11px; } }
-.hatch-panel {
-  min-width: 0;
-  background: var(--bg-elev); border: 1px solid var(--hair); border-radius: var(--radius);
-  padding: 18px 20px; display: grid; gap: 14px; align-content: start;
+.hero-readout {
+  position: absolute; right: 16px; bottom: 16px; z-index: 2;
+  min-width: 212px;
+  display: grid; gap: 8px;
+  padding: 12px 14px;
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--bg) 72%, transparent);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
 }
-.hatch-status { display: inline-flex; align-items: center; gap: 9px; font-size: 12.5px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink-2); }
+@media (max-width: 639px) {
+  .hero-stage { aspect-ratio: 1 / 1; }
+  .hero-stage .hero-caption { display: none; }
+  .hero-readout { right: 10px; bottom: 10px; left: 10px; min-width: 0; padding: 10px 12px; gap: 6px; }
+  .hero-readout .hatch-metrics { display: none; }
+  .hero-readout .hatch-hint { display: none; }
+  .hatch-count { font-size: 11px; left: calc(50% + 34px); top: 8%; }
+}
+.hatch-status { display: inline-flex; align-items: center; gap: 9px; font-size: 11.5px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink-2); }
 .hatch-status .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); flex: 0 0 auto; }
-.hatch-day .lbl { display: block; font-size: 13px; color: var(--ink-2); }
-.hatch-day .val { display: block; font-size: clamp(1.75rem, 3vw, 2.5rem); font-weight: 600; letter-spacing: -0.03em; line-height: 1.05; font-variant-numeric: tabular-nums; }
-.hatch-metrics { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 16px; border-top: 1px solid var(--hair); padding-top: 14px; }
-.hatch-metrics div { display: grid; gap: 2px; }
-.hatch-metrics dt { font-size: 12.5px; color: var(--ink-2); }
+.hatch-day .val { display: block; font-size: 1.5rem; font-weight: 600; letter-spacing: -0.03em; line-height: 1.05; font-variant-numeric: tabular-nums; }
+.hatch-metrics { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px 14px; border-top: 1px solid var(--hair); padding-top: 8px; }
+.hatch-metrics div { display: flex; justify-content: space-between; gap: 8px; font-size: 12px; }
+.hatch-metrics dt { color: var(--ink-2); }
 .hatch-metrics dd { margin: 0; font-weight: 600; font-variant-numeric: tabular-nums; }
-.hatch-phases { list-style: none; display: grid; gap: 7px; border-top: 1px solid var(--hair); padding-top: 14px; }
-.hatch-phases li { display: flex; align-items: center; gap: 10px; font-size: 13.5px; color: var(--ink-3); }
-.hatch-phases li::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--hair-2); flex: 0 0 auto; }
-.hatch-phases li.is-done { color: var(--ink-2); }
+/* phases as a row of dots; the status line names the active one */
+.hatch-phases { list-style: none; display: flex; gap: 6px; align-items: center; }
+.hatch-phases li { font-size: 0; }
+.hatch-phases li::before { content: ""; display: block; width: 7px; height: 7px; border-radius: 50%; background: var(--hair-2); }
 .hatch-phases li.is-done::before { background: var(--sage); }
-.hatch-phases li.is-active { color: var(--ink); font-weight: 600; }
 .hatch-phases li.is-active::before { background: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
-.hatch-hint { font-size: 12px; color: var(--ink-3); }
-@media (max-width: 899px) {
-  .hatch-panel { padding: 14px 16px; gap: 10px; }
-  .hatch-phases, .hatch-hint { display: none; }
-  .hatch-metrics { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-  .hatch-day .val { font-size: 1.5rem; }
-}
+.hatch-hint { font-size: 11px; color: var(--ink-3); }
 
 /* ---------- Checklist ---------- */
 .checks { display: grid; gap: 12px; grid-template-columns: 1fr; margin-top: 40px; list-style: none; }
