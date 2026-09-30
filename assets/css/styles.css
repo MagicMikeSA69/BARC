@@ -587,18 +587,24 @@ figcaption.cap {
 
 /* ---------- Hatch sequence (scroll-driven, see assets/js/hatch.js) ---------- */
 .hatch {
-  --shell: #f3e6d0; --shell-line: #c9b28d; --shell-edge: #e0cba6; --crack: #8a6a3a;
-  --chick: #f6c945; --chick-2: #e9b52e; --chick-line: #b98a1c; --beak: #e8862a;
+  --shell-hi: #fbf4e6; --shell: #ecdcbf; --shell-lo: #c4a67c; --shell-edge: #e8d6b6; --shell-in: #d9c4a0; --shell-in-lo: #a8865c; --crack: #6b4e2a;
+  --chick-hi: #fde47e; --chick: #f4c542; --chick-lo: #cf8d1a; --beak: #ec8a2c; --beak-lo: #b3601a;
+  --metal-1: #ece9e3; --metal-2: #d9d4cb; --metal-3: #c2bcb1; --metal-line: #a39c90;
+  --basket: #bcc3c9; --basket-lo: #8b939b; --window: #f8f3eb; --window-lo: #e4dacb;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) .hatch {
-    --shell: #d9c7a8; --shell-line: #8d7a5a; --shell-edge: #b9a582; --crack: #5a4426;
-    --chick: #e0b63a; --chick-2: #c99a26; --chick-line: #8a6612; --beak: #d5762a;
+    --shell-hi: #e9dbc0; --shell: #cdb891; --shell-lo: #866c48; --shell-edge: #c0a988; --shell-in: #a48c68; --shell-in-lo: #62492e; --crack: #33230f;
+    --chick-hi: #f2d56e; --chick: #ddb034; --chick-lo: #a06c12; --beak: #d67a26; --beak-lo: #7f4410;
+    --metal-1: #3d3a35; --metal-2: #2e2b27; --metal-3: #22201c; --metal-line: #4e4942;
+    --basket: #4c545c; --basket-lo: #2c3238; --window: #2b2620; --window-lo: #1c1916;
   }
 }
 :root[data-theme="dark"] .hatch {
-  --shell: #d9c7a8; --shell-line: #8d7a5a; --shell-edge: #b9a582; --crack: #5a4426;
-  --chick: #e0b63a; --chick-2: #c99a26; --chick-line: #8a6612; --beak: #d5762a;
+  --shell-hi: #e9dbc0; --shell: #cdb891; --shell-lo: #866c48; --shell-edge: #c0a988; --shell-in: #a48c68; --shell-in-lo: #62492e; --crack: #33230f;
+  --chick-hi: #f2d56e; --chick: #ddb034; --chick-lo: #a06c12; --beak: #d67a26; --beak-lo: #7f4410;
+  --metal-1: #3d3a35; --metal-2: #2e2b27; --metal-3: #22201c; --metal-line: #4e4942;
+  --basket: #4c545c; --basket-lo: #2c3238; --window: #2b2620; --window-lo: #1c1916;
 }
 .hatch-scroller { position: relative; height: 330vh; margin-top: 8px; }
 .hatch-stage {

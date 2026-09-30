@@ -660,113 +660,251 @@
           <div class="hatch-scene">
             <svg viewBox="0 0 1200 760" role="img" aria-labelledby="hatch-title hatch-desc" preserveAspectRatio="xMidYMid meet">
               <title id="hatch-title">An egg hatching inside the HX‑6 Aurora hatcher</title>
-              <desc id="hatch-desc">A view through the hatcher window at one egg in a basket. As the page scrolls the egg rocks, pips, cracks around its top, the cap lifts and a chick emerges, and the camera counts it.</desc>
+              <desc id="hatch-desc">A view through the hatcher window at one egg in a plastic basket. As the page scrolls the egg rocks, pips, cracks around its top, the cap lifts, a wet chick emerges and dries, and the camera counts it.</desc>
               <defs>
                 <path id="egg-shape" d="M0,-190 C100,-190 150,-60 150,40 C150,150 80,200 0,200 C-80,200 -150,150 -150,40 C-150,-60 -100,-190 0,-190Z"/>
                 <clipPath id="clip-egg"><use href="#egg-shape"/></clipPath>
                 <clipPath id="clip-cap"><polygon points="-160,-58 -125,-60 -100,-76 -80,-54 -58,-80 -34,-60 -10,-86 15,-60 40,-84 66,-56 92,-78 112,-58 132,-74 160,-66 160,-400 -160,-400"/></clipPath>
                 <clipPath id="clip-bottom"><polygon points="-160,-58 -125,-60 -100,-76 -80,-54 -58,-80 -34,-60 -10,-86 15,-60 40,-84 66,-56 92,-78 112,-58 132,-74 160,-66 160,400 -160,400"/></clipPath>
-                <g id="spk" fill="var(--shell-line)" opacity="0.35">
-                  <circle cx="-62" cy="-118" r="2.4"/><circle cx="-24" cy="-140" r="1.8"/><circle cx="48" cy="-126" r="2.2"/><circle cx="84" cy="-40" r="2"/>
-                  <circle cx="-96" cy="10" r="2.4"/><circle cx="-40" cy="60" r="1.8"/><circle cx="30" cy="30" r="2.2"/><circle cx="96" cy="70" r="2"/>
-                  <circle cx="-70" cy="120" r="2"/><circle cx="20" cy="140" r="2.4"/><circle cx="70" cy="150" r="1.8"/><circle cx="-10" cy="-20" r="1.6"/>
+                <clipPath id="clip-window"><rect x="90" y="150" width="1020" height="520" rx="18"/></clipPath>
+
+                <radialGradient id="shellGrad" cx="0.38" cy="0.26" r="0.82" fx="0.3" fy="0.2">
+                  <stop offset="0" style="stop-color: var(--shell-hi)"/>
+                  <stop offset="0.5" style="stop-color: var(--shell)"/>
+                  <stop offset="1" style="stop-color: var(--shell-lo)"/>
+                </radialGradient>
+                <radialGradient id="shellIn" cx="0.5" cy="1" r="0.9">
+                  <stop offset="0" style="stop-color: var(--shell-in-lo)"/>
+                  <stop offset="1" style="stop-color: var(--shell-in)"/>
+                </radialGradient>
+                <radialGradient id="chickGrad" cx="0.4" cy="0.3" r="0.82">
+                  <stop offset="0" style="stop-color: var(--chick-hi)"/>
+                  <stop offset="0.55" style="stop-color: var(--chick)"/>
+                  <stop offset="1" style="stop-color: var(--chick-lo)"/>
+                </radialGradient>
+                <linearGradient id="metal" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" style="stop-color: var(--metal-1)"/>
+                  <stop offset="0.5" style="stop-color: var(--metal-2)"/>
+                  <stop offset="1" style="stop-color: var(--metal-3)"/>
+                </linearGradient>
+                <linearGradient id="metalBand" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0" style="stop-color: var(--metal-3)"/>
+                  <stop offset="0.5" style="stop-color: var(--metal-1)"/>
+                  <stop offset="1" style="stop-color: var(--metal-3)"/>
+                </linearGradient>
+                <linearGradient id="windowBg" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" style="stop-color: var(--window)"/>
+                  <stop offset="1" style="stop-color: var(--window-lo)"/>
+                </linearGradient>
+                <linearGradient id="lampGlow" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" style="stop-color: var(--accent)" stop-opacity="0.38"/>
+                  <stop offset="1" style="stop-color: var(--accent)" stop-opacity="0"/>
+                </linearGradient>
+                <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#ffffff" stop-opacity="0.3"/>
+                  <stop offset="0.32" stop-color="#ffffff" stop-opacity="0"/>
+                  <stop offset="0.72" stop-color="#ffffff" stop-opacity="0"/>
+                  <stop offset="1" stop-color="#ffffff" stop-opacity="0.1"/>
+                </linearGradient>
+                <linearGradient id="basketGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" style="stop-color: var(--basket)"/>
+                  <stop offset="1" style="stop-color: var(--basket-lo)"/>
+                </linearGradient>
+                <pattern id="lattice" width="26" height="26" patternUnits="userSpaceOnUse">
+                  <rect x="5" y="5" width="16" height="16" rx="4" fill="var(--basket-lo)" opacity="0.75"/>
+                </pattern>
+                <pattern id="brushed" width="6" height="3" patternUnits="userSpaceOnUse">
+                  <rect width="6" height="1" fill="#ffffff" opacity="0.07"/>
+                  <rect y="2" width="6" height="1" fill="#000000" opacity="0.06"/>
+                </pattern>
+                <filter id="soft" x="-40%" y="-60%" width="180%" height="220%"><feGaussianBlur stdDeviation="9"/></filter>
+                <filter id="dof" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="1.6"/></filter>
+                <filter id="grain" x="0" y="0" width="100%" height="100%">
+                  <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="7" result="n"/>
+                  <feColorMatrix in="n" type="matrix" values="0 0 0 0 0.42  0 0 0 0 0.3  0 0 0 0 0.14  0 0 0 0.26 0"/>
+                </filter>
+                <filter id="fluff" x="-25%" y="-25%" width="150%" height="150%">
+                  <feTurbulence type="fractalNoise" baseFrequency="0.07" numOctaves="3" seed="4" result="n"/>
+                  <feDisplacementMap id="fluff-map" in="SourceGraphic" in2="n" scale="2.5" xChannelSelector="R" yChannelSelector="G"/>
+                </filter>
+                <g id="spk" fill="var(--shell-lo)">
+                  <circle cx="-62" cy="-118" r="2.6" opacity="0.45"/><circle cx="-24" cy="-140" r="1.7" opacity="0.35"/><circle cx="48" cy="-126" r="2.3" opacity="0.4"/><circle cx="84" cy="-40" r="2" opacity="0.35"/>
+                  <circle cx="-96" cy="10" r="2.6" opacity="0.4"/><circle cx="-40" cy="60" r="1.6" opacity="0.3"/><circle cx="30" cy="30" r="2.4" opacity="0.4"/><circle cx="96" cy="70" r="2" opacity="0.35"/>
+                  <circle cx="-70" cy="120" r="2" opacity="0.35"/><circle cx="20" cy="140" r="2.6" opacity="0.4"/><circle cx="70" cy="150" r="1.7" opacity="0.3"/><circle cx="-10" cy="-20" r="1.4" opacity="0.3"/>
+                  <circle cx="-118" cy="70" r="1.6" opacity="0.3"/><circle cx="112" cy="20" r="1.5" opacity="0.3"/><circle cx="6" cy="90" r="1.3" opacity="0.25"/><circle cx="-52" cy="-40" r="1.2" opacity="0.25"/>
+                  <circle cx="58" cy="-90" r="1.4" opacity="0.3"/><circle cx="-88" cy="-70" r="1.3" opacity="0.28"/><circle cx="40" cy="176" r="1.6" opacity="0.3"/><circle cx="-30" cy="172" r="1.4" opacity="0.28"/>
                 </g>
                 <g id="star" fill="none" stroke="var(--crack)" stroke-width="2.4" stroke-linecap="round">
                   <path d="M0,0 l-14,-9 M0,0 l12,-12 M0,0 l16,4 M0,0 l-6,14 M0,0 l7,12 M0,0 l-16,6"/>
+                  <path d="M0,0 l-14,-9 M0,0 l12,-12 M0,0 l16,4" stroke="#ffffff" stroke-opacity="0.5" stroke-width="1" transform="translate(1 1)"/>
                 </g>
-                <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0" stop-color="#ffffff" stop-opacity="0.22"/>
-                  <stop offset="0.45" stop-color="#ffffff" stop-opacity="0"/>
-                </linearGradient>
+                <g id="shell-egg">
+                  <use href="#egg-shape" fill="url(#shellGrad)"/>
+                  <rect x="-160" y="-200" width="320" height="410" fill="#ffffff" filter="url(#grain)" clip-path="url(#clip-egg)"/>
+                  <use href="#spk"/>
+                  <use href="#egg-shape" fill="none" stroke="var(--shell-lo)" stroke-opacity="0.55" stroke-width="1.2"/>
+                </g>
               </defs>
 
-              <!-- cabinet -->
-              <rect x="40" y="30" width="1120" height="700" rx="26" fill="var(--bg-2)" stroke="var(--hair-2)"/>
-              <path d="M40,120 H1160" stroke="var(--hair-2)"/>
-              <g fill="none" stroke="var(--ink-3)" stroke-width="1.4">
-                <circle cx="300" cy="75" r="20"/><path d="M300,55v40 M280,75h40"/>
-                <circle cx="600" cy="75" r="20"/><path d="M600,55v40 M580,75h40"/>
-                <circle cx="900" cy="75" r="20"/><path d="M900,55v40 M880,75h40"/>
+              <!-- cabinet: brushed steel -->
+              <rect x="40" y="30" width="1120" height="700" rx="26" fill="url(#metal)"/>
+              <rect x="40" y="30" width="1120" height="700" rx="26" fill="url(#brushed)"/>
+              <rect x="40" y="30" width="1120" height="700" rx="26" fill="none" stroke="var(--metal-line)" stroke-width="1.5"/>
+              <rect x="40" y="30" width="1120" height="92" rx="26" fill="url(#metalBand)" opacity="0.7"/>
+              <path d="M40,122 H1160" stroke="var(--metal-line)" stroke-width="1.5"/>
+              <path d="M40,124 H1160" stroke="#ffffff" stroke-opacity="0.35"/>
+              <!-- fans behind grilles -->
+              <g fill="none" stroke="var(--metal-line)" stroke-width="1.6">
+                <g><circle cx="300" cy="76" r="24" fill="var(--metal-3)"/><path d="M300,52v48 M276,76h48 M283,59l34,34 M317,59l-34,34"/><circle cx="300" cy="76" r="5" fill="var(--metal-line)"/></g>
+                <g><circle cx="600" cy="76" r="24" fill="var(--metal-3)"/><path d="M600,52v48 M576,76h48 M583,59l34,34 M617,59l-34,34"/><circle cx="600" cy="76" r="5" fill="var(--metal-line)"/></g>
+                <g><circle cx="900" cy="76" r="24" fill="var(--metal-3)"/><path d="M900,52v48 M876,76h48 M883,59l34,34 M917,59l-34,34"/><circle cx="900" cy="76" r="5" fill="var(--metal-line)"/></g>
               </g>
-              <g stroke="var(--hair-2)" stroke-width="2" stroke-linecap="round">
-                <path d="M110,66h60 M110,84h60 M1030,66h60 M1030,84h60"/>
+              <g stroke="var(--metal-line)" stroke-width="2" stroke-linecap="round" opacity="0.8">
+                <path d="M110,62h60 M110,76h60 M110,90h60 M1030,62h60 M1030,76h60 M1030,90h60"/>
               </g>
-              <text x="1130" y="704" text-anchor="end" font-size="14" fill="var(--ink-3)">HX‑6 Aurora Hatcher · Basket 3 · Camera 2</text>
-
-              <!-- window -->
-              <rect x="90" y="150" width="1020" height="520" rx="18" fill="var(--bg-elev)" stroke="var(--hair)"/>
-              <rect id="hatch-light" x="90" y="150" width="1020" height="520" rx="18" fill="var(--accent)" opacity="0"/>
-              <g fill="none" stroke="var(--accent)" stroke-opacity="0.35" stroke-width="1.5" stroke-dasharray="4 8">
-                <path d="M160,190 v380 M1040,190 v380"/>
+              <!-- screws -->
+              <g fill="var(--metal-3)" stroke="var(--metal-line)" stroke-width="1">
+                <circle cx="66" cy="56" r="5"/><circle cx="1134" cy="56" r="5"/><circle cx="66" cy="704" r="5"/><circle cx="1134" cy="704" r="5"/>
+                <path d="M63,53l6,6 M1131,53l6,6 M63,701l6,6 M1131,701l6,6" stroke="var(--metal-line)"/>
               </g>
+              <!-- name plate -->
+              <rect x="912" y="690" width="222" height="26" rx="5" fill="var(--metal-3)" stroke="var(--metal-line)" stroke-width="0.8"/>
+              <text x="1023" y="707" text-anchor="middle" font-size="12.5" letter-spacing="0.06em" fill="var(--ink-2)">IME · HX‑6 AURORA · HATCHER 03</text>
 
-              <!-- basket -->
-              <rect x="150" y="560" width="900" height="70" rx="10" fill="var(--bg-3)" stroke="var(--hair-2)"/>
-              <g stroke="var(--hair-2)" stroke-width="1">
-                <path d="M150,595 H1050"/>
-                <path d="M200,560v70 M250,560v70 M300,560v70 M350,560v70 M400,560v70 M450,560v70 M500,560v70 M550,560v70 M600,560v70 M650,560v70 M700,560v70 M750,560v70 M800,560v70 M850,560v70 M900,560v70 M950,560v70 M1000,560v70"/>
-              </g>
+              <!-- door frame bevel -->
+              <rect x="82" y="142" width="1036" height="536" rx="24" fill="none" stroke="var(--metal-3)" stroke-width="10"/>
+              <rect x="82" y="142" width="1036" height="536" rx="24" fill="none" stroke="var(--metal-line)" stroke-width="1"/>
+              <rect x="94" y="154" width="1012" height="512" rx="16" fill="none" stroke="#000000" stroke-opacity="0.18" stroke-width="2"/>
 
-              <!-- neighbouring eggs -->
-              <g fill="var(--shell)" stroke="var(--shell-line)" stroke-width="1.6" opacity="0.9">
-                <use href="#egg-shape" transform="translate(240 436) scale(0.62)"/>
-                <use href="#egg-shape" transform="translate(345 436) scale(0.62)"/>
-                <use href="#egg-shape" transform="translate(855 436) scale(0.62)"/>
-                <use href="#egg-shape" transform="translate(960 436) scale(0.62)"/>
-              </g>
-              <g id="bg-pips" opacity="0">
-                <use href="#star" transform="translate(352 372) scale(0.7)"/>
-                <use href="#star" transform="translate(846 380) scale(0.6)"/>
-              </g>
+              <!-- window interior -->
+              <g clip-path="url(#clip-window)">
+                <rect x="90" y="150" width="1020" height="520" fill="url(#windowBg)"/>
+                <!-- back wall seams -->
+                <path d="M90,470 H1110 M300,150 V470 M900,150 V470" stroke="#000000" stroke-opacity="0.06"/>
+                <!-- lamp strip and glow -->
+                <rect x="240" y="150" width="720" height="8" rx="4" fill="var(--accent-soft)"/>
+                <rect x="240" y="150" width="720" height="8" rx="4" fill="var(--accent)" opacity="0.6"/>
+                <rect x="140" y="158" width="920" height="260" fill="url(#lampGlow)"/>
+                <rect id="hatch-light" x="90" y="150" width="1020" height="520" fill="var(--accent)" opacity="0"/>
+                <!-- air movement -->
+                <g fill="none" stroke="var(--accent)" stroke-opacity="0.28" stroke-width="1.4" stroke-dasharray="3 9">
+                  <path d="M170,200 v360 M1030,200 v360"/>
+                </g>
 
-              <!-- IR probe -->
-              <rect x="1068" y="316" width="42" height="26" rx="6" fill="var(--bg-3)" stroke="var(--hair-2)"/>
-              <path d="M1068,329 H752" stroke="var(--accent)" stroke-opacity="0.5" stroke-width="1.4" stroke-dasharray="3 6"/>
-              <circle id="probe-dot" cx="748" cy="329" r="4.5" fill="var(--accent)"/>
+                <!-- basket shadow on back wall / floor -->
+                <ellipse cx="600" cy="640" rx="480" ry="26" fill="#000000" opacity="0.18" filter="url(#soft)"/>
+                <!-- basket -->
+                <rect x="150" y="556" width="900" height="82" rx="12" fill="url(#basketGrad)"/>
+                <rect x="150" y="556" width="900" height="82" rx="12" fill="url(#lattice)"/>
+                <rect x="150" y="556" width="900" height="82" rx="12" fill="none" stroke="var(--basket-lo)" stroke-width="1.5"/>
+                <rect x="150" y="556" width="900" height="14" rx="7" fill="#ffffff" opacity="0.25"/>
+                <path d="M162,570 H1038" stroke="#000000" stroke-opacity="0.18"/>
 
-              <!-- camera -->
-              <rect x="108" y="158" width="40" height="22" rx="5" fill="var(--bg-3)" stroke="var(--hair-2)"/>
-              <circle cx="128" cy="169" r="5.5" fill="var(--ink-2)"/>
+                <!-- egg contact shadows -->
+                <g fill="#000000" filter="url(#soft)">
+                  <ellipse cx="240" cy="564" rx="60" ry="9" opacity="0.28"/>
+                  <ellipse cx="345" cy="564" rx="60" ry="9" opacity="0.28"/>
+                  <ellipse cx="855" cy="564" rx="60" ry="9" opacity="0.28"/>
+                  <ellipse cx="960" cy="564" rx="60" ry="9" opacity="0.28"/>
+                  <ellipse cx="600" cy="566" rx="118" ry="14" opacity="0.38"/>
+                </g>
 
-              <!-- the egg -->
-              <g transform="translate(600 360)">
-                <g id="egg-rock">
-                  <!-- chick (behind the shell) -->
-                  <g id="chick" transform="translate(0 0)">
-                    <ellipse cx="0" cy="70" rx="100" ry="88" fill="var(--chick)" stroke="var(--chick-line)" stroke-width="1.5"/>
-                    <ellipse cx="-58" cy="86" rx="44" ry="24" transform="rotate(-24 -58 86)" fill="var(--chick-2)" stroke="var(--chick-line)" stroke-width="1.2"/>
-                    <circle cx="0" cy="-48" r="64" fill="var(--chick)" stroke="var(--chick-line)" stroke-width="1.5"/>
-                    <path d="M-20,-108 c6,-18 14,-22 20,-12 M2,-112 c4,-16 12,-20 18,-10 M-40,-98 c2,-14 10,-18 16,-10" fill="none" stroke="var(--chick-line)" stroke-width="2" stroke-linecap="round"/>
-                    <circle cx="40" cy="-34" r="10" fill="var(--beak)" opacity="0.22"/>
-                    <path d="M54,-52 l28,10 l-28,10 z" fill="var(--beak)" stroke="var(--chick-line)" stroke-width="1"/>
-                    <g id="chick-eye-open" opacity="0"><circle cx="26" cy="-60" r="6.5" fill="var(--ink)"/><circle cx="28.5" cy="-62.5" r="2" fill="#fff"/></g>
-                    <path id="chick-eye-closed" d="M18,-60 q8,7 16,0" fill="none" stroke="var(--ink)" stroke-width="2.4" stroke-linecap="round" opacity="1"/>
-                  </g>
-                  <!-- lower shell (front) -->
-                  <use href="#egg-shape" clip-path="url(#clip-bottom)" fill="var(--shell)" stroke="var(--shell-line)" stroke-width="1.8"/>
-                  <g clip-path="url(#clip-egg)"><use href="#spk" clip-path="url(#clip-bottom)"/></g>
-                  <g clip-path="url(#clip-egg)">
-                    <polyline id="rim-bottom" clip-path="url(#clip-bottom)" points="-160,-58 -125,-60 -100,-76 -80,-54 -58,-80 -34,-60 -10,-86 15,-60 40,-84 66,-56 92,-78 112,-58 132,-74 160,-66" fill="none" stroke="var(--shell-edge)" stroke-width="7" stroke-linejoin="round"/>
-                  </g>
-                  <!-- cap -->
-                  <g id="shell-cap" transform="translate(0 0) rotate(0 -125 -60)">
-                    <use href="#egg-shape" clip-path="url(#clip-cap)" fill="var(--shell)" stroke="var(--shell-line)" stroke-width="1.8"/>
-                    <g clip-path="url(#clip-egg)"><use href="#spk" clip-path="url(#clip-cap)"/></g>
+                <!-- neighbouring eggs, slightly out of focus -->
+                <g filter="url(#dof)">
+                  <use href="#shell-egg" transform="translate(240 436) scale(0.62) rotate(-6)"/>
+                  <use href="#shell-egg" transform="translate(960 436) scale(0.62) rotate(5)"/>
+                </g>
+                <use href="#shell-egg" transform="translate(345 436) scale(0.63) rotate(3)"/>
+                <use href="#shell-egg" transform="translate(855 436) scale(0.63) rotate(-4)"/>
+                <g id="bg-pips" opacity="0">
+                  <use href="#star" transform="translate(352 372) scale(0.7)"/>
+                  <use href="#star" transform="translate(846 380) scale(0.6)"/>
+                </g>
+
+                <!-- IR probe -->
+                <rect x="1068" y="316" width="42" height="26" rx="6" fill="var(--metal-3)" stroke="var(--metal-line)"/>
+                <path d="M1068,329 H752" stroke="var(--accent)" stroke-opacity="0.5" stroke-width="1.4" stroke-dasharray="3 6"/>
+                <circle id="probe-dot" cx="748" cy="329" r="4.5" fill="var(--accent)"/>
+
+                <!-- camera -->
+                <rect x="108" y="158" width="44" height="26" rx="6" fill="var(--metal-3)" stroke="var(--metal-line)"/>
+                <circle cx="130" cy="171" r="7" fill="var(--ink)"/><circle cx="132" cy="169" r="2" fill="#ffffff" opacity="0.7"/>
+                <circle cx="160" cy="164" r="3" fill="#e0443a" class="pulse"/>
+                <text x="168" y="168" font-size="11" fill="var(--ink-2)">CAM 2</text>
+
+                <!-- the egg -->
+                <g transform="translate(600 360)">
+                  <g id="egg-rock">
+                    <!-- shell interior seen behind the chick once open -->
                     <g clip-path="url(#clip-egg)">
-                      <polyline id="rim-cap" clip-path="url(#clip-cap)" points="-160,-58 -125,-60 -100,-76 -80,-54 -58,-80 -34,-60 -10,-86 15,-60 40,-84 66,-56 92,-78 112,-58 132,-74 160,-66" fill="none" stroke="var(--shell-edge)" stroke-width="7" stroke-linejoin="round"/>
+                      <polygon points="-150,-40 -122,-84 -100,-98 -80,-82 -58,-104 -34,-86 -10,-110 15,-86 40,-108 66,-82 92,-102 112,-84 132,-96 150,-40 150,60 -150,60" fill="url(#shellIn)"/>
+                      <polyline points="-122,-84 -100,-98 -80,-82 -58,-104 -34,-86 -10,-110 15,-86 40,-108 66,-82 92,-102 112,-84 132,-96" fill="none" stroke="#ffffff" stroke-opacity="0.55" stroke-width="2"/>
+                    </g>
+                    <!-- chick (behind the front shell) -->
+                    <g id="chick" transform="translate(0 0)">
+                      <g filter="url(#fluff)">
+                        <ellipse cx="0" cy="72" rx="104" ry="92" fill="url(#chickGrad)"/>
+                        <path d="M-28,58 C-92,36 -124,110 -72,142 C-42,154 -18,120 -28,58Z" fill="url(#chickGrad)"/>
+                        <circle cx="4" cy="-46" r="66" fill="url(#chickGrad)"/>
+                      </g>
+                      <ellipse cx="4" cy="22" rx="66" ry="18" fill="var(--chick-lo)" opacity="0.28" filter="url(#soft)"/>
+                      <g id="chick-wet" fill="none" stroke="var(--chick-lo)" stroke-width="2.2" stroke-linecap="round" opacity="0.6">
+                        <path d="M-30,-82 q-6,14 -2,28 M-8,-96 q-4,16 0,30 M20,-94 q4,16 0,30 M42,-74 q6,12 4,26 M-62,42 q-8,20 -2,40 M62,52 q8,20 2,40 M-22,112 q-2,18 4,30 M26,118 q2,18 -4,30 M-48,-62 q-8,10 -6,24 M-84,90 q-4,16 2,28"/>
+                      </g>
+                      <path d="M-18,-108 c6,-18 14,-22 20,-12 M4,-112 c4,-16 12,-20 18,-10 M-40,-98 c2,-14 10,-18 16,-10" fill="none" stroke="var(--chick-lo)" stroke-width="1.8" stroke-linecap="round" opacity="0.8"/>
+                      <circle cx="42" cy="-30" r="11" fill="var(--beak)" opacity="0.18"/>
+                      <path d="M62,-56 L94,-45 L62,-34 Z" fill="var(--beak)"/>
+                      <path d="M62,-45 L94,-45" stroke="var(--beak-lo)" stroke-width="1.2"/>
+                      <circle cx="70" cy="-50" r="1.5" fill="var(--beak-lo)"/>
+                      <circle cx="92" cy="-45" r="1.8" fill="#ffffff"/>
+                      <g id="chick-eye-open" opacity="0">
+                        <ellipse cx="30" cy="-58" rx="7.5" ry="8.5" fill="var(--ink)"/>
+                        <circle cx="33" cy="-61" r="2.6" fill="#ffffff"/>
+                        <path d="M21,-67 q9,-7 18,-2" fill="none" stroke="var(--chick-lo)" stroke-width="1.6"/>
+                      </g>
+                      <path id="chick-eye-closed" d="M21,-58 q9,7 18,0" fill="none" stroke="var(--ink)" stroke-width="2.6" stroke-linecap="round" opacity="1"/>
+                    </g>
+
+                    <!-- lower shell (front), with rim thickness -->
+                    <g>
+                      <use href="#shell-egg" clip-path="url(#clip-bottom)"/>
+                      <g clip-path="url(#clip-egg)">
+                        <polyline clip-path="url(#clip-bottom)" points="-160,-58 -125,-60 -100,-76 -80,-54 -58,-80 -34,-60 -10,-86 15,-60 40,-84 66,-56 92,-78 112,-58 132,-74 160,-66" fill="none" stroke="var(--shell-edge)" stroke-width="8" stroke-linejoin="round"/>
+                        <polyline clip-path="url(#clip-bottom)" points="-160,-58 -125,-60 -100,-76 -80,-54 -58,-80 -34,-60 -10,-86 15,-60 40,-84 66,-56 92,-78 112,-58 132,-74 160,-66" fill="none" stroke="var(--shell-in-lo)" stroke-opacity="0.55" stroke-width="2" stroke-linejoin="round" transform="translate(0 3.5)"/>
+                      </g>
+                    </g>
+                    <!-- cap -->
+                    <g id="shell-cap" transform="translate(0 0) rotate(0 -125 -60)">
+                      <use href="#shell-egg" clip-path="url(#clip-cap)"/>
+                      <g clip-path="url(#clip-egg)">
+                        <polyline clip-path="url(#clip-cap)" points="-160,-58 -125,-60 -100,-76 -80,-54 -58,-80 -34,-60 -10,-86 15,-60 40,-84 66,-56 92,-78 112,-58 132,-74 160,-66" fill="none" stroke="var(--shell-edge)" stroke-width="8" stroke-linejoin="round"/>
+                        <polyline clip-path="url(#clip-cap)" points="-160,-58 -125,-60 -100,-76 -80,-54 -58,-80 -34,-60 -10,-86 15,-60 40,-84 66,-56 92,-78 112,-58 132,-74 160,-66" fill="none" stroke="var(--shell-in-lo)" stroke-opacity="0.55" stroke-width="2" stroke-linejoin="round" transform="translate(0 -3.5)"/>
+                      </g>
+                    </g>
+                    <!-- intact shell until the cap lifts -->
+                    <g id="shell-whole" opacity="1"><use href="#shell-egg"/></g>
+                    <!-- crack, drawn outward from the pip; a light chipped edge beside a dark fracture -->
+                    <g id="cracks" clip-path="url(#clip-egg)" opacity="1" fill="none" stroke-linejoin="round" stroke-linecap="round">
+                      <polyline id="crack-l-hi" points="15,-60 -10,-86 -34,-60 -58,-80 -80,-54 -100,-76 -125,-60 -160,-58" stroke="#ffffff" stroke-opacity="0.6" stroke-width="3" transform="translate(0 2)"/>
+                      <polyline id="crack-r-hi" points="15,-60 40,-84 66,-56 92,-78 112,-58 132,-74 160,-66" stroke="#ffffff" stroke-opacity="0.6" stroke-width="3" transform="translate(0 2)"/>
+                      <polyline id="crack-l" points="15,-60 -10,-86 -34,-60 -58,-80 -80,-54 -100,-76 -125,-60 -160,-58" stroke="var(--crack)" stroke-width="2.4"/>
+                      <polyline id="crack-r" points="15,-60 40,-84 66,-56 92,-78 112,-58 132,-74 160,-66" stroke="var(--crack)" stroke-width="2.4"/>
+                    </g>
+                    <g id="pip" transform="translate(15 -60) scale(0)" opacity="1"><use href="#star"/></g>
+                    <!-- shell fragments that fall from the pip -->
+                    <g id="shards" opacity="0" fill="var(--shell)" stroke="var(--shell-lo)" stroke-width="0.8">
+                      <polygon id="shard-0" points="0,0 9,-3 7,6 -2,7" transform="translate(15 -60)"/>
+                      <polygon id="shard-1" points="0,0 6,-5 10,2 3,5" transform="translate(15 -60)"/>
+                      <polygon id="shard-2" points="0,0 5,-2 4,5 -3,4" transform="translate(15 -60)"/>
                     </g>
                   </g>
-                  <!-- intact shell, shown until the cap lifts -->
-                  <g id="shell-whole" opacity="1">
-                    <use href="#egg-shape" fill="var(--shell)" stroke="var(--shell-line)" stroke-width="1.8"/>
-                    <use href="#spk"/>
-                  </g>
-                  <!-- crack, drawn outward from the pip -->
-                  <g id="cracks" clip-path="url(#clip-egg)" opacity="1" fill="none" stroke="var(--crack)" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round">
-                    <polyline id="crack-l" points="15,-60 -10,-86 -34,-60 -58,-80 -80,-54 -100,-76 -125,-60 -160,-58"/>
-                    <polyline id="crack-r" points="15,-60 40,-84 66,-56 92,-78 112,-58 132,-74 160,-66"/>
-                  </g>
-                  <g id="pip" transform="translate(15 -60) scale(0)" opacity="1"><use href="#star"/></g>
+                </g>
+
+                <!-- humidity fog on the glass, rises with the hatch -->
+                <g id="hatch-fog" opacity="0" fill="#ffffff" filter="url(#soft)">
+                  <ellipse cx="130" cy="690" rx="230" ry="70"/>
+                  <ellipse cx="1070" cy="690" rx="230" ry="70"/>
+                  <ellipse cx="600" cy="712" rx="380" ry="34"/>
                 </g>
               </g>
 
@@ -777,8 +915,9 @@
                 <text x="692" y="166" font-size="13" fill="var(--ink-2)" stroke="none">Navel closed · active · 41 g</text>
               </g>
 
-              <!-- glass reflection -->
-              <path d="M90,168 Q90,150 108,150 H420 L200,670 H108 Q90,670 90,652 Z" fill="url(#glass)" pointer-events="none"/>
+              <!-- glass -->
+              <rect x="90" y="150" width="1020" height="520" rx="18" fill="url(#glass)" pointer-events="none"/>
+              <path d="M96,156 L96,664" stroke="#ffffff" stroke-opacity="0.35" stroke-width="2"/>
             </svg>
           </div>
 
