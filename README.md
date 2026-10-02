@@ -160,3 +160,9 @@ The constants in `packages/shared/src/protocol.ts` are the constitution:
 ## License
 
 MIT. Fork it, run it, change the rules with your members.
+
+## Also in this repository
+
+`platform/` is a separate prototype: a prepaid task platform where clients
+buy credits and Claude does the work. It has its own README, dependencies
+and tests, and is not part of the BARC workspaces.

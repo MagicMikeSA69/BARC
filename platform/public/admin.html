@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Task Desk operator summary</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <div class="auth panel stack" style="max-width:760px">
+    <div><h1>Operator summary</h1><p class="muted">Enter the <code>ADMIN_TOKEN</code> from the server's <code>.env</code>. Revenue is what clients paid; cost is what Anthropic bills for the tokens and searches those tasks used.</p></div>
+    <form id="f">
+      <input id="token" type="password" placeholder="Admin token" />
+      <div class="actions"><button class="btn primary" type="submit">Load</button></div>
+    </form>
+    <div id="out"></div>
+  </div>
+  <script>
+    const out = document.getElementById('out');
+    const tokenEl = document.getElementById('token');
+    tokenEl.value = sessionStorage.getItem('adminToken') || '';
+    document.getElementById('f').addEventListener('submit', (e) => { e.preventDefault(); load(); });
+    const usd = (n) => '$' + Number(n).toFixed(2);
+    const usd4 = (n) => '$' + Number(n).toFixed(4);
+    async function load() {
+      const token = tokenEl.value.trim();
+      sessionStorage.setItem('adminToken', token);
+      const res = await fetch('/api/admin/summary', { headers: { 'x-admin-token': token } });
+      if (!res.ok) { out.innerHTML = '<p class="error">Not authorised, or ADMIN_TOKEN is not set on the server.</p>'; return; }
+      const d = await res.json();
+      const t = d.totals;
+      const perCredit = t.credits_sold ? t.revenue_cents / 100 / t.credits_sold : 0;
+      const consumed = t.credits_charged - t.credits_refunded;
+      const realized = consumed * perCredit;
+      const margin = realized ? ((realized - t.provider_cost_usd) / realized) * 100 : 0;
+      const row = (k, v) => `<tr><td>${k}</td><td class="num">${v}</td></tr>`;
+      out.innerHTML = `
+        <p class="muted small">Claude: ${d.mode === 'live' ? 'live, ' + d.model : 'demo mode (simulated)'}</p>
+        <table><tbody>
+          ${row('Clients', t.users)}
+          ${row('Credits sold', t.credits_sold)}
+          ${row('Cash collected', usd(t.revenue_cents / 100))}
+          ${row('Average price per credit', usd(perCredit))}
+          ${row('Credits consumed (charged minus refunded)', consumed)}
+          ${row('Revenue recognised from consumed credits', usd(realized))}
+          ${row('Provider cost (Anthropic)', usd4(t.provider_cost_usd))}
+          ${row('Gross margin on consumed credits', margin.toFixed(0) + '%')}
+          ${row('Tasks', t.tasks + ' (' + d.byStatus.map((s) => s.n + ' ' + s.status).join(', ') + ')')}
+        </tbody></table>
+        <h2 style="margin-top:1rem">Completed tasks by type</h2>
+        <table><thead><tr><th>Type</th><th class="num">Tasks</th><th class="num">Credits</th><th class="num">Revenue</th><th class="num">Provider cost</th></tr></thead><tbody>
+          ${d.byType.map((r) => `<tr><td>${r.type}</td><td class="num">${r.n}</td><td class="num">${r.credits}</td><td class="num">${usd(r.credits * perCredit)}</td><td class="num">${usd4(r.cost_usd)}</td></tr>`).join('') || '<tr><td colspan="5" class="muted">No completed tasks yet.</td></tr>'}
+        </tbody></table>`;
+    }
+    if (tokenEl.value) load();
+  </script>
+</body>
+</html>
