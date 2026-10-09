@@ -13,3 +13,4 @@ build/
 npm-debug.log*
 yarn-error.log*
 .expo/
+__pycache__/
